@@ -1,7 +1,9 @@
 #! /usr/bin/env python3.6
 
+from   urllib.error import HTTPError
 from   bs4 import BeautifulSoup
 import requests
+import re
 
 
 
@@ -9,7 +11,7 @@ import requests
 #     Main-Routine      #
 #########################
 def main():
-    url = "https://stats.nba.com/players/advanced-leaders"
+    url = "http://stats.nba.com/teams/boxscores/"
     GetThePageAndUpdateURL(url)
 
 
@@ -40,8 +42,10 @@ def GetThePageAndUpdateURL(url):
     #--------------------------------------------------------------
 
     soup        = BeautifulSoup(response.text, 'lxml')
-    data        = soup.find_all('div', {"class":"r-ent"})
-    print(f'data = {data}')
+    print(soup.prettify())
+    data        = soup.find_all('a', {"ng-href" : "/game/0021701226", "href" : "\/game\/0021701226"})
+    for x in data:
+        print(f'data = {x}')
 
 #---------------Execution---------------#
 if __name__ == '__main__':
