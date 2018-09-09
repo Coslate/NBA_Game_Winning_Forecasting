@@ -26,7 +26,7 @@ def GetAllURLLinks(url, is_debug, pages_links, recursive_num):
     html = urlopen("http://en.wikipedia.org"+url)
     response = BeautifulSoup(html, 'lxml')
     ret_all_article_links = []
-    all_div_tags = response.findAll('a', href=re.compile('^(\/wiki\/).*(?!User.*)$'))
+    all_div_tags = response.findAll('a', href=re.compile('^(\/wiki\/)((?!User).)*$'))
 
     print('----------------------')
     print(f'original page_links = {pages_links}')
