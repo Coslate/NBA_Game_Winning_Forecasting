@@ -1,0 +1,1815 @@
+------------------
+ele = <a class="mw-disambig" href="/wiki/Kevin_Bacon_(disambiguation)" title="Kevin Bacon (disambiguation)">Kevin Bacon (disambiguation)</a>
+attrs = {'href': '/wiki/Kevin_Bacon_(disambiguation)', 'class': ['mw-disambig'], 'title': 'Kevin Bacon (disambiguation)'}
+attrs[href] = /wiki/Kevin_Bacon_(disambiguation)
+------------------
+------------------
+ele = <a href="/wiki/Philadelphia" title="Philadelphia">Philadelphia</a>
+attrs = {'href': '/wiki/Philadelphia', 'title': 'Philadelphia'}
+attrs[href] = /wiki/Philadelphia
+------------------
+------------------
+ele = <a href="/wiki/Pennsylvania" title="Pennsylvania">Pennsylvania</a>
+attrs = {'href': '/wiki/Pennsylvania', 'title': 'Pennsylvania'}
+attrs[href] = /wiki/Pennsylvania
+------------------
+------------------
+ele = <a href="/wiki/Kyra_Sedgwick" title="Kyra Sedgwick">Kyra Sedgwick</a>
+attrs = {'href': '/wiki/Kyra_Sedgwick', 'title': 'Kyra Sedgwick'}
+attrs[href] = /wiki/Kyra_Sedgwick
+------------------
+------------------
+ele = <a href="/wiki/Sosie_Bacon" title="Sosie Bacon">Sosie Bacon</a>
+attrs = {'href': '/wiki/Sosie_Bacon', 'title': 'Sosie Bacon'}
+attrs[href] = /wiki/Sosie_Bacon
+------------------
+------------------
+ele = <a href="/wiki/Edmund_Bacon_(architect)" title="Edmund Bacon (architect)">Edmund Bacon</a>
+attrs = {'href': '/wiki/Edmund_Bacon_(architect)', 'title': 'Edmund Bacon (architect)'}
+attrs[href] = /wiki/Edmund_Bacon_(architect)
+------------------
+------------------
+ele = <a href="/wiki/Michael_Bacon_(musician)" title="Michael Bacon (musician)">Michael Bacon</a>
+attrs = {'href': '/wiki/Michael_Bacon_(musician)', 'title': 'Michael Bacon (musician)'}
+attrs[href] = /wiki/Michael_Bacon_(musician)
+------------------
+------------------
+ele = <a href="/wiki/Footloose_(1984_film)" title="Footloose (1984 film)">Footloose</a>
+attrs = {'href': '/wiki/Footloose_(1984_film)', 'title': 'Footloose (1984 film)'}
+attrs[href] = /wiki/Footloose_(1984_film)
+------------------
+------------------
+ele = <a href="/wiki/JFK_(film)" title="JFK (film)">JFK</a>
+attrs = {'href': '/wiki/JFK_(film)', 'title': 'JFK (film)'}
+attrs[href] = /wiki/JFK_(film)
+------------------
+------------------
+ele = <a href="/wiki/A_Few_Good_Men" title="A Few Good Men">A Few Good Men</a>
+attrs = {'href': '/wiki/A_Few_Good_Men', 'title': 'A Few Good Men'}
+attrs[href] = /wiki/A_Few_Good_Men
+------------------
+------------------
+ele = <a href="/wiki/Apollo_13_(film)" title="Apollo 13 (film)">Apollo 13</a>
+attrs = {'href': '/wiki/Apollo_13_(film)', 'title': 'Apollo 13 (film)'}
+attrs[href] = /wiki/Apollo_13_(film)
+------------------
+------------------
+ele = <a href="/wiki/Mystic_River_(film)" title="Mystic River (film)">Mystic River</a>
+attrs = {'href': '/wiki/Mystic_River_(film)', 'title': 'Mystic River (film)'}
+attrs[href] = /wiki/Mystic_River_(film)
+------------------
+------------------
+ele = <a href="/wiki/Sleepers" title="Sleepers">Sleepers</a>
+attrs = {'href': '/wiki/Sleepers', 'title': 'Sleepers'}
+attrs[href] = /wiki/Sleepers
+------------------
+------------------
+ele = <a href="/wiki/The_Woodsman_(2004_film)" title="The Woodsman (2004 film)">The Woodsman</a>
+attrs = {'href': '/wiki/The_Woodsman_(2004_film)', 'title': 'The Woodsman (2004 film)'}
+attrs[href] = /wiki/The_Woodsman_(2004_film)
+------------------
+------------------
+ele = <a href="/wiki/Fox_Broadcasting_Company" title="Fox Broadcasting Company">Fox</a>
+attrs = {'href': '/wiki/Fox_Broadcasting_Company', 'title': 'Fox Broadcasting Company'}
+attrs[href] = /wiki/Fox_Broadcasting_Company
+------------------
+------------------
+ele = <a href="/wiki/The_Following" title="The Following">The Following</a>
+attrs = {'href': '/wiki/The_Following', 'title': 'The Following'}
+attrs[href] = /wiki/The_Following
+------------------
+------------------
+ele = <a href="/wiki/HBO" title="HBO">HBO</a>
+attrs = {'href': '/wiki/HBO', 'title': 'HBO'}
+attrs[href] = /wiki/HBO
+------------------
+------------------
+ele = <a href="/wiki/Taking_Chance" title="Taking Chance">Taking Chance</a>
+attrs = {'href': '/wiki/Taking_Chance', 'title': 'Taking Chance'}
+attrs[href] = /wiki/Taking_Chance
+------------------
+------------------
+ele = <a href="/wiki/Golden_Globe_Award" title="Golden Globe Award">Golden Globe Award</a>
+attrs = {'href': '/wiki/Golden_Globe_Award', 'title': 'Golden Globe Award'}
+attrs[href] = /wiki/Golden_Globe_Award
+------------------
+------------------
+ele = <a href="/wiki/Screen_Actors_Guild_Award" title="Screen Actors Guild Award">Screen Actors Guild Award</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Award', 'title': 'Screen Actors Guild Award'}
+attrs[href] = /wiki/Screen_Actors_Guild_Award
+------------------
+------------------
+ele = <a href="/wiki/Primetime_Emmy_Award" title="Primetime Emmy Award">Primetime Emmy Award</a>
+attrs = {'href': '/wiki/Primetime_Emmy_Award', 'title': 'Primetime Emmy Award'}
+attrs[href] = /wiki/Primetime_Emmy_Award
+------------------
+------------------
+ele = <a href="/wiki/The_Guardian" title="The Guardian">The Guardian</a>
+attrs = {'href': '/wiki/The_Guardian', 'title': 'The Guardian'}
+attrs[href] = /wiki/The_Guardian
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Academy_Award" title="Academy Award">Academy Award</a>
+attrs = {'href': '/wiki/Academy_Award', 'class': ['mw-redirect'], 'title': 'Academy Award'}
+attrs[href] = /wiki/Academy_Award
+------------------
+------------------
+ele = <a href="/wiki/Hollywood_Walk_of_Fame" title="Hollywood Walk of Fame">Hollywood Walk of Fame</a>
+attrs = {'href': '/wiki/Hollywood_Walk_of_Fame', 'title': 'Hollywood Walk of Fame'}
+attrs[href] = /wiki/Hollywood_Walk_of_Fame
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Social_networks" title="Social networks">social networks</a>
+attrs = {'href': '/wiki/Social_networks', 'class': ['mw-redirect'], 'title': 'Social networks'}
+attrs[href] = /wiki/Social_networks
+------------------
+------------------
+ele = <a href="/wiki/Six_Degrees_of_Kevin_Bacon" title="Six Degrees of Kevin Bacon">Six Degrees of Kevin Bacon</a>
+attrs = {'href': '/wiki/Six_Degrees_of_Kevin_Bacon', 'title': 'Six Degrees of Kevin Bacon'}
+attrs[href] = /wiki/Six_Degrees_of_Kevin_Bacon
+------------------
+------------------
+ele = <a href="/wiki/SixDegrees.org" title="SixDegrees.org">SixDegrees.org</a>
+attrs = {'href': '/wiki/SixDegrees.org', 'title': 'SixDegrees.org'}
+attrs[href] = /wiki/SixDegrees.org
+------------------
+------------------
+ele = <a href="/wiki/Philadelphia" title="Philadelphia">Philadelphia</a>
+attrs = {'href': '/wiki/Philadelphia', 'title': 'Philadelphia'}
+attrs[href] = /wiki/Philadelphia
+------------------
+------------------
+ele = <a href="/wiki/Edmund_Bacon_(architect)" title="Edmund Bacon (architect)">Edmund Norwood Bacon</a>
+attrs = {'href': '/wiki/Edmund_Bacon_(architect)', 'title': 'Edmund Bacon (architect)'}
+attrs[href] = /wiki/Edmund_Bacon_(architect)
+------------------
+------------------
+ele = <a href="/wiki/Pennsylvania_Governor%27s_School_for_the_Arts" title="Pennsylvania Governor's School for the Arts">Pennsylvania Governor's School for the Arts</a>
+attrs = {'href': '/wiki/Pennsylvania_Governor%27s_School_for_the_Arts', 'title': "Pennsylvania Governor's School for the Arts"}
+attrs[href] = /wiki/Pennsylvania_Governor%27s_School_for_the_Arts
+------------------
+------------------
+ele = <a href="/wiki/Bucknell_University" title="Bucknell University">Bucknell University</a>
+attrs = {'href': '/wiki/Bucknell_University', 'title': 'Bucknell University'}
+attrs[href] = /wiki/Bucknell_University
+------------------
+------------------
+ele = <a href="/wiki/Glory_Van_Scott" title="Glory Van Scott">Glory Van Scott</a>
+attrs = {'href': '/wiki/Glory_Van_Scott', 'title': 'Glory Van Scott'}
+attrs[href] = /wiki/Glory_Van_Scott
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Circle_in_the_Square" title="Circle in the Square">Circle in the Square Theater School</a>
+attrs = {'href': '/wiki/Circle_in_the_Square', 'class': ['mw-redirect'], 'title': 'Circle in the Square'}
+attrs[href] = /wiki/Circle_in_the_Square
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Nancy_Mills" title="Nancy Mills">Nancy Mills</a>
+attrs = {'href': '/wiki/Nancy_Mills', 'class': ['mw-redirect'], 'title': 'Nancy Mills'}
+attrs[href] = /wiki/Nancy_Mills
+------------------
+------------------
+ele = <a href="/wiki/Cosmopolitan_(magazine)" title="Cosmopolitan (magazine)">Cosmopolitan</a>
+attrs = {'href': '/wiki/Cosmopolitan_(magazine)', 'title': 'Cosmopolitan (magazine)'}
+attrs[href] = /wiki/Cosmopolitan_(magazine)
+------------------
+------------------
+ele = <a href="/wiki/Fraternities_and_sororities" title="Fraternities and sororities">fraternity</a>
+attrs = {'href': '/wiki/Fraternities_and_sororities', 'title': 'Fraternities and sororities'}
+attrs[href] = /wiki/Fraternities_and_sororities
+------------------
+------------------
+ele = <a href="/wiki/Animal_House" title="Animal House">National Lampoon's Animal House</a>
+attrs = {'href': '/wiki/Animal_House', 'title': 'Animal House'}
+attrs[href] = /wiki/Animal_House
+------------------
+------------------
+ele = <a href="/wiki/Search_for_Tomorrow" title="Search for Tomorrow">Search for Tomorrow</a>
+attrs = {'href': '/wiki/Search_for_Tomorrow', 'title': 'Search for Tomorrow'}
+attrs[href] = /wiki/Search_for_Tomorrow
+------------------
+------------------
+ele = <a href="/wiki/Guiding_Light" title="Guiding Light">Guiding Light</a>
+attrs = {'href': '/wiki/Guiding_Light', 'title': 'Guiding Light'}
+attrs[href] = /wiki/Guiding_Light
+------------------
+------------------
+ele = <a href="/wiki/Friday_the_13th_(1980_film)" title="Friday the 13th (1980 film)"><i>Friday the 13th</i></a>
+attrs = {'href': '/wiki/Friday_the_13th_(1980_film)', 'title': 'Friday the 13th (1980 film)'}
+attrs[href] = /wiki/Friday_the_13th_(1980_film)
+------------------
+------------------
+ele = <a href="/wiki/Phoenix_Theater" title="Phoenix Theater">Phoenix Theater</a>
+attrs = {'href': '/wiki/Phoenix_Theater', 'title': 'Phoenix Theater'}
+attrs[href] = /wiki/Phoenix_Theater
+------------------
+------------------
+ele = <a href="/wiki/Flux" title="Flux">Flux</a>
+attrs = {'href': '/wiki/Flux', 'title': 'Flux'}
+attrs[href] = /wiki/Flux
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Second_Stage_Theatre" title="Second Stage Theatre">Second Stage Theatre</a>
+attrs = {'href': '/wiki/Second_Stage_Theatre', 'class': ['mw-redirect'], 'title': 'Second Stage Theatre'}
+attrs[href] = /wiki/Second_Stage_Theatre
+------------------
+------------------
+ele = <a href="/wiki/Obie_Award" title="Obie Award">Obie Award</a>
+attrs = {'href': '/wiki/Obie_Award', 'title': 'Obie Award'}
+attrs[href] = /wiki/Obie_Award
+------------------
+------------------
+ele = <a href="/wiki/Forty_Deuce" title="Forty Deuce">Forty Deuce</a>
+attrs = {'href': '/wiki/Forty_Deuce', 'title': 'Forty Deuce'}
+attrs[href] = /wiki/Forty_Deuce
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Slab_Boys" title="Slab Boys">Slab Boys</a>
+attrs = {'href': '/wiki/Slab_Boys', 'class': ['mw-redirect'], 'title': 'Slab Boys'}
+attrs[href] = /wiki/Slab_Boys
+------------------
+------------------
+ele = <a href="/wiki/Sean_Penn" title="Sean Penn">Sean Penn</a>
+attrs = {'href': '/wiki/Sean_Penn', 'title': 'Sean Penn'}
+attrs[href] = /wiki/Sean_Penn
+------------------
+------------------
+ele = <a href="/wiki/Val_Kilmer" title="Val Kilmer">Val Kilmer</a>
+attrs = {'href': '/wiki/Val_Kilmer', 'title': 'Val Kilmer'}
+attrs[href] = /wiki/Val_Kilmer
+------------------
+------------------
+ele = <a href="/wiki/Barry_Levinson" title="Barry Levinson">Barry Levinson</a>
+attrs = {'href': '/wiki/Barry_Levinson', 'title': 'Barry Levinson'}
+attrs[href] = /wiki/Barry_Levinson
+------------------
+------------------
+ele = <a href="/wiki/Diner_(film)" title="Diner (film)">Diner</a>
+attrs = {'href': '/wiki/Diner_(film)', 'title': 'Diner (film)'}
+attrs[href] = /wiki/Diner_(film)
+------------------
+------------------
+ele = <a href="/wiki/Steve_Guttenberg" title="Steve Guttenberg">Steve Guttenberg</a>
+attrs = {'href': '/wiki/Steve_Guttenberg', 'title': 'Steve Guttenberg'}
+attrs[href] = /wiki/Steve_Guttenberg
+------------------
+------------------
+ele = <a href="/wiki/Daniel_Stern_(actor)" title="Daniel Stern (actor)">Daniel Stern</a>
+attrs = {'href': '/wiki/Daniel_Stern_(actor)', 'title': 'Daniel Stern (actor)'}
+attrs[href] = /wiki/Daniel_Stern_(actor)
+------------------
+------------------
+ele = <a href="/wiki/Mickey_Rourke" title="Mickey Rourke">Mickey Rourke</a>
+attrs = {'href': '/wiki/Mickey_Rourke', 'title': 'Mickey Rourke'}
+attrs[href] = /wiki/Mickey_Rourke
+------------------
+------------------
+ele = <a href="/wiki/Tim_Daly" title="Tim Daly">Tim Daly</a>
+attrs = {'href': '/wiki/Tim_Daly', 'title': 'Tim Daly'}
+attrs[href] = /wiki/Tim_Daly
+------------------
+------------------
+ele = <a href="/wiki/Ellen_Barkin" title="Ellen Barkin">Ellen Barkin</a>
+attrs = {'href': '/wiki/Ellen_Barkin', 'title': 'Ellen Barkin'}
+attrs[href] = /wiki/Ellen_Barkin
+------------------
+------------------
+ele = <a href="/wiki/Footloose_(1984_film)" title="Footloose (1984 film)">Footloose</a>
+attrs = {'href': '/wiki/Footloose_(1984_film)', 'title': 'Footloose (1984 film)'}
+attrs[href] = /wiki/Footloose_(1984_film)
+------------------
+------------------
+ele = <a href="/wiki/James_Dean" title="James Dean">James Dean</a>
+attrs = {'href': '/wiki/James_Dean', 'title': 'James Dean'}
+attrs[href] = /wiki/James_Dean
+------------------
+------------------
+ele = <a href="/wiki/Rebel_Without_a_Cause" title="Rebel Without a Cause">Rebel Without a Cause</a>
+attrs = {'href': '/wiki/Rebel_Without_a_Cause', 'title': 'Rebel Without a Cause'}
+attrs[href] = /wiki/Rebel_Without_a_Cause
+------------------
+------------------
+ele = <a href="/wiki/Mickey_Rooney" title="Mickey Rooney">Mickey Rooney</a>
+attrs = {'href': '/wiki/Mickey_Rooney', 'title': 'Mickey Rooney'}
+attrs[href] = /wiki/Mickey_Rooney
+------------------
+------------------
+ele = <a href="/wiki/Judy_Garland" title="Judy Garland">Judy Garland</a>
+attrs = {'href': '/wiki/Judy_Garland', 'title': 'Judy Garland'}
+attrs[href] = /wiki/Judy_Garland
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/People_(American_magazine)" title="People (American magazine)">People</a>
+attrs = {'href': '/wiki/People_(American_magazine)', 'class': ['mw-redirect'], 'title': 'People (American magazine)'}
+attrs[href] = /wiki/People_(American_magazine)
+------------------
+------------------
+ele = <a href="/wiki/Typecasting_(acting)" title="Typecasting (acting)">typecasting</a>
+attrs = {'href': '/wiki/Typecasting_(acting)', 'title': 'Typecasting (acting)'}
+attrs[href] = /wiki/Typecasting_(acting)
+------------------
+------------------
+ele = <a href="/wiki/John_Hughes_(filmmaker)" title="John Hughes (filmmaker)">John Hughes</a>
+attrs = {'href': '/wiki/John_Hughes_(filmmaker)', 'title': 'John Hughes (filmmaker)'}
+attrs[href] = /wiki/John_Hughes_(filmmaker)
+------------------
+------------------
+ele = <a href="/wiki/She%27s_Having_a_Baby" title="She's Having a Baby">She's Having a Baby</a>
+attrs = {'href': '/wiki/She%27s_Having_a_Baby', 'title': "She's Having a Baby"}
+attrs[href] = /wiki/She%27s_Having_a_Baby
+------------------
+------------------
+ele = <a href="/wiki/The_Big_Picture_(1989_film)" title="The Big Picture (1989 film)">The Big Picture</a>
+attrs = {'href': '/wiki/The_Big_Picture_(1989_film)', 'title': 'The Big Picture (1989 film)'}
+attrs[href] = /wiki/The_Big_Picture_(1989_film)
+------------------
+------------------
+ele = <a href="/wiki/Tremors_(film)" title="Tremors (film)">Tremors</a>
+attrs = {'href': '/wiki/Tremors_(film)', 'title': 'Tremors (film)'}
+attrs[href] = /wiki/Tremors_(film)
+------------------
+------------------
+ele = <a href="/wiki/Joel_Schumacher" title="Joel Schumacher">Joel Schumacher</a>
+attrs = {'href': '/wiki/Joel_Schumacher', 'title': 'Joel Schumacher'}
+attrs[href] = /wiki/Joel_Schumacher
+------------------
+------------------
+ele = <a href="/wiki/Flatliners" title="Flatliners">Flatliners</a>
+attrs = {'href': '/wiki/Flatliners', 'title': 'Flatliners'}
+attrs[href] = /wiki/Flatliners
+------------------
+------------------
+ele = <a href="/wiki/Elizabeth_Perkins" title="Elizabeth Perkins">Elizabeth Perkins</a>
+attrs = {'href': '/wiki/Elizabeth_Perkins', 'title': 'Elizabeth Perkins'}
+attrs[href] = /wiki/Elizabeth_Perkins
+------------------
+------------------
+ele = <a href="/wiki/He_Said,_She_Said" title="He Said, She Said">He Said, She Said</a>
+attrs = {'href': '/wiki/He_Said,_She_Said', 'title': 'He Said, She Said'}
+attrs[href] = /wiki/He_Said,_She_Said
+------------------
+------------------
+ele = <a href="/wiki/The_New_York_Times" title="The New York Times">The New York Times</a>
+attrs = {'href': '/wiki/The_New_York_Times', 'title': 'The New York Times'}
+attrs[href] = /wiki/The_New_York_Times
+------------------
+------------------
+ele = <a href="/wiki/Oliver_Stone" title="Oliver Stone">Oliver Stone</a>
+attrs = {'href': '/wiki/Oliver_Stone', 'title': 'Oliver Stone'}
+attrs[href] = /wiki/Oliver_Stone
+------------------
+------------------
+ele = <a href="/wiki/JFK_(film)" title="JFK (film)">JFK</a>
+attrs = {'href': '/wiki/JFK_(film)', 'title': 'JFK (film)'}
+attrs[href] = /wiki/JFK_(film)
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/A_Few_Good_Men_(film)" title="A Few Good Men (film)">A Few Good Men</a>
+attrs = {'href': '/wiki/A_Few_Good_Men_(film)', 'class': ['mw-redirect'], 'title': 'A Few Good Men (film)'}
+attrs[href] = /wiki/A_Few_Good_Men_(film)
+------------------
+------------------
+ele = <a href="/wiki/Michael_Greif" title="Michael Greif">Michael Greif</a>
+attrs = {'href': '/wiki/Michael_Greif', 'title': 'Michael Greif'}
+attrs[href] = /wiki/Michael_Greif
+------------------
+------------------
+ele = <a href="/wiki/Golden_Globe_Award" title="Golden Globe Award">Golden Globe</a>
+attrs = {'href': '/wiki/Golden_Globe_Award', 'title': 'Golden Globe Award'}
+attrs[href] = /wiki/Golden_Globe_Award
+------------------
+------------------
+ele = <a href="/wiki/The_River_Wild" title="The River Wild">The River Wild</a>
+attrs = {'href': '/wiki/The_River_Wild', 'title': 'The River Wild'}
+attrs[href] = /wiki/The_River_Wild
+------------------
+------------------
+ele = <a href="/wiki/Meryl_Streep" title="Meryl Streep">Meryl Streep</a>
+attrs = {'href': '/wiki/Meryl_Streep', 'title': 'Meryl Streep'}
+attrs[href] = /wiki/Meryl_Streep
+------------------
+------------------
+ele = <a href="/wiki/Murder_in_the_First_(film)" title="Murder in the First (film)">Murder in the First</a>
+attrs = {'href': '/wiki/Murder_in_the_First_(film)', 'title': 'Murder in the First (film)'}
+attrs[href] = /wiki/Murder_in_the_First_(film)
+------------------
+------------------
+ele = <a href="/wiki/Blockbuster_(entertainment)" title="Blockbuster (entertainment)">blockbuster</a>
+attrs = {'href': '/wiki/Blockbuster_(entertainment)', 'title': 'Blockbuster (entertainment)'}
+attrs[href] = /wiki/Blockbuster_(entertainment)
+------------------
+------------------
+ele = <a href="/wiki/Apollo_13_(film)" title="Apollo 13 (film)">Apollo 13</a>
+attrs = {'href': '/wiki/Apollo_13_(film)', 'title': 'Apollo 13 (film)'}
+attrs[href] = /wiki/Apollo_13_(film)
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Sleepers_(film)" title="Sleepers (film)">Sleepers</a>
+attrs = {'href': '/wiki/Sleepers_(film)', 'class': ['mw-redirect'], 'title': 'Sleepers (film)'}
+attrs[href] = /wiki/Sleepers_(film)
+------------------
+------------------
+ele = <a href="/wiki/Picture_Perfect_(1997_film)" title="Picture Perfect (1997 film)">Picture Perfect</a>
+attrs = {'href': '/wiki/Picture_Perfect_(1997_film)', 'title': 'Picture Perfect (1997 film)'}
+attrs[href] = /wiki/Picture_Perfect_(1997_film)
+------------------
+------------------
+ele = <a href="/wiki/Losing_Chase" title="Losing Chase">Losing Chase</a>
+attrs = {'href': '/wiki/Losing_Chase', 'title': 'Losing Chase'}
+attrs[href] = /wiki/Losing_Chase
+------------------
+------------------
+ele = <a href="/wiki/Digging_to_China" title="Digging to China">Digging to China</a>
+attrs = {'href': '/wiki/Digging_to_China', 'title': 'Digging to China'}
+attrs[href] = /wiki/Digging_to_China
+------------------
+------------------
+ele = <a href="/wiki/Payola" title="Payola">payola</a>
+attrs = {'href': '/wiki/Payola', 'title': 'Payola'}
+attrs[href] = /wiki/Payola
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Telling_Lies_in_America_(film)" title="Telling Lies in America (film)">Telling Lies in America</a>
+attrs = {'href': '/wiki/Telling_Lies_in_America_(film)', 'class': ['mw-redirect'], 'title': 'Telling Lies in America (film)'}
+attrs[href] = /wiki/Telling_Lies_in_America_(film)
+------------------
+------------------
+ele = <a href="/wiki/Wild_Things_(film)" title="Wild Things (film)">Wild Things</a>
+attrs = {'href': '/wiki/Wild_Things_(film)', 'title': 'Wild Things (film)'}
+attrs[href] = /wiki/Wild_Things_(film)
+------------------
+------------------
+ele = <a href="/wiki/Stir_of_Echoes" title="Stir of Echoes">Stir of Echoes</a>
+attrs = {'href': '/wiki/Stir_of_Echoes', 'title': 'Stir of Echoes'}
+attrs[href] = /wiki/Stir_of_Echoes
+------------------
+------------------
+ele = <a href="/wiki/David_Koepp" title="David Koepp">David Koepp</a>
+attrs = {'href': '/wiki/David_Koepp', 'title': 'David Koepp'}
+attrs[href] = /wiki/David_Koepp
+------------------
+------------------
+ele = <a href="/wiki/Taking_Chance" title="Taking Chance">Taking Chance</a>
+attrs = {'href': '/wiki/Taking_Chance', 'title': 'Taking Chance'}
+attrs[href] = /wiki/Taking_Chance
+------------------
+------------------
+ele = <a href="/wiki/Paul_Verhoeven" title="Paul Verhoeven">Paul Verhoeven</a>
+attrs = {'href': '/wiki/Paul_Verhoeven', 'title': 'Paul Verhoeven'}
+attrs[href] = /wiki/Paul_Verhoeven
+------------------
+------------------
+ele = <a href="/wiki/Hollow_Man" title="Hollow Man">Hollow Man</a>
+attrs = {'href': '/wiki/Hollow_Man', 'title': 'Hollow Man'}
+attrs[href] = /wiki/Hollow_Man
+------------------
+------------------
+ele = <a href="/wiki/Colin_Firth" title="Colin Firth">Colin Firth</a>
+attrs = {'href': '/wiki/Colin_Firth', 'title': 'Colin Firth'}
+attrs[href] = /wiki/Colin_Firth
+------------------
+------------------
+ele = <a href="/wiki/Rachel_Blanchard" title="Rachel Blanchard">Rachel Blanchard</a>
+attrs = {'href': '/wiki/Rachel_Blanchard', 'title': 'Rachel Blanchard'}
+attrs[href] = /wiki/Rachel_Blanchard
+------------------
+------------------
+ele = <a href="/wiki/M%C3%A9nage_%C3%A0_trois" title="Ménage à trois">ménage à trois</a>
+attrs = {'href': '/wiki/M%C3%A9nage_%C3%A0_trois', 'title': 'Ménage à trois'}
+attrs[href] = /wiki/M%C3%A9nage_%C3%A0_trois
+------------------
+------------------
+ele = <a href="/wiki/Where_the_Truth_Lies" title="Where the Truth Lies">Where the Truth Lies</a>
+attrs = {'href': '/wiki/Where_the_Truth_Lies', 'title': 'Where the Truth Lies'}
+attrs[href] = /wiki/Where_the_Truth_Lies
+------------------
+------------------
+ele = <a href="/wiki/Atom_Egoyan" title="Atom Egoyan">Atom Egoyan</a>
+attrs = {'href': '/wiki/Atom_Egoyan', 'title': 'Atom Egoyan'}
+attrs[href] = /wiki/Atom_Egoyan
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/MPAA" title="MPAA">MPAA</a>
+attrs = {'href': '/wiki/MPAA', 'class': ['mw-redirect'], 'title': 'MPAA'}
+attrs[href] = /wiki/MPAA
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/MPAA_film_rating_system" title="MPAA film rating system">NC-17</a>
+attrs = {'href': '/wiki/MPAA_film_rating_system', 'class': ['mw-redirect'], 'title': 'MPAA film rating system'}
+attrs[href] = /wiki/MPAA_film_rating_system
+------------------
+------------------
+ele = <a href="/wiki/Sean_Penn" title="Sean Penn">Sean Penn</a>
+attrs = {'href': '/wiki/Sean_Penn', 'title': 'Sean Penn'}
+attrs[href] = /wiki/Sean_Penn
+------------------
+------------------
+ele = <a href="/wiki/Tim_Robbins" title="Tim Robbins">Tim Robbins</a>
+attrs = {'href': '/wiki/Tim_Robbins', 'title': 'Tim Robbins'}
+attrs[href] = /wiki/Tim_Robbins
+------------------
+------------------
+ele = <a href="/wiki/Clint_Eastwood" title="Clint Eastwood">Clint Eastwood</a>
+attrs = {'href': '/wiki/Clint_Eastwood', 'title': 'Clint Eastwood'}
+attrs[href] = /wiki/Clint_Eastwood
+------------------
+------------------
+ele = <a href="/wiki/Mystic_River_(film)" title="Mystic River (film)">Mystic River</a>
+attrs = {'href': '/wiki/Mystic_River_(film)', 'title': 'Mystic River (film)'}
+attrs[href] = /wiki/Mystic_River_(film)
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Pedophile" title="Pedophile">pedophile</a>
+attrs = {'href': '/wiki/Pedophile', 'class': ['mw-redirect'], 'title': 'Pedophile'}
+attrs[href] = /wiki/Pedophile
+------------------
+------------------
+ele = <a href="/wiki/The_Woodsman_(2004_film)" title="The Woodsman (2004 film)">The Woodsman</a>
+attrs = {'href': '/wiki/The_Woodsman_(2004_film)', 'title': 'The Woodsman (2004 film)'}
+attrs[href] = /wiki/The_Woodsman_(2004_film)
+------------------
+------------------
+ele = <a href="/wiki/HBO_Films" title="HBO Films">HBO Films</a>
+attrs = {'href': '/wiki/HBO_Films', 'title': 'HBO Films'}
+attrs[href] = /wiki/HBO_Films
+------------------
+------------------
+ele = <a href="/wiki/Taking_Chance" title="Taking Chance">Taking Chance</a>
+attrs = {'href': '/wiki/Taking_Chance', 'title': 'Taking Chance'}
+attrs[href] = /wiki/Taking_Chance
+------------------
+------------------
+ele = <a href="/wiki/Michael_Strobl" title="Michael Strobl">Michael Strobl</a>
+attrs = {'href': '/wiki/Michael_Strobl', 'title': 'Michael Strobl'}
+attrs[href] = /wiki/Michael_Strobl
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Desert_Storm" title="Desert Storm">Desert Storm</a>
+attrs = {'href': '/wiki/Desert_Storm', 'class': ['mw-redirect'], 'title': 'Desert Storm'}
+attrs[href] = /wiki/Desert_Storm
+------------------
+------------------
+ele = <a href="/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Miniseries_or_Television_Movie" title="Screen Actors Guild Award for Outstanding Performance by a Male Actor in a Miniseries or Television Movie">Screen Actors Guild Award for Outstanding Performance by a Male Actor in a Miniseries or Television Movie</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Miniseries_or_Television_Movie', 'title': 'Screen Actors Guild Award for Outstanding Performance by a Male Actor in a Miniseries or Television Movie'}
+attrs[href] = /wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Miniseries_or_Television_Movie
+------------------
+------------------
+ele = <a href="/wiki/Matthew_Vaughn" title="Matthew Vaughn">Matthew Vaughn</a>
+attrs = {'href': '/wiki/Matthew_Vaughn', 'title': 'Matthew Vaughn'}
+attrs[href] = /wiki/Matthew_Vaughn
+------------------
+------------------
+ele = <a href="/wiki/Sebastian_Shaw_(comics)" title="Sebastian Shaw (comics)">Sebastian Shaw</a>
+attrs = {'href': '/wiki/Sebastian_Shaw_(comics)', 'title': 'Sebastian Shaw (comics)'}
+attrs[href] = /wiki/Sebastian_Shaw_(comics)
+------------------
+------------------
+ele = <a href="/wiki/Dustin_Lance_Black" title="Dustin Lance Black">Dustin Lance Black</a>
+attrs = {'href': '/wiki/Dustin_Lance_Black', 'title': 'Dustin Lance Black'}
+attrs[href] = /wiki/Dustin_Lance_Black
+------------------
+------------------
+ele = <a href="/wiki/8_(play)" title="8 (play)">8</a>
+attrs = {'href': '/wiki/8_(play)', 'title': '8 (play)'}
+attrs[href] = /wiki/8_(play)
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Perry_v._Brown" title="Perry v. Brown">federal trial</a>
+attrs = {'href': '/wiki/Perry_v._Brown', 'class': ['mw-redirect'], 'title': 'Perry v. Brown'}
+attrs[href] = /wiki/Perry_v._Brown
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Proposition_8" title="Proposition 8">Prop 8 ban</a>
+attrs = {'href': '/wiki/Proposition_8', 'class': ['mw-redirect'], 'title': 'Proposition 8'}
+attrs[href] = /wiki/Proposition_8
+------------------
+------------------
+ele = <a href="/wiki/Charles_J._Cooper" title="Charles J. Cooper">Charles J. Cooper</a>
+attrs = {'href': '/wiki/Charles_J._Cooper', 'title': 'Charles J. Cooper'}
+attrs[href] = /wiki/Charles_J._Cooper
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Wilshire_Ebell_Theatre" title="Wilshire Ebell Theatre">Wilshire Ebell Theatre</a>
+attrs = {'href': '/wiki/Wilshire_Ebell_Theatre', 'class': ['mw-redirect'], 'title': 'Wilshire Ebell Theatre'}
+attrs[href] = /wiki/Wilshire_Ebell_Theatre
+------------------
+------------------
+ele = <a href="/wiki/American_Foundation_for_Equal_Rights" title="American Foundation for Equal Rights">American Foundation for Equal Rights</a>
+attrs = {'href': '/wiki/American_Foundation_for_Equal_Rights', 'title': 'American Foundation for Equal Rights'}
+attrs[href] = /wiki/American_Foundation_for_Equal_Rights
+------------------
+------------------
+ele = <a href="/wiki/The_Following" title="The Following">The Following</a>
+attrs = {'href': '/wiki/The_Following', 'title': 'The Following'}
+attrs[href] = /wiki/The_Following
+------------------
+------------------
+ele = <a href="/wiki/Saturn_Award_for_Best_Actor_on_Television" title="Saturn Award for Best Actor on Television">Saturn Award for Best Actor on Television</a>
+attrs = {'href': '/wiki/Saturn_Award_for_Best_Actor_on_Television', 'title': 'Saturn Award for Best Actor on Television'}
+attrs[href] = /wiki/Saturn_Award_for_Best_Actor_on_Television
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Huffington_Post" title="Huffington Post">Huffington Post</a>
+attrs = {'href': '/wiki/Huffington_Post', 'class': ['mw-redirect'], 'title': 'Huffington Post'}
+attrs[href] = /wiki/Huffington_Post
+------------------
+------------------
+ele = <a href="/wiki/Tremors_(film)" title="Tremors (film)"><i>Tremors</i> franchise</a>
+attrs = {'href': '/wiki/Tremors_(film)', 'title': 'Tremors (film)'}
+attrs[href] = /wiki/Tremors_(film)
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/EE_(telecommunications_company)" title="EE (telecommunications company)">EE mobile network</a>
+attrs = {'href': '/wiki/EE_(telecommunications_company)', 'class': ['mw-redirect'], 'title': 'EE (telecommunications company)'}
+attrs[href] = /wiki/EE_(telecommunications_company)
+------------------
+------------------
+ele = <a href="/wiki/United_Kingdom" title="United Kingdom">United Kingdom</a>
+attrs = {'href': '/wiki/United_Kingdom', 'title': 'United Kingdom'}
+attrs[href] = /wiki/United_Kingdom
+------------------
+------------------
+ele = <a href="/wiki/Egg_as_food" title="Egg as food">egg</a>
+attrs = {'href': '/wiki/Egg_as_food', 'title': 'Egg as food'}
+attrs[href] = /wiki/Egg_as_food
+------------------
+------------------
+ele = <a href="/wiki/Kyra_Sedgwick" title="Kyra Sedgwick">Kyra Sedgwick</a>
+attrs = {'href': '/wiki/Kyra_Sedgwick', 'title': 'Kyra Sedgwick'}
+attrs[href] = /wiki/Kyra_Sedgwick
+------------------
+------------------
+ele = <a href="/wiki/PBS" title="PBS">PBS</a>
+attrs = {'href': '/wiki/PBS', 'title': 'PBS'}
+attrs[href] = /wiki/PBS
+------------------
+------------------
+ele = <a href="/wiki/Lanford_Wilson" title="Lanford Wilson">Lanford Wilson</a>
+attrs = {'href': '/wiki/Lanford_Wilson', 'title': 'Lanford Wilson'}
+attrs[href] = /wiki/Lanford_Wilson
+------------------
+------------------
+ele = <a href="/wiki/Lemon_Sky" title="Lemon Sky">Lemon Sky</a>
+attrs = {'href': '/wiki/Lemon_Sky', 'title': 'Lemon Sky'}
+attrs[href] = /wiki/Lemon_Sky
+------------------
+------------------
+ele = <a href="/wiki/Pyrates" title="Pyrates">Pyrates</a>
+attrs = {'href': '/wiki/Pyrates', 'title': 'Pyrates'}
+attrs[href] = /wiki/Pyrates
+------------------
+------------------
+ele = <a href="/wiki/Murder_in_the_First_(film)" title="Murder in the First (film)">Murder in the First</a>
+attrs = {'href': '/wiki/Murder_in_the_First_(film)', 'title': 'Murder in the First (film)'}
+attrs[href] = /wiki/Murder_in_the_First_(film)
+------------------
+------------------
+ele = <a href="/wiki/The_Woodsman_(2004_film)" title="The Woodsman (2004 film)">The Woodsman</a>
+attrs = {'href': '/wiki/The_Woodsman_(2004_film)', 'title': 'The Woodsman (2004 film)'}
+attrs[href] = /wiki/The_Woodsman_(2004_film)
+------------------
+------------------
+ele = <a href="/wiki/Loverboy_(2005_film)" title="Loverboy (2005 film)">Loverboy</a>
+attrs = {'href': '/wiki/Loverboy_(2005_film)', 'title': 'Loverboy (2005 film)'}
+attrs[href] = /wiki/Loverboy_(2005_film)
+------------------
+------------------
+ele = <a href="/wiki/Sosie_Bacon" title="Sosie Bacon">Sosie Ruth</a>
+attrs = {'href': '/wiki/Sosie_Bacon', 'title': 'Sosie Bacon'}
+attrs[href] = /wiki/Sosie_Bacon
+------------------
+------------------
+ele = <a href="/wiki/Upper_West_Side" title="Upper West Side">Upper West Side</a>
+attrs = {'href': '/wiki/Upper_West_Side', 'title': 'Upper West Side'}
+attrs[href] = /wiki/Upper_West_Side
+------------------
+------------------
+ele = <a href="/wiki/Manhattan" title="Manhattan">Manhattan</a>
+attrs = {'href': '/wiki/Manhattan', 'title': 'Manhattan'}
+attrs[href] = /wiki/Manhattan
+------------------
+------------------
+ele = <a href="/wiki/Tracy_Pollan" title="Tracy Pollan">Tracy Pollan</a>
+attrs = {'href': '/wiki/Tracy_Pollan', 'title': 'Tracy Pollan'}
+attrs[href] = /wiki/Tracy_Pollan
+------------------
+------------------
+ele = <a href="/wiki/The_Times" title="The Times">The Times</a>
+attrs = {'href': '/wiki/The_Times', 'title': 'The Times'}
+attrs[href] = /wiki/The_Times
+------------------
+------------------
+ele = <a href="/wiki/Will.i.am" title="Will.i.am">will.i.am</a>
+attrs = {'href': '/wiki/Will.i.am', 'title': 'Will.i.am'}
+attrs[href] = /wiki/Will.i.am
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/It%27s_a_New_Day_(Will.i.am_song)" title="It's a New Day (Will.i.am song)">"It's a New Day"</a>
+attrs = {'href': '/wiki/It%27s_a_New_Day_(Will.i.am_song)', 'class': ['mw-redirect'], 'title': "It's a New Day (Will.i.am song)"}
+attrs[href] = /wiki/It%27s_a_New_Day_(Will.i.am_song)
+------------------
+------------------
+ele = <a href="/wiki/Barack_Obama" title="Barack Obama">Barack Obama</a>
+attrs = {'href': '/wiki/Barack_Obama', 'title': 'Barack Obama'}
+attrs[href] = /wiki/Barack_Obama
+------------------
+------------------
+ele = <a href="/wiki/Ponzi_scheme" title="Ponzi scheme">Ponzi scheme</a>
+attrs = {'href': '/wiki/Ponzi_scheme', 'title': 'Ponzi scheme'}
+attrs[href] = /wiki/Ponzi_scheme
+------------------
+------------------
+ele = <a href="/wiki/Bernard_Madoff" title="Bernard Madoff">Bernard Madoff</a>
+attrs = {'href': '/wiki/Bernard_Madoff', 'title': 'Bernard Madoff'}
+attrs[href] = /wiki/Bernard_Madoff
+------------------
+------------------
+ele = <a href="/wiki/Finding_Your_Roots" title="Finding Your Roots">Finding Your Roots</a>
+attrs = {'href': '/wiki/Finding_Your_Roots', 'title': 'Finding Your Roots'}
+attrs[href] = /wiki/Finding_Your_Roots
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Henry_Louis_Gates" title="Henry Louis Gates">Henry Louis Gates</a>
+attrs = {'href': '/wiki/Henry_Louis_Gates', 'class': ['mw-redirect'], 'title': 'Henry Louis Gates'}
+attrs[href] = /wiki/Henry_Louis_Gates
+------------------
+------------------
+ele = <a href="/wiki/Six_Degrees_of_Kevin_Bacon" title="Six Degrees of Kevin Bacon">Six Degrees of Kevin Bacon</a>
+attrs = {'href': '/wiki/Six_Degrees_of_Kevin_Bacon', 'title': 'Six Degrees of Kevin Bacon'}
+attrs[href] = /wiki/Six_Degrees_of_Kevin_Bacon
+------------------
+------------------
+ele = <a href="/wiki/Trivia" title="Trivia">trivia</a>
+attrs = {'href': '/wiki/Trivia', 'title': 'Trivia'}
+attrs[href] = /wiki/Trivia
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Big_screen" title="Big screen">screen</a>
+attrs = {'href': '/wiki/Big_screen', 'class': ['mw-redirect'], 'title': 'Big screen'}
+attrs[href] = /wiki/Big_screen
+------------------
+------------------
+ele = <a href="/wiki/Six_degrees_of_separation" title="Six degrees of separation">six degrees of separation</a>
+attrs = {'href': '/wiki/Six_degrees_of_separation', 'title': 'Six degrees of separation'}
+attrs[href] = /wiki/Six_degrees_of_separation
+------------------
+------------------
+ele = <a href="/wiki/Internet_meme" title="Internet meme">meme</a>
+attrs = {'href': '/wiki/Internet_meme', 'title': 'Internet meme'}
+attrs[href] = /wiki/Internet_meme
+------------------
+------------------
+ele = <a href="/wiki/SixDegrees.org" title="SixDegrees.org">SixDegrees.org</a>
+attrs = {'href': '/wiki/SixDegrees.org', 'title': 'SixDegrees.org'}
+attrs[href] = /wiki/SixDegrees.org
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Bacon_number" title="Bacon number">Bacon number</a>
+attrs = {'href': '/wiki/Bacon_number', 'class': ['mw-redirect'], 'title': 'Bacon number'}
+attrs[href] = /wiki/Bacon_number
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Internet_Movie_Database" title="Internet Movie Database">Internet Movie Database</a>
+attrs = {'href': '/wiki/Internet_Movie_Database', 'class': ['mw-redirect'], 'title': 'Internet Movie Database'}
+attrs[href] = /wiki/Internet_Movie_Database
+------------------
+------------------
+ele = <a href="/wiki/Paul_Erd%C5%91s" title="Paul Erdős">Paul Erdős</a>
+attrs = {'href': '/wiki/Paul_Erd%C5%91s', 'title': 'Paul Erdős'}
+attrs[href] = /wiki/Paul_Erd%C5%91s
+------------------
+------------------
+ele = <a href="/wiki/Erd%C5%91s_number" title="Erdős number">Erdős number</a>
+attrs = {'href': '/wiki/Erd%C5%91s_number', 'title': 'Erdős number'}
+attrs[href] = /wiki/Erd%C5%91s_number
+------------------
+------------------
+ele = <a href="/wiki/Paul_Erd%C5%91s" title="Paul Erdős">Paul Erdős</a>
+attrs = {'href': '/wiki/Paul_Erd%C5%91s', 'title': 'Paul Erdős'}
+attrs[href] = /wiki/Paul_Erd%C5%91s
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Bacon_number" title="Bacon number">Bacon number</a>
+attrs = {'href': '/wiki/Bacon_number', 'class': ['mw-redirect'], 'title': 'Bacon number'}
+attrs[href] = /wiki/Bacon_number
+------------------
+------------------
+ele = <a href="/wiki/Erd%C5%91s_number" title="Erdős number">Erdős number</a>
+attrs = {'href': '/wiki/Erd%C5%91s_number', 'title': 'Erdős number'}
+attrs[href] = /wiki/Erd%C5%91s_number
+------------------
+------------------
+ele = <a href="/wiki/Erd%C5%91s%E2%80%93Bacon_number" title="Erdős–Bacon number">Erdős–Bacon number</a>
+attrs = {'href': '/wiki/Erd%C5%91s%E2%80%93Bacon_number', 'title': 'Erdős–Bacon number'}
+attrs[href] = /wiki/Erd%C5%91s%E2%80%93Bacon_number
+------------------
+------------------
+ele = <a href="/wiki/The_Bacon_Brothers" title="The Bacon Brothers">The Bacon Brothers</a>
+attrs = {'href': '/wiki/The_Bacon_Brothers', 'title': 'The Bacon Brothers'}
+attrs[href] = /wiki/The_Bacon_Brothers
+------------------
+------------------
+ele = <a href="/wiki/Michael_Bacon_(musician)" title="Michael Bacon (musician)">Michael</a>
+attrs = {'href': '/wiki/Michael_Bacon_(musician)', 'title': 'Michael Bacon (musician)'}
+attrs[href] = /wiki/Michael_Bacon_(musician)
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Music_album" title="Music album">albums</a>
+attrs = {'href': '/wiki/Music_album', 'class': ['mw-redirect'], 'title': 'Music album'}
+attrs[href] = /wiki/Music_album
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Golden_Globe_Awards" title="Golden Globe Awards">Golden Globe Awards</a>
+attrs = {'href': '/wiki/Golden_Globe_Awards', 'class': ['mw-redirect'], 'title': 'Golden Globe Awards'}
+attrs[href] = /wiki/Golden_Globe_Awards
+------------------
+------------------
+ele = <a href="/wiki/Golden_Globe_Award_for_Best_Supporting_Actor_%E2%80%93_Motion_Picture" title="Golden Globe Award for Best Supporting Actor – Motion Picture">Best Supporting Actor – Motion Picture</a>
+attrs = {'href': '/wiki/Golden_Globe_Award_for_Best_Supporting_Actor_%E2%80%93_Motion_Picture', 'title': 'Golden Globe Award for Best Supporting Actor – Motion Picture'}
+attrs[href] = /wiki/Golden_Globe_Award_for_Best_Supporting_Actor_%E2%80%93_Motion_Picture
+------------------
+------------------
+ele = <a href="/wiki/The_River_Wild" title="The River Wild">The River Wild</a>
+attrs = {'href': '/wiki/The_River_Wild', 'title': 'The River Wild'}
+attrs[href] = /wiki/The_River_Wild
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Broadcast_Film_Critics_Association_Awards" title="Broadcast Film Critics Association Awards">Broadcast Film Critics Association Awards</a>
+attrs = {'href': '/wiki/Broadcast_Film_Critics_Association_Awards', 'class': ['mw-redirect'], 'title': 'Broadcast Film Critics Association Awards'}
+attrs[href] = /wiki/Broadcast_Film_Critics_Association_Awards
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Broadcast_Film_Critics_Association_Award_for_Best_Actor" title="Broadcast Film Critics Association Award for Best Actor">Best Actor</a>
+attrs = {'href': '/wiki/Broadcast_Film_Critics_Association_Award_for_Best_Actor', 'class': ['mw-redirect'], 'title': 'Broadcast Film Critics Association Award for Best Actor'}
+attrs[href] = /wiki/Broadcast_Film_Critics_Association_Award_for_Best_Actor
+------------------
+------------------
+ele = <a href="/wiki/Murder_in_the_First_(film)" title="Murder in the First (film)">Murder in the First</a>
+attrs = {'href': '/wiki/Murder_in_the_First_(film)', 'title': 'Murder in the First (film)'}
+attrs[href] = /wiki/Murder_in_the_First_(film)
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Screen_Actors_Guild_Awards" title="Screen Actors Guild Awards">Screen Actors Guild Awards</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Awards', 'class': ['mw-redirect'], 'title': 'Screen Actors Guild Awards'}
+attrs[href] = /wiki/Screen_Actors_Guild_Awards
+------------------
+------------------
+ele = <a href="/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Cast_in_a_Motion_Picture" title="Screen Actors Guild Award for Outstanding Performance by a Cast in a Motion Picture">Outstanding Performance by a Cast in a Motion Picture</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Cast_in_a_Motion_Picture', 'title': 'Screen Actors Guild Award for Outstanding Performance by a Cast in a Motion Picture'}
+attrs[href] = /wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Cast_in_a_Motion_Picture
+------------------
+------------------
+ele = <a href="/wiki/Apollo_13_(film)" title="Apollo 13 (film)">Apollo 13</a>
+attrs = {'href': '/wiki/Apollo_13_(film)', 'title': 'Apollo 13 (film)'}
+attrs[href] = /wiki/Apollo_13_(film)
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Screen_Actors_Guild_Awards" title="Screen Actors Guild Awards">Screen Actors Guild Awards</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Awards', 'class': ['mw-redirect'], 'title': 'Screen Actors Guild Awards'}
+attrs[href] = /wiki/Screen_Actors_Guild_Awards
+------------------
+------------------
+ele = <a href="/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Supporting_Role" title="Screen Actors Guild Award for Outstanding Performance by a Male Actor in a Supporting Role">Outstanding Performance by a Male Actor in a Supporting Role</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Supporting_Role', 'title': 'Screen Actors Guild Award for Outstanding Performance by a Male Actor in a Supporting Role'}
+attrs[href] = /wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Supporting_Role
+------------------
+------------------
+ele = <a href="/wiki/Murder_in_the_First_(film)" title="Murder in the First (film)">Murder in the First</a>
+attrs = {'href': '/wiki/Murder_in_the_First_(film)', 'title': 'Murder in the First (film)'}
+attrs[href] = /wiki/Murder_in_the_First_(film)
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/MTV_Movie_Awards" title="MTV Movie Awards">MTV Movie Awards</a>
+attrs = {'href': '/wiki/MTV_Movie_Awards', 'class': ['mw-redirect'], 'title': 'MTV Movie Awards'}
+attrs[href] = /wiki/MTV_Movie_Awards
+------------------
+------------------
+ele = <a href="/wiki/MTV_Movie_Award_for_Best_Villain" title="MTV Movie Award for Best Villain">Best Villain</a>
+attrs = {'href': '/wiki/MTV_Movie_Award_for_Best_Villain', 'title': 'MTV Movie Award for Best Villain'}
+attrs[href] = /wiki/MTV_Movie_Award_for_Best_Villain
+------------------
+------------------
+ele = <a href="/wiki/Hollow_Man" title="Hollow Man">Hollow Man</a>
+attrs = {'href': '/wiki/Hollow_Man', 'title': 'Hollow Man'}
+attrs[href] = /wiki/Hollow_Man
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Boston_Society_of_Film_Critics_Awards" title="Boston Society of Film Critics Awards">Boston Society of Film Critics Awards</a>
+attrs = {'href': '/wiki/Boston_Society_of_Film_Critics_Awards', 'class': ['mw-redirect'], 'title': 'Boston Society of Film Critics Awards'}
+attrs[href] = /wiki/Boston_Society_of_Film_Critics_Awards
+------------------
+------------------
+ele = <a href="/wiki/Boston_Society_of_Film_Critics_Award_for_Best_Cast" title="Boston Society of Film Critics Award for Best Cast">Best Cast</a>
+attrs = {'href': '/wiki/Boston_Society_of_Film_Critics_Award_for_Best_Cast', 'title': 'Boston Society of Film Critics Award for Best Cast'}
+attrs[href] = /wiki/Boston_Society_of_Film_Critics_Award_for_Best_Cast
+------------------
+------------------
+ele = <a href="/wiki/Mystic_River_(film)" title="Mystic River (film)">Mystic River</a>
+attrs = {'href': '/wiki/Mystic_River_(film)', 'title': 'Mystic River (film)'}
+attrs[href] = /wiki/Mystic_River_(film)
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Screen_Actors_Guild_Awards" title="Screen Actors Guild Awards">Screen Actors Guild Awards</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Awards', 'class': ['mw-redirect'], 'title': 'Screen Actors Guild Awards'}
+attrs[href] = /wiki/Screen_Actors_Guild_Awards
+------------------
+------------------
+ele = <a href="/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Cast_in_a_Motion_Picture" title="Screen Actors Guild Award for Outstanding Performance by a Cast in a Motion Picture">Outstanding Performance by a Cast in a Motion Picture</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Cast_in_a_Motion_Picture', 'title': 'Screen Actors Guild Award for Outstanding Performance by a Cast in a Motion Picture'}
+attrs[href] = /wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Cast_in_a_Motion_Picture
+------------------
+------------------
+ele = <a href="/wiki/Mystic_River_(film)" title="Mystic River (film)">Mystic River</a>
+attrs = {'href': '/wiki/Mystic_River_(film)', 'title': 'Mystic River (film)'}
+attrs[href] = /wiki/Mystic_River_(film)
+------------------
+------------------
+ele = <a href="/wiki/Satellite_Awards" title="Satellite Awards">Satellite Awards</a>
+attrs = {'href': '/wiki/Satellite_Awards', 'title': 'Satellite Awards'}
+attrs[href] = /wiki/Satellite_Awards
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Satellite_Award_for_Best_Actor_%E2%80%93_Motion_Picture_Drama" title="Satellite Award for Best Actor – Motion Picture Drama">Best Actor – Motion Picture Drama</a>
+attrs = {'href': '/wiki/Satellite_Award_for_Best_Actor_%E2%80%93_Motion_Picture_Drama', 'class': ['mw-redirect'], 'title': 'Satellite Award for Best Actor – Motion Picture Drama'}
+attrs[href] = /wiki/Satellite_Award_for_Best_Actor_%E2%80%93_Motion_Picture_Drama
+------------------
+------------------
+ele = <a href="/wiki/The_Woodsman_(2004_film)" title="The Woodsman (2004 film)">The Woodsman</a>
+attrs = {'href': '/wiki/The_Woodsman_(2004_film)', 'title': 'The Woodsman (2004 film)'}
+attrs[href] = /wiki/The_Woodsman_(2004_film)
+------------------
+------------------
+ele = <a href="/wiki/Teen_Choice_Awards" title="Teen Choice Awards">Teen Choice Awards</a>
+attrs = {'href': '/wiki/Teen_Choice_Awards', 'title': 'Teen Choice Awards'}
+attrs[href] = /wiki/Teen_Choice_Awards
+------------------
+------------------
+ele = <a href="/wiki/Teen_Choice_Awards" title="Teen Choice Awards">Choice Movie Sleazebag</a>
+attrs = {'href': '/wiki/Teen_Choice_Awards', 'title': 'Teen Choice Awards'}
+attrs[href] = /wiki/Teen_Choice_Awards
+------------------
+------------------
+ele = <a href="/wiki/Beauty_Shop" title="Beauty Shop">Beauty Shop</a>
+attrs = {'href': '/wiki/Beauty_Shop', 'title': 'Beauty Shop'}
+attrs[href] = /wiki/Beauty_Shop
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Primetime_Emmy_Awards" title="Primetime Emmy Awards">Primetime Emmy Awards</a>
+attrs = {'href': '/wiki/Primetime_Emmy_Awards', 'class': ['mw-redirect'], 'title': 'Primetime Emmy Awards'}
+attrs[href] = /wiki/Primetime_Emmy_Awards
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Primetime_Emmy_Award_for_Outstanding_Lead_Actor_in_a_Miniseries_or_a_Movie" title="Primetime Emmy Award for Outstanding Lead Actor in a Miniseries or a Movie">Outstanding Lead Actor in a Miniseries or a Movie</a>
+attrs = {'href': '/wiki/Primetime_Emmy_Award_for_Outstanding_Lead_Actor_in_a_Miniseries_or_a_Movie', 'class': ['mw-redirect'], 'title': 'Primetime Emmy Award for Outstanding Lead Actor in a Miniseries or a Movie'}
+attrs[href] = /wiki/Primetime_Emmy_Award_for_Outstanding_Lead_Actor_in_a_Miniseries_or_a_Movie
+------------------
+------------------
+ele = <a href="/wiki/Taking_Chance" title="Taking Chance">Taking Chance</a>
+attrs = {'href': '/wiki/Taking_Chance', 'title': 'Taking Chance'}
+attrs[href] = /wiki/Taking_Chance
+------------------
+------------------
+ele = <a href="/wiki/Satellite_Awards" title="Satellite Awards">Satellite Awards</a>
+attrs = {'href': '/wiki/Satellite_Awards', 'title': 'Satellite Awards'}
+attrs[href] = /wiki/Satellite_Awards
+------------------
+------------------
+ele = <a href="/wiki/Satellite_Award_for_Best_Actor_%E2%80%93_Miniseries_or_Television_Film" title="Satellite Award for Best Actor – Miniseries or Television Film">Best Actor – Miniseries or Television Film</a>
+attrs = {'href': '/wiki/Satellite_Award_for_Best_Actor_%E2%80%93_Miniseries_or_Television_Film', 'title': 'Satellite Award for Best Actor – Miniseries or Television Film'}
+attrs[href] = /wiki/Satellite_Award_for_Best_Actor_%E2%80%93_Miniseries_or_Television_Film
+------------------
+------------------
+ele = <a href="/wiki/Taking_Chance" title="Taking Chance">Taking Chance</a>
+attrs = {'href': '/wiki/Taking_Chance', 'title': 'Taking Chance'}
+attrs[href] = /wiki/Taking_Chance
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Screen_Actors_Guild_Awards" title="Screen Actors Guild Awards">Screen Actors Guild Awards</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Awards', 'class': ['mw-redirect'], 'title': 'Screen Actors Guild Awards'}
+attrs[href] = /wiki/Screen_Actors_Guild_Awards
+------------------
+------------------
+ele = <a href="/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Cast_in_a_Motion_Picture" title="Screen Actors Guild Award for Outstanding Performance by a Cast in a Motion Picture">Outstanding Performance by a Cast in a Motion Picture</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Cast_in_a_Motion_Picture', 'title': 'Screen Actors Guild Award for Outstanding Performance by a Cast in a Motion Picture'}
+attrs[href] = /wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Cast_in_a_Motion_Picture
+------------------
+------------------
+ele = <a href="/wiki/Frost/Nixon_(film)" title="Frost/Nixon (film)">Frost/Nixon</a>
+attrs = {'href': '/wiki/Frost/Nixon_(film)', 'title': 'Frost/Nixon (film)'}
+attrs[href] = /wiki/Frost/Nixon_(film)
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Golden_Globe_Awards" title="Golden Globe Awards">Golden Globe Awards</a>
+attrs = {'href': '/wiki/Golden_Globe_Awards', 'class': ['mw-redirect'], 'title': 'Golden Globe Awards'}
+attrs[href] = /wiki/Golden_Globe_Awards
+------------------
+------------------
+ele = <a href="/wiki/Golden_Globe_Award_for_Best_Actor_%E2%80%93_Miniseries_or_Television_Film" title="Golden Globe Award for Best Actor – Miniseries or Television Film">Best Actor – Miniseries or Television Film</a>
+attrs = {'href': '/wiki/Golden_Globe_Award_for_Best_Actor_%E2%80%93_Miniseries_or_Television_Film', 'title': 'Golden Globe Award for Best Actor – Miniseries or Television Film'}
+attrs[href] = /wiki/Golden_Globe_Award_for_Best_Actor_%E2%80%93_Miniseries_or_Television_Film
+------------------
+------------------
+ele = <a href="/wiki/Taking_Chance" title="Taking Chance">Taking Chance</a>
+attrs = {'href': '/wiki/Taking_Chance', 'title': 'Taking Chance'}
+attrs[href] = /wiki/Taking_Chance
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Screen_Actors_Guild_Awards" title="Screen Actors Guild Awards">Screen Actors Guild Awards</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Awards', 'class': ['mw-redirect'], 'title': 'Screen Actors Guild Awards'}
+attrs[href] = /wiki/Screen_Actors_Guild_Awards
+------------------
+------------------
+ele = <a href="/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Miniseries_or_Television_Movie" title="Screen Actors Guild Award for Outstanding Performance by a Male Actor in a Miniseries or Television Movie">Outstanding Performance by a Male Actor in a Miniseries or Television Movie</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Miniseries_or_Television_Movie', 'title': 'Screen Actors Guild Award for Outstanding Performance by a Male Actor in a Miniseries or Television Movie'}
+attrs[href] = /wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Miniseries_or_Television_Movie
+------------------
+------------------
+ele = <a href="/wiki/Taking_Chance" title="Taking Chance">Taking Chance</a>
+attrs = {'href': '/wiki/Taking_Chance', 'title': 'Taking Chance'}
+attrs[href] = /wiki/Taking_Chance
+------------------
+------------------
+ele = <a href="/wiki/Teen_Choice_Awards" title="Teen Choice Awards">Teen Choice Awards</a>
+attrs = {'href': '/wiki/Teen_Choice_Awards', 'title': 'Teen Choice Awards'}
+attrs[href] = /wiki/Teen_Choice_Awards
+------------------
+------------------
+ele = <a href="/wiki/Teen_Choice_Awards" title="Teen Choice Awards">Choice Movie Villain</a>
+attrs = {'href': '/wiki/Teen_Choice_Awards', 'title': 'Teen Choice Awards'}
+attrs[href] = /wiki/Teen_Choice_Awards
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Saturn_Awards" title="Saturn Awards">Saturn Awards</a>
+attrs = {'href': '/wiki/Saturn_Awards', 'class': ['mw-redirect'], 'title': 'Saturn Awards'}
+attrs[href] = /wiki/Saturn_Awards
+------------------
+------------------
+ele = <a href="/wiki/Saturn_Award_for_Best_Actor_on_Television" title="Saturn Award for Best Actor on Television">Best Actor on Television</a>
+attrs = {'href': '/wiki/Saturn_Award_for_Best_Actor_on_Television', 'title': 'Saturn Award for Best Actor on Television'}
+attrs[href] = /wiki/Saturn_Award_for_Best_Actor_on_Television
+------------------
+------------------
+ele = <a href="/wiki/The_Following" title="The Following">The Following</a>
+attrs = {'href': '/wiki/The_Following', 'title': 'The Following'}
+attrs[href] = /wiki/The_Following
+------------------
+------------------
+ele = <a href="/wiki/People%27s_Choice_Awards" title="People's Choice Awards">People's Choice Awards</a>
+attrs = {'href': '/wiki/People%27s_Choice_Awards', 'title': "People's Choice Awards"}
+attrs[href] = /wiki/People%27s_Choice_Awards
+------------------
+------------------
+ele = <a href="/wiki/People%27s_Choice_Awards" title="People's Choice Awards">Favorite Dramatic TV Actor</a>
+attrs = {'href': '/wiki/People%27s_Choice_Awards', 'title': "People's Choice Awards"}
+attrs[href] = /wiki/People%27s_Choice_Awards
+------------------
+------------------
+ele = <a href="/wiki/The_Following" title="The Following">The Following</a>
+attrs = {'href': '/wiki/The_Following', 'title': 'The Following'}
+attrs[href] = /wiki/The_Following
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Saturn_Awards" title="Saturn Awards">Saturn Awards</a>
+attrs = {'href': '/wiki/Saturn_Awards', 'class': ['mw-redirect'], 'title': 'Saturn Awards'}
+attrs[href] = /wiki/Saturn_Awards
+------------------
+------------------
+ele = <a href="/wiki/Saturn_Award_for_Best_Actor_on_Television" title="Saturn Award for Best Actor on Television">Best Actor on Television</a>
+attrs = {'href': '/wiki/Saturn_Award_for_Best_Actor_on_Television', 'title': 'Saturn Award for Best Actor on Television'}
+attrs[href] = /wiki/Saturn_Award_for_Best_Actor_on_Television
+------------------
+------------------
+ele = <a href="/wiki/The_Following" title="The Following">The Following</a>
+attrs = {'href': '/wiki/The_Following', 'title': 'The Following'}
+attrs[href] = /wiki/The_Following
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Golden_Globe_Awards" title="Golden Globe Awards">Golden Globe Awards</a>
+attrs = {'href': '/wiki/Golden_Globe_Awards', 'class': ['mw-redirect'], 'title': 'Golden Globe Awards'}
+attrs[href] = /wiki/Golden_Globe_Awards
+------------------
+------------------
+ele = <a href="/wiki/Golden_Globe_Award_for_Best_Actor_%E2%80%93_Television_Series_Musical_or_Comedy" title="Golden Globe Award for Best Actor – Television Series Musical or Comedy">Best Actor – Television Series Musical or Comedy</a>
+attrs = {'href': '/wiki/Golden_Globe_Award_for_Best_Actor_%E2%80%93_Television_Series_Musical_or_Comedy', 'title': 'Golden Globe Award for Best Actor – Television Series Musical or Comedy'}
+attrs[href] = /wiki/Golden_Globe_Award_for_Best_Actor_%E2%80%93_Television_Series_Musical_or_Comedy
+------------------
+------------------
+ele = <a href="/wiki/I_Love_Dick_(TV_series)" title="I Love Dick (TV series)">I Love Dick</a>
+attrs = {'href': '/wiki/I_Love_Dick_(TV_series)', 'title': 'I Love Dick (TV series)'}
+attrs[href] = /wiki/I_Love_Dick_(TV_series)
+------------------
+------------------
+ele = <a href="/wiki/Kevin_Bacon_filmography" title="Kevin Bacon filmography">Kevin Bacon filmography</a>
+attrs = {'href': '/wiki/Kevin_Bacon_filmography', 'title': 'Kevin Bacon filmography'}
+attrs[href] = /wiki/Kevin_Bacon_filmography
+------------------
+------------------
+ele = <a href="/wiki/List_of_actors_with_Hollywood_Walk_of_Fame_motion_picture_stars" title="List of actors with Hollywood Walk of Fame motion picture stars">List of actors with Hollywood Walk of Fame motion picture stars</a>
+attrs = {'href': '/wiki/List_of_actors_with_Hollywood_Walk_of_Fame_motion_picture_stars', 'title': 'List of actors with Hollywood Walk of Fame motion picture stars'}
+attrs[href] = /wiki/List_of_actors_with_Hollywood_Walk_of_Fame_motion_picture_stars
+------------------
+------------------
+ele = <a href="/wiki/The_Austin_Chronicle" title="The Austin Chronicle">The Austin Chronicle</a>
+attrs = {'href': '/wiki/The_Austin_Chronicle', 'title': 'The Austin Chronicle'}
+attrs[href] = /wiki/The_Austin_Chronicle
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Access_Hollywood" title="Access Hollywood">Access Hollywood</a>
+attrs = {'href': '/wiki/Access_Hollywood', 'class': ['mw-redirect'], 'title': 'Access Hollywood'}
+attrs[href] = /wiki/Access_Hollywood
+------------------
+------------------
+ele = <a href="/wiki/Reuters" title="Reuters">Reuters</a>
+attrs = {'href': '/wiki/Reuters', 'title': 'Reuters'}
+attrs[href] = /wiki/Reuters
+------------------
+------------------
+ele = <a href="/wiki/CBS_News" title="CBS News">CBS News</a>
+attrs = {'href': '/wiki/CBS_News', 'title': 'CBS News'}
+attrs[href] = /wiki/CBS_News
+------------------
+------------------
+ele = <a href="/wiki/The_Verge" title="The Verge">The Verge</a>
+attrs = {'href': '/wiki/The_Verge', 'title': 'The Verge'}
+attrs[href] = /wiki/The_Verge
+------------------
+------------------
+ele = <a href="/wiki/The_Hollywood_Reporter" title="The Hollywood Reporter">The Hollywood Reporter</a>
+attrs = {'href': '/wiki/The_Hollywood_Reporter', 'title': 'The Hollywood Reporter'}
+attrs[href] = /wiki/The_Hollywood_Reporter
+------------------
+------------------
+ele = <a class="mw-redirect" href="/wiki/Indie_Wire" title="Indie Wire">Indie Wire</a>
+attrs = {'href': '/wiki/Indie_Wire', 'class': ['mw-redirect'], 'title': 'Indie Wire'}
+attrs[href] = /wiki/Indie_Wire
+------------------
+------------------
+ele = <a href="/wiki/IMDb" title="IMDb">IMDb</a>
+attrs = {'href': '/wiki/IMDb', 'title': 'IMDb'}
+attrs[href] = /wiki/IMDb
+------------------
+------------------
+ele = <a href="/wiki/Internet_Broadway_Database" title="Internet Broadway Database">Internet Broadway Database</a>
+attrs = {'href': '/wiki/Internet_Broadway_Database', 'title': 'Internet Broadway Database'}
+attrs[href] = /wiki/Internet_Broadway_Database
+------------------
+------------------
+ele = <a href="/wiki/Lortel_Archives" title="Lortel Archives">Internet Off-Broadway Database</a>
+attrs = {'href': '/wiki/Lortel_Archives', 'title': 'Lortel Archives'}
+attrs[href] = /wiki/Lortel_Archives
+------------------
+------------------
+ele = <a href="/wiki/AllMovie" title="AllMovie">AllMovie</a>
+attrs = {'href': '/wiki/AllMovie', 'title': 'AllMovie'}
+attrs[href] = /wiki/AllMovie
+------------------
+------------------
+ele = <a href="/wiki/Losing_Chase" title="Losing Chase">Losing Chase</a>
+attrs = {'href': '/wiki/Losing_Chase', 'title': 'Losing Chase'}
+attrs[href] = /wiki/Losing_Chase
+------------------
+------------------
+ele = <a href="/wiki/Loverboy_(2005_film)" title="Loverboy (2005 film)">Loverboy</a>
+attrs = {'href': '/wiki/Loverboy_(2005_film)', 'title': 'Loverboy (2005 film)'}
+attrs[href] = /wiki/Loverboy_(2005_film)
+------------------
+------------------
+ele = <a href="/wiki/The_Closer" title="The Closer">The Closer</a>
+attrs = {'href': '/wiki/The_Closer', 'title': 'The Closer'}
+attrs[href] = /wiki/The_Closer
+------------------
+------------------
+ele = <a href="/wiki/Wild_Things_(film)" title="Wild Things (film)">Wild Things</a>
+attrs = {'href': '/wiki/Wild_Things_(film)', 'title': 'Wild Things (film)'}
+attrs[href] = /wiki/Wild_Things_(film)
+------------------
+------------------
+ele = <a href="/wiki/The_Woodsman_(2004_film)" title="The Woodsman (2004 film)">The Woodsman</a>
+attrs = {'href': '/wiki/The_Woodsman_(2004_film)', 'title': 'The Woodsman (2004 film)'}
+attrs[href] = /wiki/The_Woodsman_(2004_film)
+------------------
+------------------
+ele = <a href="/wiki/Loverboy_(2005_film)" title="Loverboy (2005 film)">Loverboy</a>
+attrs = {'href': '/wiki/Loverboy_(2005_film)', 'title': 'Loverboy (2005 film)'}
+attrs[href] = /wiki/Loverboy_(2005_film)
+------------------
+------------------
+ele = <a href="/wiki/The_Following" title="The Following">The Following</a>
+attrs = {'href': '/wiki/The_Following', 'title': 'The Following'}
+attrs[href] = /wiki/The_Following
+------------------
+------------------
+ele = <a href="/wiki/Cop_Car_(film)" title="Cop Car (film)">Cop Car</a>
+attrs = {'href': '/wiki/Cop_Car_(film)', 'title': 'Cop Car (film)'}
+attrs[href] = /wiki/Cop_Car_(film)
+------------------
+------------------
+ele = <a href="/wiki/I_Love_Dick_(TV_series)" title="I Love Dick (TV series)">I Love Dick</a>
+attrs = {'href': '/wiki/I_Love_Dick_(TV_series)', 'title': 'I Love Dick (TV series)'}
+attrs[href] = /wiki/I_Love_Dick_(TV_series)
+------------------
+------------------
+ele = <a href="/wiki/Kevin_Bacon_filmography" title="Kevin Bacon filmography">Filmography</a>
+attrs = {'href': '/wiki/Kevin_Bacon_filmography', 'title': 'Kevin Bacon filmography'}
+attrs[href] = /wiki/Kevin_Bacon_filmography
+------------------
+------------------
+ele = <a href="/wiki/Critics%27_Choice_Movie_Award_for_Best_Actor" title="Critics' Choice Movie Award for Best Actor">Critics' Choice Movie Award for Best Actor</a>
+attrs = {'href': '/wiki/Critics%27_Choice_Movie_Award_for_Best_Actor', 'title': "Critics' Choice Movie Award for Best Actor"}
+attrs[href] = /wiki/Critics%27_Choice_Movie_Award_for_Best_Actor
+------------------
+------------------
+ele = <a href="/wiki/Geoffrey_Rush" title="Geoffrey Rush">Geoffrey Rush</a>
+attrs = {'href': '/wiki/Geoffrey_Rush', 'title': 'Geoffrey Rush'}
+attrs[href] = /wiki/Geoffrey_Rush
+------------------
+------------------
+ele = <a href="/wiki/Jack_Nicholson" title="Jack Nicholson">Jack Nicholson</a>
+attrs = {'href': '/wiki/Jack_Nicholson', 'title': 'Jack Nicholson'}
+attrs[href] = /wiki/Jack_Nicholson
+------------------
+------------------
+ele = <a href="/wiki/Ian_McKellen" title="Ian McKellen">Ian McKellen</a>
+attrs = {'href': '/wiki/Ian_McKellen', 'title': 'Ian McKellen'}
+attrs[href] = /wiki/Ian_McKellen
+------------------
+------------------
+ele = <a href="/wiki/Russell_Crowe" title="Russell Crowe">Russell Crowe</a>
+attrs = {'href': '/wiki/Russell_Crowe', 'title': 'Russell Crowe'}
+attrs[href] = /wiki/Russell_Crowe
+------------------
+------------------
+ele = <a href="/wiki/Russell_Crowe" title="Russell Crowe">Russell Crowe</a>
+attrs = {'href': '/wiki/Russell_Crowe', 'title': 'Russell Crowe'}
+attrs[href] = /wiki/Russell_Crowe
+------------------
+------------------
+ele = <a href="/wiki/Russell_Crowe" title="Russell Crowe">Russell Crowe</a>
+attrs = {'href': '/wiki/Russell_Crowe', 'title': 'Russell Crowe'}
+attrs[href] = /wiki/Russell_Crowe
+------------------
+------------------
+ele = <a href="/wiki/Daniel_Day-Lewis" title="Daniel Day-Lewis">Daniel Day-Lewis</a>
+attrs = {'href': '/wiki/Daniel_Day-Lewis', 'title': 'Daniel Day-Lewis'}
+attrs[href] = /wiki/Daniel_Day-Lewis
+------------------
+------------------
+ele = <a href="/wiki/Jack_Nicholson" title="Jack Nicholson">Jack Nicholson</a>
+attrs = {'href': '/wiki/Jack_Nicholson', 'title': 'Jack Nicholson'}
+attrs[href] = /wiki/Jack_Nicholson
+------------------
+------------------
+ele = <a href="/wiki/Sean_Penn" title="Sean Penn">Sean Penn</a>
+attrs = {'href': '/wiki/Sean_Penn', 'title': 'Sean Penn'}
+attrs[href] = /wiki/Sean_Penn
+------------------
+------------------
+ele = <a href="/wiki/Jamie_Foxx" title="Jamie Foxx">Jamie Foxx</a>
+attrs = {'href': '/wiki/Jamie_Foxx', 'title': 'Jamie Foxx'}
+attrs[href] = /wiki/Jamie_Foxx
+------------------
+------------------
+ele = <a href="/wiki/Philip_Seymour_Hoffman" title="Philip Seymour Hoffman">Philip Seymour Hoffman</a>
+attrs = {'href': '/wiki/Philip_Seymour_Hoffman', 'title': 'Philip Seymour Hoffman'}
+attrs[href] = /wiki/Philip_Seymour_Hoffman
+------------------
+------------------
+ele = <a href="/wiki/Forest_Whitaker" title="Forest Whitaker">Forest Whitaker</a>
+attrs = {'href': '/wiki/Forest_Whitaker', 'title': 'Forest Whitaker'}
+attrs[href] = /wiki/Forest_Whitaker
+------------------
+------------------
+ele = <a href="/wiki/Daniel_Day-Lewis" title="Daniel Day-Lewis">Daniel Day-Lewis</a>
+attrs = {'href': '/wiki/Daniel_Day-Lewis', 'title': 'Daniel Day-Lewis'}
+attrs[href] = /wiki/Daniel_Day-Lewis
+------------------
+------------------
+ele = <a href="/wiki/Sean_Penn" title="Sean Penn">Sean Penn</a>
+attrs = {'href': '/wiki/Sean_Penn', 'title': 'Sean Penn'}
+attrs[href] = /wiki/Sean_Penn
+------------------
+------------------
+ele = <a href="/wiki/Jeff_Bridges" title="Jeff Bridges">Jeff Bridges</a>
+attrs = {'href': '/wiki/Jeff_Bridges', 'title': 'Jeff Bridges'}
+attrs[href] = /wiki/Jeff_Bridges
+------------------
+------------------
+ele = <a href="/wiki/Colin_Firth" title="Colin Firth">Colin Firth</a>
+attrs = {'href': '/wiki/Colin_Firth', 'title': 'Colin Firth'}
+attrs[href] = /wiki/Colin_Firth
+------------------
+------------------
+ele = <a href="/wiki/George_Clooney" title="George Clooney">George Clooney</a>
+attrs = {'href': '/wiki/George_Clooney', 'title': 'George Clooney'}
+attrs[href] = /wiki/George_Clooney
+------------------
+------------------
+ele = <a href="/wiki/Daniel_Day-Lewis" title="Daniel Day-Lewis">Daniel Day-Lewis</a>
+attrs = {'href': '/wiki/Daniel_Day-Lewis', 'title': 'Daniel Day-Lewis'}
+attrs[href] = /wiki/Daniel_Day-Lewis
+------------------
+------------------
+ele = <a href="/wiki/Matthew_McConaughey" title="Matthew McConaughey">Matthew McConaughey</a>
+attrs = {'href': '/wiki/Matthew_McConaughey', 'title': 'Matthew McConaughey'}
+attrs[href] = /wiki/Matthew_McConaughey
+------------------
+------------------
+ele = <a href="/wiki/Michael_Keaton" title="Michael Keaton">Michael Keaton</a>
+attrs = {'href': '/wiki/Michael_Keaton', 'title': 'Michael Keaton'}
+attrs[href] = /wiki/Michael_Keaton
+------------------
+------------------
+ele = <a href="/wiki/Leonardo_DiCaprio" title="Leonardo DiCaprio">Leonardo DiCaprio</a>
+attrs = {'href': '/wiki/Leonardo_DiCaprio', 'title': 'Leonardo DiCaprio'}
+attrs[href] = /wiki/Leonardo_DiCaprio
+------------------
+------------------
+ele = <a href="/wiki/Casey_Affleck" title="Casey Affleck">Casey Affleck</a>
+attrs = {'href': '/wiki/Casey_Affleck', 'title': 'Casey Affleck'}
+attrs[href] = /wiki/Casey_Affleck
+------------------
+------------------
+ele = <a href="/wiki/Gary_Oldman" title="Gary Oldman">Gary Oldman</a>
+attrs = {'href': '/wiki/Gary_Oldman', 'title': 'Gary Oldman'}
+attrs[href] = /wiki/Gary_Oldman
+------------------
+------------------
+ele = <a href="/wiki/Golden_Globe_Award_for_Best_Actor_%E2%80%93_Miniseries_or_Television_Film" title="Golden Globe Award for Best Actor – Miniseries or Television Film">Golden Globe Award for Best Actor – Miniseries or Television Film</a>
+attrs = {'href': '/wiki/Golden_Globe_Award_for_Best_Actor_%E2%80%93_Miniseries_or_Television_Film', 'title': 'Golden Globe Award for Best Actor – Miniseries or Television Film'}
+attrs[href] = /wiki/Golden_Globe_Award_for_Best_Actor_%E2%80%93_Miniseries_or_Television_Film
+------------------
+------------------
+ele = <a href="/wiki/Mickey_Rooney" title="Mickey Rooney">Mickey Rooney</a>
+attrs = {'href': '/wiki/Mickey_Rooney', 'title': 'Mickey Rooney'}
+attrs[href] = /wiki/Mickey_Rooney
+------------------
+------------------
+ele = <a href="/wiki/Anthony_Andrews" title="Anthony Andrews">Anthony Andrews</a>
+attrs = {'href': '/wiki/Anthony_Andrews', 'title': 'Anthony Andrews'}
+attrs[href] = /wiki/Anthony_Andrews
+------------------
+------------------
+ele = <a href="/wiki/Richard_Chamberlain" title="Richard Chamberlain">Richard Chamberlain</a>
+attrs = {'href': '/wiki/Richard_Chamberlain', 'title': 'Richard Chamberlain'}
+attrs[href] = /wiki/Richard_Chamberlain
+------------------
+------------------
+ele = <a href="/wiki/Ted_Danson" title="Ted Danson">Ted Danson</a>
+attrs = {'href': '/wiki/Ted_Danson', 'title': 'Ted Danson'}
+attrs[href] = /wiki/Ted_Danson
+------------------
+------------------
+ele = <a href="/wiki/Dustin_Hoffman" title="Dustin Hoffman">Dustin Hoffman</a>
+attrs = {'href': '/wiki/Dustin_Hoffman', 'title': 'Dustin Hoffman'}
+attrs[href] = /wiki/Dustin_Hoffman
+------------------
+------------------
+ele = <a href="/wiki/James_Woods" title="James Woods">James Woods</a>
+attrs = {'href': '/wiki/James_Woods', 'title': 'James Woods'}
+attrs[href] = /wiki/James_Woods
+------------------
+------------------
+ele = <a href="/wiki/Randy_Quaid" title="Randy Quaid">Randy Quaid</a>
+attrs = {'href': '/wiki/Randy_Quaid', 'title': 'Randy Quaid'}
+attrs[href] = /wiki/Randy_Quaid
+------------------
+------------------
+ele = <a href="/wiki/Michael_Caine" title="Michael Caine">Michael Caine</a>
+attrs = {'href': '/wiki/Michael_Caine', 'title': 'Michael Caine'}
+attrs[href] = /wiki/Michael_Caine
+------------------
+------------------
+ele = <a href="/wiki/Stacy_Keach" title="Stacy Keach">Stacy Keach</a>
+attrs = {'href': '/wiki/Stacy_Keach', 'title': 'Stacy Keach'}
+attrs[href] = /wiki/Stacy_Keach
+------------------
+------------------
+ele = <a href="/wiki/Robert_Duvall" title="Robert Duvall">Robert Duvall</a>
+attrs = {'href': '/wiki/Robert_Duvall', 'title': 'Robert Duvall'}
+attrs[href] = /wiki/Robert_Duvall
+------------------
+------------------
+ele = <a href="/wiki/James_Garner" title="James Garner">James Garner</a>
+attrs = {'href': '/wiki/James_Garner', 'title': 'James Garner'}
+attrs[href] = /wiki/James_Garner
+------------------
+------------------
+ele = <a href="/wiki/Beau_Bridges" title="Beau Bridges">Beau Bridges</a>
+attrs = {'href': '/wiki/Beau_Bridges', 'title': 'Beau Bridges'}
+attrs[href] = /wiki/Beau_Bridges
+------------------
+------------------
+ele = <a href="/wiki/Robert_Duvall" title="Robert Duvall">Robert Duvall</a>
+attrs = {'href': '/wiki/Robert_Duvall', 'title': 'Robert Duvall'}
+attrs[href] = /wiki/Robert_Duvall
+------------------
+------------------
+ele = <a href="/wiki/James_Garner" title="James Garner">James Garner</a>
+attrs = {'href': '/wiki/James_Garner', 'title': 'James Garner'}
+attrs[href] = /wiki/James_Garner
+------------------
+------------------
+ele = <a href="/wiki/Ra%C3%BAl_Juli%C3%A1" title="Raúl Juliá">Raúl Juliá</a>
+attrs = {'href': '/wiki/Ra%C3%BAl_Juli%C3%A1', 'title': 'Raúl Juliá'}
+attrs[href] = /wiki/Ra%C3%BAl_Juli%C3%A1
+------------------
+------------------
+ele = <a href="/wiki/Gary_Sinise" title="Gary Sinise">Gary Sinise</a>
+attrs = {'href': '/wiki/Gary_Sinise', 'title': 'Gary Sinise'}
+attrs[href] = /wiki/Gary_Sinise
+------------------
+------------------
+ele = <a href="/wiki/Alan_Rickman" title="Alan Rickman">Alan Rickman</a>
+attrs = {'href': '/wiki/Alan_Rickman', 'title': 'Alan Rickman'}
+attrs[href] = /wiki/Alan_Rickman
+------------------
+------------------
+ele = <a href="/wiki/Ving_Rhames" title="Ving Rhames">Ving Rhames</a>
+attrs = {'href': '/wiki/Ving_Rhames', 'title': 'Ving Rhames'}
+attrs[href] = /wiki/Ving_Rhames
+------------------
+------------------
+ele = <a href="/wiki/Stanley_Tucci" title="Stanley Tucci">Stanley Tucci</a>
+attrs = {'href': '/wiki/Stanley_Tucci', 'title': 'Stanley Tucci'}
+attrs[href] = /wiki/Stanley_Tucci
+------------------
+------------------
+ele = <a href="/wiki/Jack_Lemmon" title="Jack Lemmon">Jack Lemmon</a>
+attrs = {'href': '/wiki/Jack_Lemmon', 'title': 'Jack Lemmon'}
+attrs[href] = /wiki/Jack_Lemmon
+------------------
+------------------
+ele = <a href="/wiki/Brian_Dennehy" title="Brian Dennehy">Brian Dennehy</a>
+attrs = {'href': '/wiki/Brian_Dennehy', 'title': 'Brian Dennehy'}
+attrs[href] = /wiki/Brian_Dennehy
+------------------
+------------------
+ele = <a href="/wiki/James_Franco" title="James Franco">James Franco</a>
+attrs = {'href': '/wiki/James_Franco', 'title': 'James Franco'}
+attrs[href] = /wiki/James_Franco
+------------------
+------------------
+ele = <a href="/wiki/Albert_Finney" title="Albert Finney">Albert Finney</a>
+attrs = {'href': '/wiki/Albert_Finney', 'title': 'Albert Finney'}
+attrs[href] = /wiki/Albert_Finney
+------------------
+------------------
+ele = <a href="/wiki/Al_Pacino" title="Al Pacino">Al Pacino</a>
+attrs = {'href': '/wiki/Al_Pacino', 'title': 'Al Pacino'}
+attrs[href] = /wiki/Al_Pacino
+------------------
+------------------
+ele = <a href="/wiki/Geoffrey_Rush" title="Geoffrey Rush">Geoffrey Rush</a>
+attrs = {'href': '/wiki/Geoffrey_Rush', 'title': 'Geoffrey Rush'}
+attrs[href] = /wiki/Geoffrey_Rush
+------------------
+------------------
+ele = <a href="/wiki/Jonathan_Rhys_Meyers" title="Jonathan Rhys Meyers">Jonathan Rhys Meyers</a>
+attrs = {'href': '/wiki/Jonathan_Rhys_Meyers', 'title': 'Jonathan Rhys Meyers'}
+attrs[href] = /wiki/Jonathan_Rhys_Meyers
+------------------
+------------------
+ele = <a href="/wiki/Bill_Nighy" title="Bill Nighy">Bill Nighy</a>
+attrs = {'href': '/wiki/Bill_Nighy', 'title': 'Bill Nighy'}
+attrs[href] = /wiki/Bill_Nighy
+------------------
+------------------
+ele = <a href="/wiki/Jim_Broadbent" title="Jim Broadbent">Jim Broadbent</a>
+attrs = {'href': '/wiki/Jim_Broadbent', 'title': 'Jim Broadbent'}
+attrs[href] = /wiki/Jim_Broadbent
+------------------
+------------------
+ele = <a href="/wiki/Paul_Giamatti" title="Paul Giamatti">Paul Giamatti</a>
+attrs = {'href': '/wiki/Paul_Giamatti', 'title': 'Paul Giamatti'}
+attrs[href] = /wiki/Paul_Giamatti
+------------------
+------------------
+ele = <a href="/wiki/Al_Pacino" title="Al Pacino">Al Pacino</a>
+attrs = {'href': '/wiki/Al_Pacino', 'title': 'Al Pacino'}
+attrs[href] = /wiki/Al_Pacino
+------------------
+------------------
+ele = <a href="/wiki/Idris_Elba" title="Idris Elba">Idris Elba</a>
+attrs = {'href': '/wiki/Idris_Elba', 'title': 'Idris Elba'}
+attrs[href] = /wiki/Idris_Elba
+------------------
+------------------
+ele = <a href="/wiki/Kevin_Costner" title="Kevin Costner">Kevin Costner</a>
+attrs = {'href': '/wiki/Kevin_Costner', 'title': 'Kevin Costner'}
+attrs[href] = /wiki/Kevin_Costner
+------------------
+------------------
+ele = <a href="/wiki/Michael_Douglas" title="Michael Douglas">Michael Douglas</a>
+attrs = {'href': '/wiki/Michael_Douglas', 'title': 'Michael Douglas'}
+attrs[href] = /wiki/Michael_Douglas
+------------------
+------------------
+ele = <a href="/wiki/Billy_Bob_Thornton" title="Billy Bob Thornton">Billy Bob Thornton</a>
+attrs = {'href': '/wiki/Billy_Bob_Thornton', 'title': 'Billy Bob Thornton'}
+attrs[href] = /wiki/Billy_Bob_Thornton
+------------------
+------------------
+ele = <a href="/wiki/Oscar_Isaac" title="Oscar Isaac">Oscar Isaac</a>
+attrs = {'href': '/wiki/Oscar_Isaac', 'title': 'Oscar Isaac'}
+attrs[href] = /wiki/Oscar_Isaac
+------------------
+------------------
+ele = <a href="/wiki/Tom_Hiddleston" title="Tom Hiddleston">Tom Hiddleston</a>
+attrs = {'href': '/wiki/Tom_Hiddleston', 'title': 'Tom Hiddleston'}
+attrs[href] = /wiki/Tom_Hiddleston
+------------------
+------------------
+ele = <a href="/wiki/Ewan_McGregor" title="Ewan McGregor">Ewan McGregor</a>
+attrs = {'href': '/wiki/Ewan_McGregor', 'title': 'Ewan McGregor'}
+attrs[href] = /wiki/Ewan_McGregor
+------------------
+------------------
+ele = <a href="/wiki/Saturn_Award_for_Best_Actor_on_Television" title="Saturn Award for Best Actor on Television">Saturn Award for Best Actor on Television</a>
+attrs = {'href': '/wiki/Saturn_Award_for_Best_Actor_on_Television', 'title': 'Saturn Award for Best Actor on Television'}
+attrs[href] = /wiki/Saturn_Award_for_Best_Actor_on_Television
+------------------
+------------------
+ele = <a href="/wiki/Kyle_Chandler" title="Kyle Chandler">Kyle Chandler</a>
+attrs = {'href': '/wiki/Kyle_Chandler', 'title': 'Kyle Chandler'}
+attrs[href] = /wiki/Kyle_Chandler
+------------------
+------------------
+ele = <a href="/wiki/Steven_Weber_(actor)" title="Steven Weber (actor)">Steven Weber</a>
+attrs = {'href': '/wiki/Steven_Weber_(actor)', 'title': 'Steven Weber (actor)'}
+attrs[href] = /wiki/Steven_Weber_(actor)
+------------------
+------------------
+ele = <a href="/wiki/Richard_Dean_Anderson" title="Richard Dean Anderson">Richard Dean Anderson</a>
+attrs = {'href': '/wiki/Richard_Dean_Anderson', 'title': 'Richard Dean Anderson'}
+attrs[href] = /wiki/Richard_Dean_Anderson
+------------------
+------------------
+ele = <a href="/wiki/David_Boreanaz" title="David Boreanaz">David Boreanaz</a>
+attrs = {'href': '/wiki/David_Boreanaz', 'title': 'David Boreanaz'}
+attrs[href] = /wiki/David_Boreanaz
+------------------
+------------------
+ele = <a href="/wiki/Robert_Patrick" title="Robert Patrick">Robert Patrick</a>
+attrs = {'href': '/wiki/Robert_Patrick', 'title': 'Robert Patrick'}
+attrs[href] = /wiki/Robert_Patrick
+------------------
+------------------
+ele = <a href="/wiki/Ben_Browder" title="Ben Browder">Ben Browder</a>
+attrs = {'href': '/wiki/Ben_Browder', 'title': 'Ben Browder'}
+attrs[href] = /wiki/Ben_Browder
+------------------
+------------------
+ele = <a href="/wiki/David_Boreanaz" title="David Boreanaz">David Boreanaz</a>
+attrs = {'href': '/wiki/David_Boreanaz', 'title': 'David Boreanaz'}
+attrs[href] = /wiki/David_Boreanaz
+------------------
+------------------
+ele = <a href="/wiki/David_Boreanaz" title="David Boreanaz">David Boreanaz</a>
+attrs = {'href': '/wiki/David_Boreanaz', 'title': 'David Boreanaz'}
+attrs[href] = /wiki/David_Boreanaz
+------------------
+------------------
+ele = <a href="/wiki/Ben_Browder" title="Ben Browder">Ben Browder</a>
+attrs = {'href': '/wiki/Ben_Browder', 'title': 'Ben Browder'}
+attrs[href] = /wiki/Ben_Browder
+------------------
+------------------
+ele = <a href="/wiki/Matthew_Fox" title="Matthew Fox">Matthew Fox</a>
+attrs = {'href': '/wiki/Matthew_Fox', 'title': 'Matthew Fox'}
+attrs[href] = /wiki/Matthew_Fox
+------------------
+------------------
+ele = <a href="/wiki/Michael_C._Hall" title="Michael C. Hall">Michael C. Hall</a>
+attrs = {'href': '/wiki/Michael_C._Hall', 'title': 'Michael C. Hall'}
+attrs[href] = /wiki/Michael_C._Hall
+------------------
+------------------
+ele = <a href="/wiki/Matthew_Fox" title="Matthew Fox">Matthew Fox</a>
+attrs = {'href': '/wiki/Matthew_Fox', 'title': 'Matthew Fox'}
+attrs[href] = /wiki/Matthew_Fox
+------------------
+------------------
+ele = <a href="/wiki/Edward_James_Olmos" title="Edward James Olmos">Edward James Olmos</a>
+attrs = {'href': '/wiki/Edward_James_Olmos', 'title': 'Edward James Olmos'}
+attrs[href] = /wiki/Edward_James_Olmos
+------------------
+------------------
+ele = <a href="/wiki/Josh_Holloway" title="Josh Holloway">Josh Holloway</a>
+attrs = {'href': '/wiki/Josh_Holloway', 'title': 'Josh Holloway'}
+attrs[href] = /wiki/Josh_Holloway
+------------------
+------------------
+ele = <a href="/wiki/Stephen_Moyer" title="Stephen Moyer">Stephen Moyer</a>
+attrs = {'href': '/wiki/Stephen_Moyer', 'title': 'Stephen Moyer'}
+attrs[href] = /wiki/Stephen_Moyer
+------------------
+------------------
+ele = <a href="/wiki/Bryan_Cranston" title="Bryan Cranston">Bryan Cranston</a>
+attrs = {'href': '/wiki/Bryan_Cranston', 'title': 'Bryan Cranston'}
+attrs[href] = /wiki/Bryan_Cranston
+------------------
+------------------
+ele = <a href="/wiki/Bryan_Cranston" title="Bryan Cranston">Bryan Cranston</a>
+attrs = {'href': '/wiki/Bryan_Cranston', 'title': 'Bryan Cranston'}
+attrs[href] = /wiki/Bryan_Cranston
+------------------
+------------------
+ele = <a href="/wiki/Mads_Mikkelsen" title="Mads Mikkelsen">Mads Mikkelsen</a>
+attrs = {'href': '/wiki/Mads_Mikkelsen', 'title': 'Mads Mikkelsen'}
+attrs[href] = /wiki/Mads_Mikkelsen
+------------------
+------------------
+ele = <a href="/wiki/Hugh_Dancy" title="Hugh Dancy">Hugh Dancy</a>
+attrs = {'href': '/wiki/Hugh_Dancy', 'title': 'Hugh Dancy'}
+attrs[href] = /wiki/Hugh_Dancy
+------------------
+------------------
+ele = <a href="/wiki/Andrew_Lincoln" title="Andrew Lincoln">Andrew Lincoln</a>
+attrs = {'href': '/wiki/Andrew_Lincoln', 'title': 'Andrew Lincoln'}
+attrs[href] = /wiki/Andrew_Lincoln
+------------------
+------------------
+ele = <a href="/wiki/Bruce_Campbell" title="Bruce Campbell">Bruce Campbell</a>
+attrs = {'href': '/wiki/Bruce_Campbell', 'title': 'Bruce Campbell'}
+attrs[href] = /wiki/Bruce_Campbell
+------------------
+------------------
+ele = <a href="/wiki/Andrew_Lincoln" title="Andrew Lincoln">Andrew Lincoln</a>
+attrs = {'href': '/wiki/Andrew_Lincoln', 'title': 'Andrew Lincoln'}
+attrs[href] = /wiki/Andrew_Lincoln
+------------------
+------------------
+ele = <a href="/wiki/Kyle_MacLachlan" title="Kyle MacLachlan">Kyle MacLachlan</a>
+attrs = {'href': '/wiki/Kyle_MacLachlan', 'title': 'Kyle MacLachlan'}
+attrs[href] = /wiki/Kyle_MacLachlan
+------------------
+------------------
+ele = <a href="/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Miniseries_or_Television_Movie" title="Screen Actors Guild Award for Outstanding Performance by a Male Actor in a Miniseries or Television Movie">Screen Actors Guild Award for Outstanding Performance by a Male Actor in a Miniseries or Television Movie</a>
+attrs = {'href': '/wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Miniseries_or_Television_Movie', 'title': 'Screen Actors Guild Award for Outstanding Performance by a Male Actor in a Miniseries or Television Movie'}
+attrs[href] = /wiki/Screen_Actors_Guild_Award_for_Outstanding_Performance_by_a_Male_Actor_in_a_Miniseries_or_Television_Movie
+------------------
+------------------
+ele = <a href="/wiki/Ra%C3%BAl_Juli%C3%A1" title="Raúl Juliá">Raúl Juliá</a>
+attrs = {'href': '/wiki/Ra%C3%BAl_Juli%C3%A1', 'title': 'Raúl Juliá'}
+attrs[href] = /wiki/Ra%C3%BAl_Juli%C3%A1
+------------------
+------------------
+ele = <a href="/wiki/Gary_Sinise" title="Gary Sinise">Gary Sinise</a>
+attrs = {'href': '/wiki/Gary_Sinise', 'title': 'Gary Sinise'}
+attrs[href] = /wiki/Gary_Sinise
+------------------
+------------------
+ele = <a href="/wiki/Alan_Rickman" title="Alan Rickman">Alan Rickman</a>
+attrs = {'href': '/wiki/Alan_Rickman', 'title': 'Alan Rickman'}
+attrs[href] = /wiki/Alan_Rickman
+------------------
+------------------
+ele = <a href="/wiki/Gary_Sinise" title="Gary Sinise">Gary Sinise</a>
+attrs = {'href': '/wiki/Gary_Sinise', 'title': 'Gary Sinise'}
+attrs[href] = /wiki/Gary_Sinise
+------------------
+------------------
+ele = <a href="/wiki/Christopher_Reeve" title="Christopher Reeve">Christopher Reeve</a>
+attrs = {'href': '/wiki/Christopher_Reeve', 'title': 'Christopher Reeve'}
+attrs[href] = /wiki/Christopher_Reeve
+------------------
+------------------
+ele = <a href="/wiki/Jack_Lemmon" title="Jack Lemmon">Jack Lemmon</a>
+attrs = {'href': '/wiki/Jack_Lemmon', 'title': 'Jack Lemmon'}
+attrs[href] = /wiki/Jack_Lemmon
+------------------
+------------------
+ele = <a href="/wiki/Brian_Dennehy" title="Brian Dennehy">Brian Dennehy</a>
+attrs = {'href': '/wiki/Brian_Dennehy', 'title': 'Brian Dennehy'}
+attrs[href] = /wiki/Brian_Dennehy
+------------------
+------------------
+ele = <a href="/wiki/Ben_Kingsley" title="Ben Kingsley">Ben Kingsley</a>
+attrs = {'href': '/wiki/Ben_Kingsley', 'title': 'Ben Kingsley'}
+attrs[href] = /wiki/Ben_Kingsley
+------------------
+------------------
+ele = <a href="/wiki/William_H._Macy" title="William H. Macy">William H. Macy</a>
+attrs = {'href': '/wiki/William_H._Macy', 'title': 'William H. Macy'}
+attrs[href] = /wiki/William_H._Macy
+------------------
+------------------
+ele = <a href="/wiki/Al_Pacino" title="Al Pacino">Al Pacino</a>
+attrs = {'href': '/wiki/Al_Pacino', 'title': 'Al Pacino'}
+attrs[href] = /wiki/Al_Pacino
+------------------
+------------------
+ele = <a href="/wiki/Geoffrey_Rush" title="Geoffrey Rush">Geoffrey Rush</a>
+attrs = {'href': '/wiki/Geoffrey_Rush', 'title': 'Geoffrey Rush'}
+attrs[href] = /wiki/Geoffrey_Rush
+------------------
+------------------
+ele = <a href="/wiki/Paul_Newman" title="Paul Newman">Paul Newman</a>
+attrs = {'href': '/wiki/Paul_Newman', 'title': 'Paul Newman'}
+attrs[href] = /wiki/Paul_Newman
+------------------
+------------------
+ele = <a href="/wiki/Jeremy_Irons" title="Jeremy Irons">Jeremy Irons</a>
+attrs = {'href': '/wiki/Jeremy_Irons', 'title': 'Jeremy Irons'}
+attrs[href] = /wiki/Jeremy_Irons
+------------------
+------------------
+ele = <a href="/wiki/Kevin_Kline" title="Kevin Kline">Kevin Kline</a>
+attrs = {'href': '/wiki/Kevin_Kline', 'title': 'Kevin Kline'}
+attrs[href] = /wiki/Kevin_Kline
+------------------
+------------------
+ele = <a href="/wiki/Paul_Giamatti" title="Paul Giamatti">Paul Giamatti</a>
+attrs = {'href': '/wiki/Paul_Giamatti', 'title': 'Paul Giamatti'}
+attrs[href] = /wiki/Paul_Giamatti
+------------------
+------------------
+ele = <a href="/wiki/Al_Pacino" title="Al Pacino">Al Pacino</a>
+attrs = {'href': '/wiki/Al_Pacino', 'title': 'Al Pacino'}
+attrs[href] = /wiki/Al_Pacino
+------------------
+------------------
+ele = <a href="/wiki/Paul_Giamatti" title="Paul Giamatti">Paul Giamatti</a>
+attrs = {'href': '/wiki/Paul_Giamatti', 'title': 'Paul Giamatti'}
+attrs[href] = /wiki/Paul_Giamatti
+------------------
+------------------
+ele = <a href="/wiki/Kevin_Costner" title="Kevin Costner">Kevin Costner</a>
+attrs = {'href': '/wiki/Kevin_Costner', 'title': 'Kevin Costner'}
+attrs[href] = /wiki/Kevin_Costner
+------------------
+------------------
+ele = <a href="/wiki/Michael_Douglas" title="Michael Douglas">Michael Douglas</a>
+attrs = {'href': '/wiki/Michael_Douglas', 'title': 'Michael Douglas'}
+attrs[href] = /wiki/Michael_Douglas
+------------------
+------------------
+ele = <a href="/wiki/Mark_Ruffalo" title="Mark Ruffalo">Mark Ruffalo</a>
+attrs = {'href': '/wiki/Mark_Ruffalo', 'title': 'Mark Ruffalo'}
+attrs[href] = /wiki/Mark_Ruffalo
+------------------
+------------------
+ele = <a href="/wiki/Idris_Elba" title="Idris Elba">Idris Elba</a>
+attrs = {'href': '/wiki/Idris_Elba', 'title': 'Idris Elba'}
+attrs[href] = /wiki/Idris_Elba
+------------------
+------------------
+ele = <a href="/wiki/Bryan_Cranston" title="Bryan Cranston">Bryan Cranston</a>
+attrs = {'href': '/wiki/Bryan_Cranston', 'title': 'Bryan Cranston'}
+attrs[href] = /wiki/Bryan_Cranston
+------------------
+------------------
+ele = <a href="/wiki/Alexander_Skarsg%C3%A5rd" title="Alexander Skarsgård">Alexander Skarsgård</a>
+attrs = {'href': '/wiki/Alexander_Skarsg%C3%A5rd', 'title': 'Alexander Skarsgård'}
+attrs[href] = /wiki/Alexander_Skarsg%C3%A5rd
+------------------
+------------------
+ele = <a href="/wiki/Biblioteca_Nacional_de_Espa%C3%B1a" title="Biblioteca Nacional de España">BNE</a>
+attrs = {'href': '/wiki/Biblioteca_Nacional_de_Espa%C3%B1a', 'title': 'Biblioteca Nacional de España'}
+attrs[href] = /wiki/Biblioteca_Nacional_de_Espa%C3%B1a
+------------------
+------------------
+ele = <a href="/wiki/Biblioth%C3%A8que_nationale_de_France" title="Bibliothèque nationale de France">BNF</a>
+attrs = {'href': '/wiki/Biblioth%C3%A8que_nationale_de_France', 'title': 'Bibliothèque nationale de France'}
+attrs[href] = /wiki/Biblioth%C3%A8que_nationale_de_France
+------------------
+------------------
+ele = <a href="/wiki/Integrated_Authority_File" title="Integrated Authority File">GND</a>
+attrs = {'href': '/wiki/Integrated_Authority_File', 'title': 'Integrated Authority File'}
+attrs[href] = /wiki/Integrated_Authority_File
+------------------
+------------------
+ele = <a href="/wiki/International_Standard_Name_Identifier" title="International Standard Name Identifier">ISNI</a>
+attrs = {'href': '/wiki/International_Standard_Name_Identifier', 'title': 'International Standard Name Identifier'}
+attrs[href] = /wiki/International_Standard_Name_Identifier
+------------------
+------------------
+ele = <a href="/wiki/Library_of_Congress_Control_Number" title="Library of Congress Control Number">LCCN</a>
+attrs = {'href': '/wiki/Library_of_Congress_Control_Number', 'title': 'Library of Congress Control Number'}
+attrs[href] = /wiki/Library_of_Congress_Control_Number
+------------------
+------------------
+ele = <a href="/wiki/MusicBrainz" title="MusicBrainz">MusicBrainz</a>
+attrs = {'href': '/wiki/MusicBrainz', 'title': 'MusicBrainz'}
+attrs[href] = /wiki/MusicBrainz
+------------------
+------------------
+ele = <a href="/wiki/National_Library_of_the_Czech_Republic" title="National Library of the Czech Republic">NKC</a>
+attrs = {'href': '/wiki/National_Library_of_the_Czech_Republic', 'title': 'National Library of the Czech Republic'}
+attrs[href] = /wiki/National_Library_of_the_Czech_Republic
+------------------
+------------------
+ele = <a href="/wiki/SNAC" title="SNAC">SNAC</a>
+attrs = {'href': '/wiki/SNAC', 'title': 'SNAC'}
+attrs[href] = /wiki/SNAC
+------------------
+------------------
+ele = <a href="/wiki/Syst%C3%A8me_universitaire_de_documentation" title="Système universitaire de documentation">SUDOC</a>
+attrs = {'href': '/wiki/Syst%C3%A8me_universitaire_de_documentation', 'title': 'Système universitaire de documentation'}
+attrs[href] = /wiki/Syst%C3%A8me_universitaire_de_documentation
+------------------
+------------------
+ele = <a href="/wiki/Virtual_International_Authority_File" title="Virtual International Authority File">VIAF</a>
+attrs = {'href': '/wiki/Virtual_International_Authority_File', 'title': 'Virtual International Authority File'}
+attrs[href] = /wiki/Virtual_International_Authority_File
+------------------
