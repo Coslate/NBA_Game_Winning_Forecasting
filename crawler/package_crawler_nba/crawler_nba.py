@@ -85,12 +85,15 @@ def GetCountry(ip_address):
     response_json = json.loads(response)
     return response_json.get('country_name')
 
-def GetInternalLinks(bs_obj, include_url):
+def GetInternalLinks(bs_obj, include_url_str, domain):
     internal_links = set()
     #Find all the links that begins with '/'
-    for link in bs_obj.findAll('a', href=re.compile('include_url')):
+    for link in bs_obj.findAll('a', href=re.compile(include_url_str)):
         if(link.attrs['href'] not in internal_links):
             print(f"link.attrs['href'] = {link.attrs['href']}")
-            internal_links.add(link.attrs['href'])
+            if(re.match(r'^(/|#)', link.attrs['href']) is not None):
+                internal_links.add(domain+link.attrs['href'])
+            else:
+                internal_links.add(link.attrs['href'])
 
     return internal_links
