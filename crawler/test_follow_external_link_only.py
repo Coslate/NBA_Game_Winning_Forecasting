@@ -8,6 +8,7 @@ import package_crawler_nba.crawler_nba as crawler_nba
 import random
 import datetime
 import sys
+from urllib.error import HTTPError
 
 def GetAllInternalLinks(starting_url):
     print('---------------GetAllInternalLinks begins-------------------')
@@ -23,7 +24,13 @@ def GetAllInternalLinks(starting_url):
 
     print(f'internal_url_pattern_str = {internal_url_pattern_str}')
 
-    html = urlopen(starting_url)
+    try:
+        html = urlopen(starting_url)
+    except HTTPError:
+        print(f'Cannot access {starting_url}')
+        print(f'Program terminated')
+        sys.exit(1)
+
     bs_obj = BeautifulSoup(html, 'lxml')
 
     domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
@@ -50,7 +57,13 @@ def GetRandomExternalLinks(starting_url):
 
     print(f'external_url_pattern_str = {external_url_pattern_str}')
 
-    html   = urlopen(starting_url)
+    try:
+        html = urlopen(starting_url)
+    except HTTPError:
+        print(f'Cannot access {starting_url}')
+        print(f'Program terminated')
+        sys.exit(1)
+
     bs_obj = BeautifulSoup(html, 'lxml')
 
     all_external_links = crawler_nba.GetExternalLinks(bs_obj, external_url_pattern_str)
@@ -67,7 +80,9 @@ def GetRandomExternalLinks(starting_url):
             print('No internal links found. Progran terminated.')
             sys.exit(1)
         else:
-            return GetRandomExternalLinks(all_internal_links[random.randint(0, len(all_internal_links)-1)])
+            random_internal_link = all_internal_links[random.randint(0, len(all_internal_links)-1)]
+            print(f'Random internal link is {random_internal_link}')
+            return GetRandomExternalLinks(random_internal_link)
     else:
         return all_external_links[random.randint(0, len(all_external_links)-1)]
 
