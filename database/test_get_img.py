@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 if __name__ == '__main__':
     html = urlopen("http://www.pythonscraping.com")
     bs_obj = BeautifulSoup(html, 'lxml')
+#    print(bs_obj.prettify())
     all_image_locs = bs_obj.findAll('a', {"id":"logo"})
     count = 0
 

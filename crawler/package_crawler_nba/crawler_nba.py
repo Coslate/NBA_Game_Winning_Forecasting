@@ -1,4 +1,6 @@
 from urllib.request import urlopen
+from urllib.parse import urlparse
+from urllib.error import HTTPError
 from urllib import error
 from bs4 import BeautifulSoup
 import re
@@ -90,7 +92,6 @@ def GetInternalLinks(bs_obj, include_url_str, domain):
     #Find all the links that begins with '/'
     for link in bs_obj.findAll('a', href=re.compile(include_url_str)):
         if(link.attrs['href'] not in internal_links):
-            print(f"link.attrs['href'] = {link.attrs['href']}")
             if(re.match(r'^(/|#)', link.attrs['href']) is not None):
                 internal_links.append(domain+link.attrs['href'])
             else:
@@ -98,13 +99,125 @@ def GetInternalLinks(bs_obj, include_url_str, domain):
 
     return internal_links
 
-def GetExternalLinks(bs_obj, exclude_url_str):
+def GetExternalLinks(bs_obj, exclude_url_str_list):
     external_links = []
     #Find all the links that begins with 'http' or 'www' except the current URL
-    for link in bs_obj.findAll('a', href=re.compile('^(http|www)((?!{x}).)*$'.format(x=exclude_url_str), re.IGNORECASE)):
-        if(link.attrs['href'] not in external_links):
-            external_links.append(link.attrs['href'])
+#    for link in bs_obj.findAll('a', href=re.compile('^(http|www)((?!{x}).)*$'.format(x=exclude_url_str), re.IGNORECASE)):
+    for link in bs_obj.findAll('a', href=re.compile('^(http|www)')):
+        get_exclude_str = 0
+
+        for exclude_url_str in exclude_url_str_list:
+            print(f'1st exclude_url_str = {exclude_url_str}')
+            p = re.compile('{x}'.format(x = exclude_url_str), re.IGNORECASE)
+            m = p.match(link.attrs['href'])
+            if(m is not None):
+                get_exclude_str = 1
+                print(f'm--exclude_url_str = {exclude_url_str}')
+                print(f'm--link = {link}')
+                break
+
+        if(not get_exclude_str):
+            print(f'get_exclude_str = {get_exclude_str}')
+            if(link.attrs['href'] not in external_links):
+                external_links.append(link.attrs['href'])
 
     return external_links
+
+def GetAllInternalLinks(starting_url):
+    print('---------------crawler_nba.GetAllInternalLinks begins-------------------')
+    all_internal_links = []
+    internal_url_pattern_str = ""
+    internal_url_pattern = re.compile(r'.*www.(\S*)\.com.*')
+    internal_url_pattern_match = internal_url_pattern.match(starting_url)
+    if(internal_url_pattern_match is not None):
+        internal_url_pattern_str = internal_url_pattern_match.group(1)
+    else:
+        internal_url_pattern = re.compile(r'(\S*)\..*')
+        internal_url_pattern_match = internal_url_pattern.match(urlparse(starting_url).netloc)
+        internal_url_pattern_str = internal_url_pattern_match.group(1)
+
+    print(f'internal_url_pattern_str = {internal_url_pattern_str}')
+
+    try:
+        html = urlopen(starting_url)
+    except HTTPError:
+        print(f'Cannot access {starting_url}')
+        return all_internal_links
+
+    bs_obj = BeautifulSoup(html, 'lxml')
+
+    domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
+    print(f'domain = {domain}')
+    all_internal_links = GetInternalLinks(bs_obj, internal_url_pattern_str, domain)
+
+    for ele in all_internal_links:
+        print(f'internal link = {ele}')
+    print('---------------crawler_nba.GetAllInternalLinks ends-------------------')
+
+    return all_internal_links
+
+def GetAllExternalLinks(starting_url, external_link_str_list):
+    print('---------------crawler_nba.GetAllExternalLinks begins-------------------')
+    all_external_links = []
+    external_url_pattern_str = ""
+    external_url_pattern = re.compile(r'.*www.(\S*)\.com.*')
+    external_url_pattern_match = external_url_pattern.match(starting_url)
+    if(external_url_pattern_match is not None):
+        external_url_pattern_str = external_url_pattern_match.group(1)
+    else:
+        external_url_pattern = re.compile(r'(\S*)\..*')
+        external_url_pattern_match = external_url_pattern.match(urlparse(starting_url).netloc)
+        external_url_pattern_str = external_url_pattern_match.group(1)
+
+    print(f'external_url_pattern_str = {external_url_pattern_str}')
+    if(external_url_pattern_str not in external_link_str_list):
+        external_link_str_list.append(external_url_pattern_str)
+
+    try:
+        html = urlopen(starting_url)
+    except HTTPError:
+        print(f'Cannot access {starting_url}')
+        return all_external_links
+
+    bs_obj = BeautifulSoup(html, 'lxml')
+
+    domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
+    print(f'domain = {domain}')
+    all_external_links = GetExternalLinks(bs_obj, external_link_str_list)
+
+    for ele in all_external_links:
+        print(f'external link = {ele}')
+    print('---------------crawler_nba.GetAllExternalLinks ends-------------------')
+
+    return all_external_links
+
+
+def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_links, external_link_str_list):
+    recursive_err = 0
+    all_internal_links_loop = GetAllInternalLinks(url)
+    all_external_links_loop = GetAllExternalLinks(url, external_link_str_list)
+
+    for external_link in all_external_links_loop:
+        if external_link not in all_external_links:
+            all_external_links.append(external_link)
+            print(f'--> added external_link = {external_link}')
+
+    for internal_link in all_internal_links_loop:
+        if internal_link not in all_internal_links:
+            all_internal_links.append(internal_link)
+            print(f'--> added internal_link = {internal_link}')
+            print(f'About to get internal_link = {internal_link}')
+            try:
+                (all_external_links, all_internal_links, recursive_err) = GetAllExternalLinksThrInternalLinks(internal_link, all_external_links, all_internal_links, external_link_str_list)
+                if(recursive_err):
+                    break
+            except RecursionError:
+                recursive_err = 1
+                print("Maximum recursive error occurs. Return...")
+                print(f"recursive_err = {recursive_err}")
+                break
+
+    return (all_external_links, all_internal_links, recursive_err)
+
 
 
