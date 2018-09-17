@@ -18,6 +18,21 @@ def GetAbsoluteRUL(base_url, source):
 
     return url
 
+def GetDownloadPath(base_url, file_url, download_dir):
+    path = file_url.replace('www.', '')
+    path = path.replace('http://', '')
+    path = path.replace('https://', '')
+    path = path.replace(base_url, '')
+    path = path.replace('/', '_')
+    path = path.replace('?', '_')
+    path = download_dir+'/'+path
+    print(f'path = {path}')
+    directory = os.path.dirname(path)
+
+    if(not os.path.exists(directory)):
+        os.makedirs(directory)
+
+    return path
 
 #-----------------Execution------------------#
 if __name__ == '__main__':
@@ -32,4 +47,7 @@ if __name__ == '__main__':
         print(f'download_ele = {download_ele}')
         print(f'download_ele_src = {download_ele.attrs["src"]}')
         file_url = GetAbsoluteRUL(base_url, download_ele.attrs['src'])
-        print(f'file_url = {file_url}')
+        if(file_url is not None):
+            print(f'file_url = {file_url}')
+            urlretrieve(file_url, GetDownloadPath(base_url, file_url, download_dir))
+
