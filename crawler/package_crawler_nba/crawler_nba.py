@@ -1,3 +1,4 @@
+from urllib import request
 from urllib.request import urlopen
 from urllib.parse import urlparse
 from urllib.error import HTTPError
@@ -6,6 +7,8 @@ from bs4 import BeautifulSoup
 import re
 import sys
 import json
+import http.client
+import random
 
 def GetAllWikiAtricleLinks(url, is_debug=0):
     html = urlopen("http://en.wikipedia.org"+url)
@@ -92,7 +95,7 @@ def GetInternalLinks(bs_obj, include_url_str, domain):
     #Find all the links that begins with '/'
     for link in bs_obj.findAll('a', href=re.compile(include_url_str)):
         if(link.attrs['href'] not in internal_links):
-            if(re.match(r'^(/|#)', link.attrs['href']) is not None):
+            if(re.match(r'^(/|#|[a-zA-z0-9])', link.attrs['href']) is not None):
                 internal_links.append(domain+link.attrs['href'])
             else:
                 internal_links.append(link.attrs['href'])
@@ -107,17 +110,13 @@ def GetExternalLinks(bs_obj, exclude_url_str_list):
         get_exclude_str = 0
 
         for exclude_url_str in exclude_url_str_list:
-            print(f'1st exclude_url_str = {exclude_url_str}')
-            p = re.compile('{x}'.format(x = exclude_url_str), re.IGNORECASE)
+            p = re.compile('.*{x}.*'.format(x = exclude_url_str), re.IGNORECASE)
             m = p.match(link.attrs['href'])
             if(m is not None):
                 get_exclude_str = 1
-                print(f'm--exclude_url_str = {exclude_url_str}')
-                print(f'm--link = {link}')
                 break
 
         if(not get_exclude_str):
-            print(f'get_exclude_str = {get_exclude_str}')
             if(link.attrs['href'] not in external_links):
                 external_links.append(link.attrs['href'])
 
@@ -125,29 +124,38 @@ def GetExternalLinks(bs_obj, exclude_url_str_list):
 
 def GetAllInternalLinks(starting_url):
     print('---------------crawler_nba.GetAllInternalLinks begins-------------------')
+    print(f'starting_url = {starting_url}')
     all_internal_links = []
     internal_url_pattern_str = ""
-    internal_url_pattern = re.compile(r'.*www.(\S*)\.com.*')
+    internal_url_pattern = re.compile(r'.*www.(\S*?)\.com.*')
     internal_url_pattern_match = internal_url_pattern.match(starting_url)
     if(internal_url_pattern_match is not None):
         internal_url_pattern_str = internal_url_pattern_match.group(1)
     else:
-        internal_url_pattern = re.compile(r'(\S*)\..*')
+        internal_url_pattern = re.compile(r'(\S*?)\..*')
         internal_url_pattern_match = internal_url_pattern.match(urlparse(starting_url).netloc)
         internal_url_pattern_str = internal_url_pattern_match.group(1)
 
     print(f'internal_url_pattern_str = {internal_url_pattern_str}')
 
     try:
-        html = urlopen(starting_url)
+        head = {}
+        user_agent = random.choice(USER_AGENT_LIST)
+        head['User-Agent'] = user_agent
+        req = request.Request(starting_url, headers=head)
+        html = urlopen(req)
     except HTTPError:
-        print(f'Cannot access {starting_url}')
+        print(f'Cannot access {starting_url}. HTTPError.')
+        return all_internal_links
+    except http.client.RemoteDisconnected:
+        print(f'Cannot access {starting_url}. RemoteDisconnected.')
         return all_internal_links
 
     bs_obj = BeautifulSoup(html, 'lxml')
 
     domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
     print(f'domain = {domain}')
+    print(f'user_agent = {head["User-Agent"]}')
     all_internal_links = GetInternalLinks(bs_obj, internal_url_pattern_str, domain)
 
     for ele in all_internal_links:
@@ -158,14 +166,15 @@ def GetAllInternalLinks(starting_url):
 
 def GetAllExternalLinks(starting_url, external_link_str_list):
     print('---------------crawler_nba.GetAllExternalLinks begins-------------------')
+    print(f'starting_url = {starting_url}')
     all_external_links = []
     external_url_pattern_str = ""
-    external_url_pattern = re.compile(r'.*www.(\S*)\.com.*')
+    external_url_pattern = re.compile(r'.*www.(\S*?)\.com.*')
     external_url_pattern_match = external_url_pattern.match(starting_url)
     if(external_url_pattern_match is not None):
         external_url_pattern_str = external_url_pattern_match.group(1)
     else:
-        external_url_pattern = re.compile(r'(\S*)\..*')
+        external_url_pattern = re.compile(r'(\S*?)\..*')
         external_url_pattern_match = external_url_pattern.match(urlparse(starting_url).netloc)
         external_url_pattern_str = external_url_pattern_match.group(1)
 
@@ -174,15 +183,23 @@ def GetAllExternalLinks(starting_url, external_link_str_list):
         external_link_str_list.append(external_url_pattern_str)
 
     try:
-        html = urlopen(starting_url)
+        head = {}
+        user_agent = random.choice(USER_AGENT_LIST)
+        head['User-Agent'] = user_agent
+        req = request.Request(starting_url, headers=head)
+        html = urlopen(req)
     except HTTPError:
-        print(f'Cannot access {starting_url}')
+        print(f'Cannot access {starting_url}. HTTPError')
+        return all_external_links
+    except http.client.RemoteDisconnected:
+        print(f'Cannot access {starting_url}. RemoteDisconnected.')
         return all_external_links
 
     bs_obj = BeautifulSoup(html, 'lxml')
 
     domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
     print(f'domain = {domain}')
+    print(f'user_agent = {user_agent}')
     all_external_links = GetExternalLinks(bs_obj, external_link_str_list)
 
     for ele in all_external_links:
@@ -221,3 +238,41 @@ def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_li
 
 
 
+global USER_AGENT_LIST
+USER_AGENT_LIST = [
+    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
+    "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)",
+    "Mozilla/4.0 (compatible; MSIE 7.0; AOL 9.5; AOLBuild 4337.35; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
+    "Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)",
+    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)",
+    "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 1.0.3705; .NET CLR 1.1.4322)",
+    "Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 5.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727; InfoPath.2; .NET CLR 3.0.04506.30)",
+    "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN) AppleWebKit/523.15 (KHTML, like Gecko, Safari/419.3) Arora/0.3 (Change: 287 c9dfb30)",
+    "Mozilla/5.0 (X11; U; Linux; en-US) AppleWebKit/527+ (KHTML, like Gecko, Safari/419.3) Arora/0.6",
+    "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.2pre) Gecko/20070215 K-Ninja/2.1.1",
+    "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9) Gecko/20080705 Firefox/3.0 Kapiko/3.0",
+    "Mozilla/5.0 (X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5",
+    "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.8) Gecko Fedora/1.9.0.8-1.fc10 Kazehakase/0.5.6",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20",
+    "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.11 TaoBrowser/2.0 Safari/536.11",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.71 Safari/537.1 LBBROWSER",
+    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; LBBROWSER)",
+    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E; LBBROWSER)",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.84 Safari/535.11 LBBROWSER",
+    "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)",
+    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; QQBrowser/7.0.3698.400)",
+    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E)",
+    "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SV1; QQDownload 732; .NET4.0C; .NET4.0E; 360SE)",
+    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E)",
+    "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)",
+    "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1",
+    "Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; zh-cn) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5",
+    "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:2.0b13pre) Gecko/20110307 Firefox/4.0b13pre",
+    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:16.0) Gecko/20100101 Firefox/16.0",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11",
+    "Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+    ]
