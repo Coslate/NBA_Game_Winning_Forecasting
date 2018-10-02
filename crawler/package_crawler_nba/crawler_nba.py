@@ -4,6 +4,7 @@ from urllib.parse import urlparse
 from urllib.error import HTTPError
 from urllib import error
 from bs4 import BeautifulSoup
+import package_tool_surf.tool_surf as tool_surf
 import re
 import sys
 import json
@@ -96,8 +97,18 @@ def GetInternalLinks(bs_obj, include_url_str, domain):
     for link in bs_obj.findAll('a', href=re.compile(include_url_str)):
         if(link.attrs['href'] not in internal_links):
             if(re.match(r'^(/|#|[a-zA-z0-9])', link.attrs['href']) is not None):
-                internal_links.append(domain+link.attrs['href'])
+                if(re.match(r'^(https|http)', link.attrs['href']) is not None):
+                    internal_links.append(link.attrs['href'])
+                    print('link_1 = {x}'.format(x = link.attrs['href']))
+                else:
+                    if(re.match(r'.*:.*', link.attrs['href']) is not None):
+                        print('link_3 = {x}'.format(x = link.attrs['href']))
+                        pass
+                    else:
+                        internal_links.append(domain+link.attrs['href'])
+                        print('link_2 = {x}'.format(x = link.attrs['href']))
             else:
+                print('link_4 = {x}'.format(x = link.attrs['href']))
                 internal_links.append(link.attrs['href'])
 
     return internal_links
@@ -122,6 +133,14 @@ def GetExternalLinks(bs_obj, exclude_url_str_list):
 
     return external_links
 
+def SetProxy(proxy):
+    proxy_support = request.ProxyHandler({'http':proxy,
+                                          'https':proxy})
+    opener = request.build_opener(proxy_support)
+    request.install_opener(opener)
+
+
+
 def GetAllInternalLinks(starting_url):
     print('---------------crawler_nba.GetAllInternalLinks begins-------------------')
     print(f'starting_url = {starting_url}')
@@ -139,16 +158,28 @@ def GetAllInternalLinks(starting_url):
     print(f'internal_url_pattern_str = {internal_url_pattern_str}')
 
     try:
+        ip_addr_org = tool_surf.GetPublicIPAddress()
         head = {}
         user_agent = random.choice(USER_AGENT_LIST)
         head['User-Agent'] = user_agent
+        SetProxy('http://195.29.155.98:35497')
+
         req = request.Request(starting_url, headers=head)
         html = urlopen(req)
+        ip_addr_new = tool_surf.GetPublicIPAddress()
+        print(f'org_ip = {ip_addr_org}')
+        print(f'new_ip = {ip_addr_new}')
     except HTTPError:
         print(f'Cannot access {starting_url}. HTTPError.')
         return all_internal_links
     except http.client.RemoteDisconnected:
         print(f'Cannot access {starting_url}. RemoteDisconnected.')
+        return all_internal_links
+    except error.URLError:
+        print(f'Cannot access {starting_url}. Remote end closed connection without response.')
+        return all_internal_links
+    except:
+        print('Unexpected Error occurs {x}. Cannot access {y}.'.format(x = sys.exc_info()[0], y = starting_url))
         return all_internal_links
 
     bs_obj = BeautifulSoup(html, 'lxml')
@@ -193,6 +224,12 @@ def GetAllExternalLinks(starting_url, external_link_str_list):
         return all_external_links
     except http.client.RemoteDisconnected:
         print(f'Cannot access {starting_url}. RemoteDisconnected.')
+        return all_external_links
+    except error.URLError:
+        print(f'Cannot access {starting_url}. Remote end closed connection without response.')
+        return all_external_links
+    except:
+        print('Unexpected Error occurs {x}. Cannot access {starting_url}.'.format(x = sys.exc_info()[0]))
         return all_external_links
 
     bs_obj = BeautifulSoup(html, 'lxml')
