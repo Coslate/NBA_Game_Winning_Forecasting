@@ -229,7 +229,7 @@ def GetAllExternalLinks(starting_url, external_link_str_list):
         print(f'Cannot access {starting_url}. Remote end closed connection without response.')
         return all_external_links
     except:
-        print('Unexpected Error occurs {x}. Cannot access {starting_url}.'.format(x = sys.exc_info()[0]))
+        print('Unexpected Error occurs {x}. Cannot access {y}.'.format(x = sys.exc_info()[0], y = starting_url))
         return all_external_links
 
     bs_obj = BeautifulSoup(html, 'lxml')
