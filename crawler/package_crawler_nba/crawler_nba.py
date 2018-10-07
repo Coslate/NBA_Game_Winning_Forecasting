@@ -166,32 +166,27 @@ def GetAllInternalLinks(starting_url):
         head['User-Agent'] = user_agent
         req = request.Request(starting_url, headers=head)
         html = urlopen(req)
-    except HTTPError:
-        print(f'Cannot access {starting_url}. HTTPError.')
+    except HTTPError as err:
+        print(f'Cannot access {starting_url}. {err}')
+        return all_internal_links
+    except http.client.RemoteDisconnected as disconnected_err:
+        print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
         print(f'Randomly set new proxy, and try again.')
 
         #randomly set new proxy
-        SetProxy('http://195.29.155.98:35497')
+        SetProxy('http://118.174.232.219:43665')
         all_internal_links = GetAllInternalLinks(starting_url)
         return all_internal_links
-    except http.client.RemoteDisconnected:
-        print(f'Cannot access {starting_url}. RemoteDisconnected.')
+    except error.URLError as err:
+        print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
         print(f'Randomly set new proxy, and try again.')
 
         #randomly set new proxy
-        SetProxy('http://195.29.155.98:35497')
+        SetProxy('http://118.174.232.219:43665')
         all_internal_links = GetAllInternalLinks(starting_url)
         return all_internal_links
-    except error.URLError:
-        print(f'Cannot access {starting_url}. Remote end closed connection without response.')
-        print(f'Randomly set new proxy, and try again.')
-
-        #randomly set new proxy
-        SetProxy('http://195.29.155.98:35497')
-        all_internal_links = GetAllInternalLinks(starting_url)
-        return all_internal_links
-    except:
-        print('Unexpected Error occurs {x}. Cannot access {y}.'.format(x = sys.exc_info()[0], y = starting_url))
+    except Exception as err:
+        print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
         return all_internal_links
 
     bs_obj = BeautifulSoup(html, 'lxml')
@@ -226,27 +221,37 @@ def GetAllExternalLinks(starting_url, external_link_str_list):
         external_link_str_list.append(external_url_pattern_str)
 
     try:
+        ip_addr = tool_surf.GetPublicIPAddress()
+        print(f'ip address = {ip_addr}')
+
         head = {}
         user_agent = random.choice(USER_AGENT_LIST)
         head['User-Agent'] = user_agent
         req = request.Request(starting_url, headers=head)
         html = urlopen(req)
-    except HTTPError:
-        print(f'Cannot access {starting_url}. HTTPError')
+    except HTTPError as err:
+        print(f'Cannot access {starting_url}. {err}')
+        return all_external_links
+    except http.client.RemoteDisconnected as disconnected_err:
+        print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
         print(f'Randomly set new proxy, and try again.')
 
         #randomly set new proxy
-        SetProxy('http://195.29.155.98:35497')
+        SetProxy('http://118.174.232.219:43665')
         all_external_links = GetAllExternalLinks(starting_url, external_link_str_list)
         return all_external_links
-    except http.client.RemoteDisconnected:
-        print(f'Cannot access {starting_url}. RemoteDisconnected.')
         return all_external_links
-    except error.URLError:
-        print(f'Cannot access {starting_url}. Remote end closed connection without response.')
+    except error.URLError as err:
+        print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
+        print(f'Randomly set new proxy, and try again.')
+
+        #randomly set new proxy
+        SetProxy('http://118.174.232.219:43665')
+        all_external_links = GetAllExternalLinks(starting_url, external_link_str_list)
         return all_external_links
-    except:
-        print('Unexpected Error occurs {x}. Cannot access {y}.'.format(x = sys.exc_info()[0], y = starting_url))
+        return all_external_links
+    except Exception as err:
+        print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
         return all_external_links
 
     bs_obj = BeautifulSoup(html, 'lxml')
