@@ -158,25 +158,37 @@ def GetAllInternalLinks(starting_url):
     print(f'internal_url_pattern_str = {internal_url_pattern_str}')
 
     try:
-        ip_addr_org = tool_surf.GetPublicIPAddress()
+        ip_addr = tool_surf.GetPublicIPAddress()
+        print(f'ip address = {ip_addr}')
+
         head = {}
         user_agent = random.choice(USER_AGENT_LIST)
         head['User-Agent'] = user_agent
-        SetProxy('http://195.29.155.98:35497')
-
         req = request.Request(starting_url, headers=head)
         html = urlopen(req)
-        ip_addr_new = tool_surf.GetPublicIPAddress()
-        print(f'org_ip = {ip_addr_org}')
-        print(f'new_ip = {ip_addr_new}')
     except HTTPError:
         print(f'Cannot access {starting_url}. HTTPError.')
+        print(f'Randomly set new proxy, and try again.')
+
+        #randomly set new proxy
+        SetProxy('http://195.29.155.98:35497')
+        all_internal_links = GetAllInternalLinks(starting_url)
         return all_internal_links
     except http.client.RemoteDisconnected:
         print(f'Cannot access {starting_url}. RemoteDisconnected.')
+        print(f'Randomly set new proxy, and try again.')
+
+        #randomly set new proxy
+        SetProxy('http://195.29.155.98:35497')
+        all_internal_links = GetAllInternalLinks(starting_url)
         return all_internal_links
     except error.URLError:
         print(f'Cannot access {starting_url}. Remote end closed connection without response.')
+        print(f'Randomly set new proxy, and try again.')
+
+        #randomly set new proxy
+        SetProxy('http://195.29.155.98:35497')
+        all_internal_links = GetAllInternalLinks(starting_url)
         return all_internal_links
     except:
         print('Unexpected Error occurs {x}. Cannot access {y}.'.format(x = sys.exc_info()[0], y = starting_url))
@@ -221,6 +233,11 @@ def GetAllExternalLinks(starting_url, external_link_str_list):
         html = urlopen(req)
     except HTTPError:
         print(f'Cannot access {starting_url}. HTTPError')
+        print(f'Randomly set new proxy, and try again.')
+
+        #randomly set new proxy
+        SetProxy('http://195.29.155.98:35497')
+        all_external_links = GetAllExternalLinks(starting_url, external_link_str_list)
         return all_external_links
     except http.client.RemoteDisconnected:
         print(f'Cannot access {starting_url}. RemoteDisconnected.')
