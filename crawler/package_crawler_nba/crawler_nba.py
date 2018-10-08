@@ -308,6 +308,48 @@ def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_li
 
     return (all_external_links, all_internal_links, recursive_err)
 
+def GetProxyList():
+    #proxy_list_url = 'http://www.freeproxylists.net/zh/'
+    proxy_list_url = 'https://www.sslproxies.org/'
+    proxy_list = []
+    head = {}
+    #user_agent = random.choice(USER_AGENT_LIST)
+    ua = UserAgent()
+    user_agent = ua.random
+    head['User-Agent'] = user_agent
+    print(f'user_agent = {head["User-Agent"]}')
+
+    try:
+        req = request.Request(proxy_list_url, headers=head)
+        html = urlopen(req)
+    except Exception as err:
+        print('Unexpected Error occurs during scraping proxy list : {x}. Cannot access {y}.'.format(x = err, y = proxy_list_url))
+        sys.exit(0)
+
+    bs_obj = BeautifulSoup(html, 'lxml')
+    proxy_table = bs_obj.find('table', {'id' : 'proxylisttable'})
+    for row in proxy_table.tbody.findAll('tr'):
+        anonymity    = row.findAll('td')[4].string
+
+        if(re.match(r'elite\s*proxy', anonymity) is not None):
+            ip_address = row.findAll('td')[0].string
+            ip_port    = row.findAll('td')[1].string
+            ip_country = row.findAll('td')[3].string
+            ip_region  = row.findAll('td')[2].string
+
+            proxy_list.append({
+                'ip':   ip_address,
+                'port': ip_port
+            })
+            print('-----------------------')
+            print(f'PROXY, ip_address   = {ip_address}')
+            print(f'PROXY, ip_port      = {ip_port}')
+            print(f'PROXY, anonymity    = {anonymity}')
+            print(f'PROXY, ip_country   = {ip_country}')
+            print(f'PROXY, ip_region   = {ip_region}')
+
+    return proxy_list
+
 def init():
     global request_num
     global USER_AGENT_LIST
