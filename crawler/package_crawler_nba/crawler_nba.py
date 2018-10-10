@@ -131,15 +131,30 @@ def GetExternalLinks(bs_obj, exclude_url_str_list):
     return external_links
 
 def SetProxy(proxy):
-    proxy_support = request.ProxyHandler({'http':proxy,
+    print(f'Set proxy : {proxy}')
+    try :
+        proxy_support = request.ProxyHandler({'http':proxy,
                                           'https':proxy})
-    opener = request.build_opener(proxy_support)
-    request.install_opener(opener)
+        opener = request.build_opener(proxy_support)
+        request.install_opener(opener)
+        ip_addr = tool_surf.GetPublicIPAddress()
+        print(f'Set ip address = {ip_addr}')
+    except Exception as err :
+        print(err)
+        print('Randomly get new proxy.')
+        proxy_index = RandomProxy(proxy_list)
+        proxy_used = proxy_list[proxy_index]
+        SetProxy(proxy_used['ip']+':'+proxy_used['port'])
 
 
 
-def GetAllInternalLinks(starting_url, thresh_change_proxy):
+
+def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list):
     global request_num
+    global proxy_list
+    global proxy_used
+    global proxy_index
+
     print('---------------crawler_nba.GetAllInternalLinks begins-------------------')
     print(f'starting_url = {starting_url}')
     print(f'request_num = {request_num}')
@@ -167,8 +182,19 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy):
         head['User-Agent'] = user_agent
         print(f'user_agent = {head["User-Agent"]}')
 
-        if((request_num % thresh_change_proxy == 0) and (request_num != 0)):
-            print(f'Request number reaches {thresh_change_proxy}. Change the proxy.')
+        if(request_num % thresh_change_proxy == 0):
+            if(request_num != 0):
+                print(f'Request number reaches {thresh_change_proxy}. Change the proxy.')
+            if(proxy_index != -1):
+                del proxy_list[proxy_index]
+
+            proxy_index = RandomProxy(proxy_list)
+            proxy_used = proxy_list[proxy_index]
+            SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+        if((request_num % thresh_change_proxy_list == 0) and (request_num != 0)):
+            print(f'Request number reaches {thresh_change_proxy_list}. Change the proxy list.')
+            proxy_list = GetProxyList(1)
+
         req = request.Request(starting_url, headers=head)
         html = urlopen(req)
         request_num += 1
@@ -178,25 +204,32 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy):
     except http.client.RemoteDisconnected as disconnected_err:
         print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
         print(f'Randomly set new proxy, and try again.')
+        if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
+            proxy_list.remove(proxy_used)
 
         #randomly set new proxy
-        SetProxy('http://118.174.232.219:43665')
-        all_internal_links = GetAllInternalLinks(starting_url, thresh_change_proxy)
+        proxy_index = RandomProxy(proxy_list)
+        proxy_used = proxy_list[proxy_index]
+        SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+        all_internal_links = GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list)
         return all_internal_links
     except error.URLError as err:
         print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
         print(f'Randomly set new proxy, and try again.')
+        if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
+            proxy_list.remove(proxy_used)
 
         #randomly set new proxy
-        SetProxy('http://118.174.232.219:43665')
-        all_internal_links = GetAllInternalLinks(starting_url, thresh_change_proxy)
+        proxy_index = RandomProxy(proxy_list)
+        proxy_used = proxy_list[proxy_index]
+        SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+        all_internal_links = GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list)
         return all_internal_links
     except Exception as err:
         print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
         return all_internal_links
 
     bs_obj = BeautifulSoup(html, 'lxml')
-
     domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
     print(f'domain = {domain}')
     all_internal_links = GetInternalLinks(bs_obj, internal_url_pattern_str, domain)
@@ -207,8 +240,12 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy):
 
     return all_internal_links
 
-def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy):
+def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list):
     global request_num
+    global proxy_list
+    global proxy_used
+    global proxy_index
+
     print('---------------crawler_nba.GetAllExternalLinks begins-------------------')
     print(f'starting_url = {starting_url}')
     print(f'request_num = {request_num}')
@@ -238,8 +275,19 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
         head['User-Agent'] = user_agent
         print(f'user_agent = {user_agent}')
 
-        if((request_num % thresh_change_proxy == 0) and (request_num != 0)):
-            print(f'Request number reaches {thresh_change_proxy}. Change the proxy.')
+        if(request_num % thresh_change_proxy == 0):
+            if(request_num != 0):
+                print(f'Request number reaches {thresh_change_proxy}. Change the proxy.')
+            if(proxy_index != -1):
+                del proxy_list[proxy_index]
+
+            proxy_index = RandomProxy(proxy_list)
+            proxy_used = proxy_list[proxy_index]
+            SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+        if((request_num % thresh_change_proxy_list == 0) and (request_num != 0)):
+            print(f'Request number reaches {thresh_change_proxy_list}. Change the proxy list.')
+            proxy_list = GetProxyList(1)
+
         req = request.Request(starting_url, headers=head)
         html = urlopen(req)
         request_num += 1
@@ -249,27 +297,34 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
     except http.client.RemoteDisconnected as disconnected_err:
         print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
         print(f'Randomly set new proxy, and try again.')
+        if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
+            proxy_list.remove(proxy_used)
 
         #randomly set new proxy
-        SetProxy('http://118.174.232.219:43665')
-        all_external_links = GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy)
-        return all_external_links
+        proxy_index = RandomProxy(proxy_list)
+        proxy_used = proxy_list[proxy_index]
+        SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+
+        all_external_links = GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list)
         return all_external_links
     except error.URLError as err:
         print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
         print(f'Randomly set new proxy, and try again.')
+        if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
+            proxy_list.remove(proxy_used)
 
         #randomly set new proxy
-        SetProxy('http://118.174.232.219:43665')
-        all_external_links = GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy)
-        return all_external_links
+        proxy_index = RandomProxy(proxy_list)
+        proxy_used = proxy_list[proxy_index]
+        SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+
+        all_external_links = GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list)
         return all_external_links
     except Exception as err:
         print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
         return all_external_links
 
     bs_obj = BeautifulSoup(html, 'lxml')
-
     domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
     print(f'domain = {domain}')
     all_external_links = GetExternalLinks(bs_obj, external_link_str_list)
@@ -281,10 +336,10 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
     return all_external_links
 
 
-def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_links, external_link_str_list, thresh_change_proxy):
+def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_links, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list):
     recursive_err = 0
-    all_internal_links_loop = GetAllInternalLinks(url, thresh_change_proxy)
-    all_external_links_loop = GetAllExternalLinks(url, external_link_str_list, thresh_change_proxy)
+    all_internal_links_loop = GetAllInternalLinks(url, thresh_change_proxy, thresh_change_proxy_list)
+    all_external_links_loop = GetAllExternalLinks(url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list)
 
     for external_link in all_external_links_loop:
         if external_link not in all_external_links:
@@ -297,7 +352,7 @@ def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_li
             print(f'--> added internal_link = {internal_link}')
             print(f'About to get internal_link = {internal_link}')
             try:
-                (all_external_links, all_internal_links, recursive_err) = GetAllExternalLinksThrInternalLinks(internal_link, all_external_links, all_internal_links, external_link_str_list, thresh_change_proxy)
+                (all_external_links, all_internal_links, recursive_err) = GetAllExternalLinksThrInternalLinks(internal_link, all_external_links, all_internal_links, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list)
                 if(recursive_err):
                     break
             except RecursionError:
@@ -308,7 +363,10 @@ def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_li
 
     return (all_external_links, all_internal_links, recursive_err)
 
-def GetProxyList():
+def RandomProxy(proxy_list):
+    return random.randint(0, len(proxy_list)-1)
+
+def GetProxyList(is_debug):
     #proxy_list_url = 'http://www.freeproxylists.net/zh/'
     proxy_list_url = 'https://www.sslproxies.org/'
     proxy_list = []
@@ -341,20 +399,32 @@ def GetProxyList():
                 'ip':   ip_address,
                 'port': ip_port
             })
-            print('-----------------------')
-            print(f'PROXY, ip_address   = {ip_address}')
-            print(f'PROXY, ip_port      = {ip_port}')
-            print(f'PROXY, anonymity    = {anonymity}')
-            print(f'PROXY, ip_country   = {ip_country}')
-            print(f'PROXY, ip_region   = {ip_region}')
+            if(is_debug):
+                print('-----------------------')
+                print(f'PROXY, ip_address   = {ip_address}')
+                print(f'PROXY, ip_port      = {ip_port}')
+                print(f'PROXY, anonymity    = {anonymity}')
+                print(f'PROXY, ip_country   = {ip_country}')
+                print(f'PROXY, ip_region    = {ip_region}')
 
     return proxy_list
 
 def init():
+    print('--------------------------Initialization--------------------------')
     global request_num
     global USER_AGENT_LIST
+    global proxy_list
+    global proxy_used
+    global proxy_index
 
     request_num = 0
+    proxy_index = -1
+    proxy_used  = {}
+    proxy_list  = []
+    proxy_list  = GetProxyList(0)
+    proxy_index = RandomProxy(proxy_list)
+    proxy_used  = proxy_list[proxy_index]
+
     USER_AGENT_LIST = [
         "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
         "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)",

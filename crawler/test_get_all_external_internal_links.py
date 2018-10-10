@@ -19,8 +19,9 @@ def main():
     crawler_nba.init()
 
     #Argument Parser
-    thresh_change_proxy = ArgumentParser()
-    print(f'thresh_change_proxy = {thresh_change_proxy}')
+    (thresh_change_proxy, thresh_change_proxy_list) = ArgumentParser()
+    print(f'thresh_change_proxy      = {thresh_change_proxy}')
+    print(f'thresh_change_proxy_list = {thresh_change_proxy_list}')
 
     #Sideband Setting
     current_time = datetime.datetime.now()
@@ -33,7 +34,7 @@ def main():
     all_internal_links = []
     all_external_links = []
     external_link_str_list = []
-    (all_external_links, all_internal_links, recursive_err) = crawler_nba.GetAllExternalLinksThrInternalLinks(starting_url, all_external_links, all_internal_links, external_link_str_list, thresh_change_proxy)
+    (all_external_links, all_internal_links, recursive_err) = crawler_nba.GetAllExternalLinksThrInternalLinks(starting_url, all_external_links, all_internal_links, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list)
 
     print('---------------------All External Links : ---------------------')
     for external_link in all_external_links:
@@ -52,17 +53,21 @@ def main():
 #########################
 def ArgumentParser():
     thresh_change_proxy = 10
+    thresh_change_proxy_list = 50
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--thresh_change_proxy", "-tcp", help="The threshold value of the request number within an IP address. If the request number is larger, then the program will change the proxy.")
+    parser.add_argument("--thresh_change_proxy", "-tcp", help="The threshold value of the request number within an IP address to change the proxy.")
+    parser.add_argument("--thresh_change_proxy_list", "-tcpl", help="The threshold value of the request number within an IP address to change the proxy list.")
 
 
     args = parser.parse_args()
 
     if args.thresh_change_proxy:
         thresh_change_proxy = int(args.thresh_change_proxy)
+    if args.thresh_change_proxy_list:
+        thresh_change_proxy_list = int(args.thresh_change_proxy_list)
 
-    return(thresh_change_proxy)
+    return(thresh_change_proxy, thresh_change_proxy_list)
 
 #-----------------Execution------------------#
 if __name__ == '__main__':
