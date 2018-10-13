@@ -149,7 +149,7 @@ def SetProxy(proxy):
 
 
 
-def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list):
+def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list, all_internal_links):
     global request_num
     global proxy_list
     global proxy_used
@@ -158,7 +158,7 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_l
     print('---------------crawler_nba.GetAllInternalLinks begins-------------------')
     print(f'starting_url = {starting_url}')
     print(f'request_num = {request_num}')
-    all_internal_links = []
+    all_internal_links_loop = []
     internal_url_pattern_str = ""
     internal_url_pattern = re.compile(r'.*www.(\S*?)\.com.*')
     internal_url_pattern_match = internal_url_pattern.match(starting_url)
@@ -200,7 +200,12 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_l
         request_num += 1
     except HTTPError as err:
         print(f'Cannot access {starting_url}. {err}')
-        return all_internal_links
+        if(re.match(r'\s*HTTP\s*Error\s*404.*', err) is not None):
+            print(f'Remove the url : {starting_url}')
+            if(any(url_check == starting_url) for url_check in all_internal_links):
+                all_internal_links.remove(starting_url)
+
+        return all_internal_links_loop
     except http.client.RemoteDisconnected as disconnected_err:
         print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
         print(f'Randomly set new proxy, and try again.')
@@ -211,8 +216,8 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_l
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        all_internal_links = GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list)
-        return all_internal_links
+        all_internal_links_loop = GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list, all_internal_links)
+        return all_internal_links_loop
     except error.URLError as err:
         print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
         print(f'Randomly set new proxy, and try again.')
@@ -223,24 +228,24 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_l
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        all_internal_links = GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list)
-        return all_internal_links
+        all_internal_links_loop = GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list, all_internal_links)
+        return all_internal_links_loop
     except Exception as err:
         print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
-        return all_internal_links
+        return all_internal_links_loop
 
     bs_obj = BeautifulSoup(html, 'lxml')
     domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
     print(f'domain = {domain}')
-    all_internal_links = GetInternalLinks(bs_obj, internal_url_pattern_str, domain)
+    all_internal_links_loop = GetInternalLinks(bs_obj, internal_url_pattern_str, domain)
 
-    for ele in all_internal_links:
-        print(f'internal link = {ele}')
+    for ele in all_internal_links_loop:
+        print(f'this loop internal link = {ele}')
     print('---------------crawler_nba.GetAllInternalLinks ends-------------------')
 
-    return all_internal_links
+    return all_internal_links_loop
 
-def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list):
+def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list, all_external_links):
     global request_num
     global proxy_list
     global proxy_used
@@ -249,7 +254,7 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
     print('---------------crawler_nba.GetAllExternalLinks begins-------------------')
     print(f'starting_url = {starting_url}')
     print(f'request_num = {request_num}')
-    all_external_links = []
+    all_external_links_loop = []
     external_url_pattern_str = ""
     external_url_pattern = re.compile(r'.*www.(\S*?)\.com.*')
     external_url_pattern_match = external_url_pattern.match(starting_url)
@@ -293,7 +298,12 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
         request_num += 1
     except HTTPError as err:
         print(f'Cannot access {starting_url}. {err}')
-        return all_external_links
+        if(re.match(r'\s*HTTP\s*Error\s*404.*', err) is not None):
+            print(f'Remove the url : {starting_url}')
+            if(any(url_check == starting_url) for url_check in all_external_links):
+                all_external_links.remove(starting_url)
+
+        return all_external_links_loop
     except http.client.RemoteDisconnected as disconnected_err:
         print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
         print(f'Randomly set new proxy, and try again.')
@@ -305,8 +315,8 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
 
-        all_external_links = GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list)
-        return all_external_links
+        all_external_links_loop = GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list, all_external_links)
+        return all_external_links_loop
     except error.URLError as err:
         print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
         print(f'Randomly set new proxy, and try again.')
@@ -318,28 +328,28 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
 
-        all_external_links = GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list)
-        return all_external_links
+        all_external_links_loop = GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list, all_external_links)
+        return all_external_links_loop
     except Exception as err:
         print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
-        return all_external_links
+        return all_external_links_loop
 
     bs_obj = BeautifulSoup(html, 'lxml')
     domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
     print(f'domain = {domain}')
-    all_external_links = GetExternalLinks(bs_obj, external_link_str_list)
+    all_external_links_loop = GetExternalLinks(bs_obj, external_link_str_list)
 
-    for ele in all_external_links:
-        print(f'external link = {ele}')
+    for ele in all_external_links_loop:
+        print(f'this loop external link = {ele}')
     print('---------------crawler_nba.GetAllExternalLinks ends-------------------')
 
-    return all_external_links
+    return all_external_links_loop
 
 
 def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_links, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list):
     recursive_err = 0
-    all_internal_links_loop = GetAllInternalLinks(url, thresh_change_proxy, thresh_change_proxy_list)
-    all_external_links_loop = GetAllExternalLinks(url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list)
+    all_internal_links_loop = GetAllInternalLinks(url, thresh_change_proxy, thresh_change_proxy_list, all_internal_links)
+    all_external_links_loop = GetAllExternalLinks(url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list, all_external_links)
 
     for external_link in all_external_links_loop:
         if external_link not in all_external_links:
