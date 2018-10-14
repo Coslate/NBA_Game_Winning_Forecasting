@@ -200,9 +200,9 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_l
         request_num += 1
     except HTTPError as err:
         print(f'Cannot access {starting_url}. {err}')
-        if(re.match(r'\s*HTTP\s*Error\s*404.*', err) is not None):
+        if(re.match(r'\s*HTTP\s*Error\s*404.*', str(err)) is not None):
             print(f'Remove the url : {starting_url}')
-            if(any(url_check == starting_url) for url_check in all_internal_links):
+            if(any(url_check == starting_url for url_check in all_internal_links)):
                 all_internal_links.remove(starting_url)
 
         return all_internal_links_loop
@@ -298,9 +298,9 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
         request_num += 1
     except HTTPError as err:
         print(f'Cannot access {starting_url}. {err}')
-        if(re.match(r'\s*HTTP\s*Error\s*404.*', err) is not None):
+        if(re.match(r'\s*HTTP\s*Error\s*404.*', str(err)) is not None):
             print(f'Remove the url : {starting_url}')
-            if(any(url_check == starting_url) for url_check in all_external_links):
+            if(any(url_check == starting_url for url_check in all_external_links)):
                 all_external_links.remove(starting_url)
 
         return all_external_links_loop
@@ -434,6 +434,10 @@ def init():
     proxy_list  = GetProxyList(0)
     proxy_index = RandomProxy(proxy_list)
     proxy_used  = proxy_list[proxy_index]
+
+    print('--------------------------Resolve "http.client.IncompleteRead" Error--------------------------')
+    http.client.HTTPConnection._http_vsn = 10
+    http.client.HTTPConnection._http_vsn_str = 'HTTP/1.0'
 
     USER_AGENT_LIST = [
         "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
