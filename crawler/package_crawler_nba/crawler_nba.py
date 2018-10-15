@@ -11,6 +11,7 @@ import sys
 import json
 import http.client
 import random
+import time
 
 def GetAllWikiAtricleLinks(url, is_debug=0):
     html = urlopen("http://en.wikipedia.org"+url)
@@ -392,7 +393,9 @@ def GetProxyList(is_debug):
         html = urlopen(req)
     except Exception as err:
         print('Unexpected Error occurs during scraping proxy list : {x}. Cannot access {y}.'.format(x = err, y = proxy_list_url))
-        sys.exit(0)
+        print('Sleep 5 minutes and try again.')
+        time.sleep(5*60)
+        return GetProxyList(1)
 
     bs_obj = BeautifulSoup(html, 'lxml')
     proxy_table = bs_obj.find('table', {'id' : 'proxylisttable'})
