@@ -6,7 +6,6 @@ import datetime
 import sys
 import argparse
 import os
-#import package_crawler_nba.crawler_nba as crawler_nba
 
 #########################
 #     Main-Routine      #
@@ -47,10 +46,10 @@ def ArgumentParser():
 
     args = parser.parse_args()
 
-    if args.password:
-        password = args.password
-    if args.table:
-        table = args.table
+    if args.mysql_password:
+        password = args.mysql_password
+    if args.mysql_table_name:
+        table = args.mysql_table_name
 
     return(password, table)
 
