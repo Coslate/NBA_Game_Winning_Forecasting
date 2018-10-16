@@ -12,6 +12,93 @@ import json
 import http.client
 import random
 import time
+import pymysql
+
+def MySQLDBInitialize(password, table):
+    global conn
+    global cur
+    conn = pymysql.connect(host       ='localhost',
+                           unix_socket='/var/run/mysqld/mysqld.sock',
+                           user       ='root',
+                           passwd     = password,
+                           db         ='mysql')
+    cur = conn.cursor()
+    cur.execute('CREATE TABLE {x} (id BIGINT(7) NOT NULL AUTO_INCREMENT, title VARCHAR(255), url VARCHAR(255), content VARCHAR(10000), created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id)'.format(x = table))
+    cur.execute('USE {x}'.format(x = table))
+
+def StoreWikiToMySQL(table, cur, url, title, content):
+    cur.execute('INSERT INTO {table_name} (title, url, content) VALUES ({title_name}, {url_name}, {content_name})'.format(table_name = table, url_name = url, content_name = content))
+    cur.connection.commit()
+
+def GetWikiLinksContent(starting_url, cur, table):
+    all_internal_links_loop = []
+    try:
+        ip_addr = tool_surf.GetPublicIPAddress()
+        print(f'ip address = {ip_addr}')
+
+        head = {}
+        #user_agent = random.choice(USER_AGENT_LIST)
+        ua = UserAgent()
+        user_agent = ua.random
+        head['User-Agent'] = user_agent
+        print(f'user_agent = {head["User-Agent"]}')
+
+        if(request_num % thresh_change_proxy == 0):
+            if(request_num != 0):
+                print(f'Request number reaches {thresh_change_proxy}. Change the proxy.')
+            if(proxy_index != -1):
+                del proxy_list[proxy_index]
+
+            proxy_index = RandomProxy(proxy_list)
+            proxy_used = proxy_list[proxy_index]
+            SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+        if((request_num % thresh_change_proxy_list == 0) and (request_num != 0)):
+            print(f'Request number reaches {thresh_change_proxy_list}. Change the proxy list.')
+            proxy_list = GetProxyList(1)
+
+        req = request.Request(starting_url, headers=head)
+        html = urlopen(req)
+        request_num += 1
+    except HTTPError as err:
+        print(f'Cannot access {starting_url}. {err}')
+        return all_internal_links_loop
+    except http.client.RemoteDisconnected as disconnected_err:
+        print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
+        print(f'Randomly set new proxy, and try again.')
+        if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
+            proxy_list.remove(proxy_used)
+
+        #randomly set new proxy
+        proxy_index = RandomProxy(proxy_list)
+        proxy_used = proxy_list[proxy_index]
+        SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+        all_internal_links_loop = GetWikiLinksContent(starting_url, cur, table)
+        return all_internal_links_loop
+    except error.URLError as err:
+        print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
+        print(f'Randomly set new proxy, and try again.')
+        if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
+            proxy_list.remove(proxy_used)
+
+        #randomly set new proxy
+        proxy_index = RandomProxy(proxy_list)
+        proxy_used = proxy_list[proxy_index]
+        SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+        all_internal_links_loop = GetWikiLinksContent(starting_url, cur, table)
+        return all_internal_links_loop
+    except Exception as err:
+        print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
+        return all_internal_links_loop
+
+    bs_obj  = BeautifulSoup(html, 'lxml')
+    domain  = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
+    title   = bs_obj.find('h1').get_text()
+    content = bs_obj.find('div', {'id' : 'mw-content-text'}).find('p').get_text()
+    all_internal_links_loop = bs_obj.find('div', {'id' : 'bodyContent'}).findAll('a', href=re.compile('^(/wiki/)((?!:).)*$'))
+    StoreWikiToMySQL(table, cur, starting_url, title, content)
+
+    return all_internal_links_loop
+
 
 def GetAllWikiAtricleLinks(url, is_debug=0):
     html = urlopen("http://en.wikipedia.org"+url)
@@ -429,6 +516,10 @@ def init():
     global proxy_list
     global proxy_used
     global proxy_index
+
+    #Initialization of PyMySQL
+    global conn
+    global cur
 
     request_num = 0
     proxy_index = -1
