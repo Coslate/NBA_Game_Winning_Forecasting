@@ -14,6 +14,11 @@ import random
 import time
 import pymysql
 
+def MySQLDBClose(cur, conn):
+    cur.close()
+    conn.close()
+    print('Close MySQL Database connection.')
+
 def MySQLDBInitialize(password, table):
     global conn
     global cur
@@ -23,11 +28,26 @@ def MySQLDBInitialize(password, table):
                            passwd     = password,
                            db         ='mysql')
     cur = conn.cursor()
-    cur.execute('CREATE TABLE {x} (id BIGINT(7) NOT NULL AUTO_INCREMENT, title VARCHAR(255), url VARCHAR(255), content VARCHAR(10000), created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id)'.format(x = table))
-    cur.execute('USE {x}'.format(x = table))
+    cur.execute('USE scraping;')
+    cur.execute('CREATE TABLE IF NOT EXISTS {x} (id BIGINT(7) NOT NULL AUTO_INCREMENT, title VARCHAR(255), url VARCHAR(255), content VARCHAR(100000), created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id));'.format(x = table))
 
 def StoreWikiToMySQL(table, cur, url, title, content):
-    cur.execute('INSERT INTO {table_name} (title, url, content) VALUES ({title_name}, {url_name}, {content_name})'.format(table_name = table, url_name = url, content_name = content))
+    print('Storing...')
+    print(f'table   = {table}')
+    print(f'title   = {title}')
+    print(f'url     = {url}')
+    print(f'content = {content}')
+
+    tabls   = '"'+table+'"'
+    title   = '"'+title+'"'
+    url     = '"'+url+'"'
+    content = '"'+content+'"'
+
+    execute_str = 'INSERT INTO {table_name} (title, url, content) VALUES ({title_name}, {url_name}, {content_name})'.format(table_name = table, url_name = url, title_name = title, content_name = content)
+    print(f'execute_str = {execute_str}')
+    cur.execute(execute_str)
+
+    #cur.execute('INSERT INTO {table_name} (title, url, content) VALUES ({title_name}, {url_name}, {content_name})'.format(table_name = table, url_name = url, title_name = title, content_name = content))
     cur.connection.commit()
 
 def GetWikiLinksContent(starting_url, cur, table):
@@ -43,22 +63,13 @@ def GetWikiLinksContent(starting_url, cur, table):
         head['User-Agent'] = user_agent
         print(f'user_agent = {head["User-Agent"]}')
 
-        if(request_num % thresh_change_proxy == 0):
-            if(request_num != 0):
-                print(f'Request number reaches {thresh_change_proxy}. Change the proxy.')
-            if(proxy_index != -1):
-                del proxy_list[proxy_index]
-
-            proxy_index = RandomProxy(proxy_list)
-            proxy_used = proxy_list[proxy_index]
-            SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        if((request_num % thresh_change_proxy_list == 0) and (request_num != 0)):
-            print(f'Request number reaches {thresh_change_proxy_list}. Change the proxy list.')
-            proxy_list = GetProxyList(1)
+        #Set Proxy
+        proxy_index = RandomProxy(proxy_list)
+        proxy_used = proxy_list[proxy_index]
+        SetProxy(proxy_used['ip']+':'+proxy_used['port'])
 
         req = request.Request(starting_url, headers=head)
         html = urlopen(req)
-        request_num += 1
     except HTTPError as err:
         print(f'Cannot access {starting_url}. {err}')
         return all_internal_links_loop
@@ -90,10 +101,26 @@ def GetWikiLinksContent(starting_url, cur, table):
         print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
         return all_internal_links_loop
 
-    bs_obj  = BeautifulSoup(html, 'lxml')
-    domain  = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
-    title   = bs_obj.find('h1').get_text()
-    content = bs_obj.find('div', {'id' : 'mw-content-text'}).find('p').get_text()
+    bs_obj       = BeautifulSoup(html, 'lxml')
+    domain       = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
+    title        = bs_obj.find('h1').get_text()
+#    content_list = bs_obj.find('div', {'id' : 'mw-content-text'}).findAll('p', {'class': re.compile(r'^(((?!(empty)).)*$)')})
+    content_list = bs_obj.find('div', {'id' : 'mw-content-text'}).findAll('p')
+    content = ""
+
+    for content_ele in content_list:
+        print(f'type(content_ele) = {type(content_ele)}')
+        if(content_ele.has_attr('class')):
+            if(re.match(r'.*empty.*', content_ele.attrs['class'][-1]) is not None):
+                print(f'filtered -------> content_ele = {content_ele}')
+                continue
+
+        print(f'content_ele = {content_ele}')
+        content += content_ele.get_text().strip('\n')
+    content = content.replace('\n', ' ')
+    content = content.replace('\"', '\'')
+    print(f'content = {content}')
+
     all_internal_links_loop = bs_obj.find('div', {'id' : 'bodyContent'}).findAll('a', href=re.compile('^(/wiki/)((?!:).)*$'))
     StoreWikiToMySQL(table, cur, starting_url, title, content)
 
