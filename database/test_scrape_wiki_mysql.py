@@ -29,17 +29,36 @@ def main():
     starting_url = "https://en.wikipedia.org/wiki/Kevin_Bacon"
     print(f'starting_url = {starting_url}')
 
+    # Scrape articles from Wikipedia and store into MySQl Database
     choose_link = starting_url
+    skipping = 0
     while(iter_num < max_sql_store_num):
         print('iter_num = {}. Get Wiki Links and store the content to MySQL...'.format(iter_num))
         print(f'choose_link = {choose_link}')
-        all_internal_links_loop = crawler_nba.GetWikiLinksContent(choose_link, crawler_nba.cur, table)
+        all_internal_links_loop, skipping = crawler_nba.GetWikiLinksContent(choose_link, crawler_nba.cur, table)
         total_num_internal_links_loop = len(all_internal_links_loop)
 
         if(total_num_internal_links_loop > 0):
             choose_link = "http://en.wikipedia.org"+all_internal_links_loop[random.randint(0, total_num_internal_links_loop-1)].attrs['href']
-        iter_num += 1
+        if(skipping == 0):
+            iter_num += 1
 
+    # Test to read from MySQL Database
+    sql_ex = 'SELECT id, title, created, LEFT(content, 32) FROM {table_name} WHERE id=4;'.format(table_name=table)
+    crawler_nba.cur.execute(sql_ex)
+    results = crawler_nba.cur.fetchall()
+
+    print(f'-------------------Execution {sql_ex}-------------------')
+    print(f'table = {table}')
+    for row in results:
+        id_name = str(row[0])
+        title_name = row[1]
+        created_name = str(row[2])
+        content_name = row[3]
+
+        print('{x:<2s}, {y:<2s}, {z:<2s}, {k:<2s}'.format(x=id_name, y=title_name, z=created_name, k=content_name))
+
+    # Close the connection of MySQL Database
     crawler_nba.MySQLDBClose(crawler_nba.cur, crawler_nba.conn)
 #########################
 #     Sub-Routine       #

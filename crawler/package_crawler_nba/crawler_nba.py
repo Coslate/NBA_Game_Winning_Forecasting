@@ -29,7 +29,17 @@ def MySQLDBInitialize(password, table):
                            db         ='mysql')
     cur = conn.cursor()
     cur.execute('USE scraping;')
-    cur.execute('CREATE TABLE IF NOT EXISTS {x} (id BIGINT(7) NOT NULL AUTO_INCREMENT, title VARCHAR(255), url VARCHAR(255), content VARCHAR(100000), created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id));'.format(x = table))
+    cur.execute('DROP TABLE IF EXISTS {x};'.format(x=table))
+    cur.execute('CREATE TABLE IF NOT EXISTS {x} (id BIGINT(7) NOT NULL AUTO_INCREMENT\
+                , title VARCHAR(255)\
+                , url VARCHAR(255)\
+                , content VARCHAR(100000)\
+                , created TIMESTAMP DEFAULT CURRENT_TIMESTAMP\
+                , PRIMARY KEY (id)\
+                , UNIQUE KEY title_idx (title)\
+                , UNIQUE KEY url_idx (url)\
+                , UNIQUE KEY created_idx (created)\
+                , UNIQUE KEY content_idx (content(16)));'.format(x=table))
 
 def StoreWikiToMySQL(table, cur, url, title, content):
     print('Storing...')
@@ -38,20 +48,24 @@ def StoreWikiToMySQL(table, cur, url, title, content):
     print(f'url     = {url}')
     print(f'content = {content}')
 
-    tabls   = '"'+table+'"'
     title   = '"'+title+'"'
     url     = '"'+url+'"'
     content = '"'+content+'"'
 
-    execute_str = 'INSERT INTO {table_name} (title, url, content) VALUES ({title_name}, {url_name}, {content_name})'.format(table_name = table, url_name = url, title_name = title, content_name = content)
-    print(f'execute_str = {execute_str}')
-    cur.execute(execute_str)
-
-    #cur.execute('INSERT INTO {table_name} (title, url, content) VALUES ({title_name}, {url_name}, {content_name})'.format(table_name = table, url_name = url, title_name = title, content_name = content))
-    cur.connection.commit()
+    cur.execute('SELECT * FROM {x} WHERE url={url_name}'.format(x=table, url_name=url))
+    if cur.rowcount==0:
+        execute_str = 'INSERT INTO {table_name} (title, url, content) VALUES ({title_name}, {url_name}, {content_name});'.format(table_name = table, url_name = url, title_name = title, content_name = content)
+        print(f'execute_str = {execute_str}')
+        cur.execute(execute_str)
+        cur.connection.commit()
+        return 0;
+    else:
+        print('Already existed. Skipping...')
+        return 1;
 
 def GetWikiLinksContent(starting_url, cur, table):
     all_internal_links_loop = []
+    skipping = 0
     try:
         ip_addr = tool_surf.GetPublicIPAddress()
         print(f'ip address = {ip_addr}')
@@ -72,7 +86,7 @@ def GetWikiLinksContent(starting_url, cur, table):
         html = urlopen(req)
     except HTTPError as err:
         print(f'Cannot access {starting_url}. {err}')
-        return all_internal_links_loop
+        return all_internal_links_loop, skipping
     except http.client.RemoteDisconnected as disconnected_err:
         print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
         print(f'Randomly set new proxy, and try again.')
@@ -83,8 +97,8 @@ def GetWikiLinksContent(starting_url, cur, table):
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        all_internal_links_loop = GetWikiLinksContent(starting_url, cur, table)
-        return all_internal_links_loop
+        all_internal_links_loop, skipping = GetWikiLinksContent(starting_url, cur, table)
+        return all_internal_links_loop, skipping
     except error.URLError as err:
         print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
         print(f'Randomly set new proxy, and try again.')
@@ -95,36 +109,31 @@ def GetWikiLinksContent(starting_url, cur, table):
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        all_internal_links_loop = GetWikiLinksContent(starting_url, cur, table)
-        return all_internal_links_loop
+        all_internal_links_loop, skipping = GetWikiLinksContent(starting_url, cur, table)
+        return all_internal_links_loop, skipping
     except Exception as err:
         print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
-        return all_internal_links_loop
+        return all_internal_links_loop, skipping
 
     bs_obj       = BeautifulSoup(html, 'lxml')
     domain       = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
     title        = bs_obj.find('h1').get_text()
-#    content_list = bs_obj.find('div', {'id' : 'mw-content-text'}).findAll('p', {'class': re.compile(r'^(((?!(empty)).)*$)')})
     content_list = bs_obj.find('div', {'id' : 'mw-content-text'}).findAll('p')
     content = ""
 
     for content_ele in content_list:
-        print(f'type(content_ele) = {type(content_ele)}')
         if(content_ele.has_attr('class')):
             if(re.match(r'.*empty.*', content_ele.attrs['class'][-1]) is not None):
                 print(f'filtered -------> content_ele = {content_ele}')
                 continue
-
-        print(f'content_ele = {content_ele}')
         content += content_ele.get_text().strip('\n')
     content = content.replace('\n', ' ')
     content = content.replace('\"', '\'')
-    print(f'content = {content}')
 
     all_internal_links_loop = bs_obj.find('div', {'id' : 'bodyContent'}).findAll('a', href=re.compile('^(/wiki/)((?!:).)*$'))
-    StoreWikiToMySQL(table, cur, starting_url, title, content)
+    skipping = StoreWikiToMySQL(table, cur, starting_url, title, content)
 
-    return all_internal_links_loop
+    return all_internal_links_loop, skipping
 
 
 def GetAllWikiAtricleLinks(url, is_debug=0):
