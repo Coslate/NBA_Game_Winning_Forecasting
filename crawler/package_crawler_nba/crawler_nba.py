@@ -545,7 +545,7 @@ def GetProxyList(is_debug):
 
     return proxy_list
 
-def init():
+def init(is_debug):
     print('--------------------------Initialization--------------------------')
     global request_num
     global USER_AGENT_LIST
@@ -561,9 +561,11 @@ def init():
     proxy_index = -1
     proxy_used  = {}
     proxy_list  = []
-    proxy_list  = GetProxyList(0)
+    proxy_list  = GetProxyList(is_debug)
     proxy_index = RandomProxy(proxy_list)
     proxy_used  = proxy_list[proxy_index]
+    if(is_debug):
+        print(f"proxy_used = {proxy_used}")
 
     print('--------------------------Resolve "http.client.IncompleteRead" Error--------------------------')
     http.client.HTTPConnection._http_vsn = 10
