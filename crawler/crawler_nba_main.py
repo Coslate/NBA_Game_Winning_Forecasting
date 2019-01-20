@@ -31,6 +31,7 @@ def main():
     starting_url = "https://stats.nba.com/teams/boxscores"
     print(f'starting_url = {starting_url}')
 
+    all_data_loop = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
 
 #########################
 #     Sub-Routine       #

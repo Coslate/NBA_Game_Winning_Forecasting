@@ -63,6 +63,88 @@ def StoreWikiToMySQL(table, cur, url, title, content):
         print('Already existed. Skipping...')
         return 1;
 
+def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list):
+    print("> GetNBADataRequest...")
+    global request_num
+    global proxy_list
+    global proxy_used
+    global proxy_index
+
+    print('---------------crawler_nba.GetNBADataRequest begins-------------------')
+    print(f'starting_url = {starting_url}')
+    print(f'request_num = {request_num}')
+
+    all_data_loop = []
+
+    try:
+        ip_addr = tool_surf.GetPublicIPAddress()
+        print(f'ip address = {ip_addr}')
+
+        head = {}
+        #user_agent = random.choice(USER_AGENT_LIST)
+        ua = UserAgent()
+        user_agent = ua.random
+        head['User-Agent'] = user_agent
+        print(f'user_agent = {head["User-Agent"]}')
+
+        if(request_num % thresh_change_proxy == 0):
+            if(request_num != 0):
+                print(f'Request number reaches {thresh_change_proxy}. Change the proxy.')
+            if(proxy_index != -1):
+                del proxy_list[proxy_index]
+
+            proxy_index = RandomProxy(proxy_list)
+            proxy_used = proxy_list[proxy_index]
+            SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+        if((request_num % thresh_change_proxy_list == 0) and (request_num != 0)):
+            print(f'Request number reaches {thresh_change_proxy_list}. Change the proxy list.')
+            proxy_list = GetProxyList(1)
+
+        req = request.Request(starting_url, headers=head)
+        html = urlopen(req)
+        request_num += 1
+    except HTTPError as err:
+        print(f'Cannot access {starting_url}. {err}')
+        if(re.match(r'\s*HTTP\s*Error\s*404.*', str(err)) is not None):
+            print(f'Return with original data.')
+
+        return all_data_loop
+    except http.client.RemoteDisconnected as disconnected_err:
+        print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
+        print(f'Randomly set new proxy, and try again.')
+        if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
+            proxy_list.remove(proxy_used)
+
+        #randomly set new proxy
+        proxy_index = RandomProxy(proxy_list)
+        proxy_used = proxy_list[proxy_index]
+        SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+        all_data_loop = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
+        return all_data_loop
+    except error.URLError as err:
+        print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
+        print(f'Randomly set new proxy, and try again.')
+        if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
+            proxy_list.remove(proxy_used)
+
+        #randomly set new proxy
+        proxy_index = RandomProxy(proxy_list)
+        proxy_used = proxy_list[proxy_index]
+        SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+        all_data_loop = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
+        return all_data_loop
+    except Exception as err:
+        print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
+        print(f'Return with original data.')
+        return all_data_loop
+
+    bs_obj = BeautifulSoup(html, 'lxml')
+    domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
+    print(f'domain = {domain}')
+
+    print('---------------crawler_nba.GetNBADataRequest ends-------------------')
+    return all_data_loop
+
 def GetWikiLinksContent(starting_url, cur, table):
     all_internal_links_loop = []
     skipping = 0
@@ -134,7 +216,6 @@ def GetWikiLinksContent(starting_url, cur, table):
     skipping = StoreWikiToMySQL(table, cur, starting_url, title, content)
 
     return all_internal_links_loop, skipping
-
 
 def GetAllWikiAtricleLinks(url, is_debug=0):
     html = urlopen("http://en.wikipedia.org"+url)
@@ -255,10 +336,11 @@ def GetExternalLinks(bs_obj, exclude_url_str_list):
     return external_links
 
 def SetProxy(proxy):
-    print(f'Set proxy : {proxy}')
+    print(f'> SetProxy: {proxy}')
     try :
         proxy_support = request.ProxyHandler({'http':proxy,
-                                          'https':proxy})
+                                              'https':proxy})
+#        proxy_support = request.ProxyHandler({'https':proxy})
         opener = request.build_opener(proxy_support)
         request.install_opener(opener)
         ip_addr = tool_surf.GetPublicIPAddress()
@@ -269,9 +351,6 @@ def SetProxy(proxy):
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-
-
-
 
 def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list, all_internal_links):
     global request_num
@@ -469,7 +548,6 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
 
     return all_external_links_loop
 
-
 def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_links, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list):
     recursive_err = 0
     all_internal_links_loop = GetAllInternalLinks(url, thresh_change_proxy, thresh_change_proxy_list, all_internal_links)
@@ -498,9 +576,11 @@ def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_li
     return (all_external_links, all_internal_links, recursive_err)
 
 def RandomProxy(proxy_list):
+    print("> RandomProxy...")
     return random.randint(0, len(proxy_list)-1)
 
 def GetProxyList(is_debug):
+    print("> GetProxyList...")
     #proxy_list_url = 'http://www.freeproxylists.net/zh/'
     proxy_list_url = 'https://www.sslproxies.org/'
     proxy_list = []
@@ -546,7 +626,7 @@ def GetProxyList(is_debug):
     return proxy_list
 
 def init(is_debug):
-    print('--------------------------Initialization--------------------------')
+    print('> Initialization...')
     global request_num
     global USER_AGENT_LIST
     global proxy_list
