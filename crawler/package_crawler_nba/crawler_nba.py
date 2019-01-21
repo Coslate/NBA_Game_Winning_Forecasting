@@ -139,11 +139,17 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         return all_data_loop
 
     bs_obj = BeautifulSoup(html, 'lxml')
-    domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
-    print(f'domain = {domain}')
+    GetNBAData(bs_obj, all_data_loop)
 
     print('---------------crawler_nba.GetNBADataRequest ends-------------------')
     return all_data_loop
+
+def GetNBAData(bs_obj, all_data_loop):
+    print(bs_obj.prettify())
+#    data_candidate = bs_obj.find_all('div', {'class':'nba-stat-table__overflow'})
+#    for data_get in data_candidate:
+#        print(data_get)
+
 
 def GetWikiLinksContent(starting_url, cur, table):
     all_internal_links_loop = []
