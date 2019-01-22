@@ -1,0 +1,72 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ArgumentParser	./crawler_nba_main.py	/^def ArgumentParser():$/;"	f
+ArgumentParser	./test_get_all_external_internal_links.py	/^def ArgumentParser():$/;"	f
+DelElement	./test_list_remove.py	/^def DelElement(val, my_list):$/;"	f
+FollowExternalOnly	./test_follow_external_link_only.py	/^def FollowExternalOnly(starting_url):$/;"	f
+GetAllExternalLinks	./package_crawler_nba/crawler_nba.py	/^def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list, all_external_links):$/;"	f
+GetAllExternalLinksThrInternalLinks	./package_crawler_nba/crawler_nba.py	/^def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_links, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list):$/;"	f
+GetAllInternalLinks	./package_crawler_nba/crawler_nba.py	/^def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list, all_internal_links):$/;"	f
+GetAllInternalLinks	./test_follow_external_link_only.py	/^def GetAllInternalLinks(starting_url):$/;"	f
+GetAllURLLinks	./package_crawler_nba/crawler_nba.py	/^def GetAllURLLinks(url, pages_links, recursive_num, is_debug=0):$/;"	f
+GetAllWikiAtricleLinks	./package_crawler_nba/crawler_nba.py	/^def GetAllWikiAtricleLinks(url, is_debug=0):$/;"	f
+GetCountry	./package_crawler_nba/crawler_nba.py	/^def GetCountry(ip_address):$/;"	f
+GetEditHistoryIPList	./package_crawler_nba/crawler_nba.py	/^def GetEditHistoryIPList(url, is_debug=0):$/;"	f
+GetExternalLinks	./package_crawler_nba/crawler_nba.py	/^def GetExternalLinks(bs_obj, exclude_url_str_list):$/;"	f
+GetInternalLinks	./package_crawler_nba/crawler_nba.py	/^def GetInternalLinks(bs_obj, include_url_str, domain):$/;"	f
+GetNBADataRequest	./package_crawler_nba/crawler_nba.py	/^def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list):$/;"	f
+GetProxyList	./package_crawler_nba/crawler_nba.py	/^def GetProxyList(is_debug):$/;"	f
+GetPublicIPAddress	./package_tool_surf/tool_surf.py	/^def GetPublicIPAddress():$/;"	f
+GetRandomExternalLinks	./test_follow_external_link_only.py	/^def GetRandomExternalLinks(starting_url):$/;"	f
+GetThePageAndUpdateURL	./scrape_nba.py	/^def GetThePageAndUpdateURL(url):$/;"	f
+GetWikiLinksContent	./package_crawler_nba/crawler_nba.py	/^def GetWikiLinksContent(starting_url, cur, table):$/;"	f
+MySQLDBClose	./package_crawler_nba/crawler_nba.py	/^def MySQLDBClose(cur, conn):$/;"	f
+MySQLDBInitialize	./package_crawler_nba/crawler_nba.py	/^def MySQLDBInitialize(password, table):$/;"	f
+RandomProxy	./package_crawler_nba/crawler_nba.py	/^def RandomProxy(proxy_list):$/;"	f
+SendMail	./package_email/email.py	/^def SendMail(gmail_user, gmail_password, content, title, to_addr):$/;"	f
+SetProxy	./package_crawler_nba/crawler_nba.py	/^def SetProxy(proxy):$/;"	f
+StoreWikiToMySQL	./package_crawler_nba/crawler_nba.py	/^def StoreWikiToMySQL(table, cur, url, title, content):$/;"	f
+a	./test_re.py	/^a = "yes" if(re.match(r'.*world.*', 'hello world!')) else "no"$/;"	v
+a_dict_list	./test_search_dict.py	/^a_dict_list = [{'main_color' : 'red', 'sec_color' : 'blue'},$/;"	v
+all_article_links	./test_get_all_editing_ip.py	/^    all_article_links = crawler_nba.GetAllWikiAtricleLinks(new_article_link)$/;"	v
+all_article_links	./test_get_all_editing_ip.py	/^all_article_links = crawler_nba.GetAllWikiAtricleLinks(initial_page)$/;"	v
+all_article_links_len	./test_get_all_editing_ip.py	/^    all_article_links_len = len(all_article_links)$/;"	v
+all_article_links_len	./test_get_all_editing_ip.py	/^all_article_links_len = len(all_article_links)$/;"	v
+country	./test_get_all_editing_ip.py	/^            country = crawler_nba.GetCountry(history_ip)$/;"	v
+first_link	./test_random_surf_wiki.py	/^first_link = "\/wiki\/Kevin_Bacon"$/;"	v
+history_ip_address_list	./test_get_all_editing_ip.py	/^        history_ip_address_list = crawler_nba.GetEditHistoryIPList(link.attrs['href'])$/;"	v
+href_link	./test_tag_attrs.py	/^        href_link = link.attrs['href']$/;"	v
+html	./test_find_all_articles.py	/^html = urlopen("https:\/\/en.wikipedia.org\/wiki\/Kevin_Bacon")$/;"	v
+html	./test_tag_attrs.py	/^html = urlopen("https:\/\/en.wikipedia.org\/wiki\/Kevin_Bacon")$/;"	v
+init	./package_crawler_nba/crawler_nba.py	/^def init(is_debug):$/;"	f
+initial_page	./test_get_all_editing_ip.py	/^initial_page = '\/wiki\/Python_(programming_language)'$/;"	v
+ip_addr	./test_proxy.py	/^ip_addr = tool_surf.GetPublicIPAddress()$/;"	v
+len_links	./test_random_surf_wiki.py	/^    len_links = len(links)$/;"	v
+len_links	./test_random_surf_wiki.py	/^len_links = len(links)$/;"	v
+link_url	./test_get_all_editing_ip.py	/^        link_url = link.attrs['href']$/;"	v
+links	./test_random_surf_wiki.py	/^    links = crawler_nba.GetAllWikiAtricleLinks(random_selected_links, 0)$/;"	v
+links	./test_random_surf_wiki.py	/^links = crawler_nba.GetAllWikiAtricleLinks(first_link, 0)$/;"	v
+main	./crawler_nba_main.py	/^def main():$/;"	f
+main	./scrape_nba.py	/^def main():$/;"	f
+main	./test_follow_external_link_only.py	/^def main():$/;"	f
+main	./test_get_all_external_internal_links.py	/^def main():$/;"	f
+my_list	./test_list_remove.py	/^my_list = [1, 2, 3, 4]$/;"	v
+new_article_link	./test_get_all_editing_ip.py	/^    new_article_link = all_article_links[random.randint(0, all_article_links_len-1)].attrs['href']$/;"	v
+pages_links	./test_traverse_all_links_wiki.py	/^pages_links = set()$/;"	v
+proxy	./test_proxy.py	/^proxy = '186.159.3.49:30981'$/;"	v
+proxy_list	./test_get_proxy_list.py	/^proxy_list = []$/;"	v
+proxy_list	./test_get_proxy_list.py	/^proxy_list = crawler_nba.GetProxyList()$/;"	v
+rand_int	./test_random_surf_wiki.py	/^    rand_int = random.randint(0, len_links-1)$/;"	v
+random_selected_links	./test_random_surf_wiki.py	/^    random_selected_links = links[rand_int].attrs['href']$/;"	v
+recursive_num	./test_traverse_all_links_wiki.py	/^recursive_num = 0$/;"	v
+response	./test_find_all_articles.py	/^response = BeautifulSoup(html, 'lxml')$/;"	v
+response	./test_tag_attrs.py	/^response = BeautifulSoup(html, 'lxml')$/;"	v
+sel_dict	./test_search_dict.py	/^sel_dict = a_dict_list[0]$/;"	v
+str_test	./test_re_match.py	/^str_test = '\/mail_to:orielly.com'$/;"	v
+test_list	./test_search_sim.py	/^test_list = ['shit', 'fuck', 'suck']$/;"	v
+url_extrac	./test_find_all_articles.py	/^    url_extrac = link.findAll("a", href = re.compile("^(\\\/wiki\\\/)((?!:).)*$"))$/;"	v
+x	./test_search_sim.py	/^x = 'shit.do'$/;"	v

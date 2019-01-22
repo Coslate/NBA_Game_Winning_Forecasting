@@ -4,6 +4,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from urllib.error import HTTPError
+from selenium import webdriver
 import re
 import package_crawler_nba.crawler_nba as crawler_nba
 import random
@@ -28,9 +29,8 @@ def main():
     print(f'current_time = {current_time}')
     random.seed(current_time)
 
+    #Scraping NBA stats
     starting_url = "https://stats.nba.com/teams/boxscores"
-    print(f'starting_url = {starting_url}')
-
     all_data_loop = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
 
 #########################
