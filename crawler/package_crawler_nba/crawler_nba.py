@@ -139,8 +139,7 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
     browser.find_element_by_xpath('/html/body/main/div[2]/div/div[2]/div/div/nba-stat-table/div[3]/div/div/select/option[1]').click()
 
     #Get the data table by css
-    table = browser.find_element_by_class_name('nba-stat-table__overflow')
-    print(table.text)
+    table = browser.find_elements_by_class_name('nba-stat-table__overflow')
     GetNBAData(table, all_data_loop)
     print('---------------crawler_nba.GetNBADataRequest ends-------------------')
     browser.close()
@@ -148,7 +147,24 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
     return all_data_loop
 
 def GetNBAData(table_obj, all_data_loop):
-    #To-do
+    print("> GetNBAData...")
+    if(len(table_obj) > 1):
+        print("Error: table_obj has more than one candidate. Need to specify which data table to use.")
+        sys.exit(1)
+
+    table_cand = table_obj[0]
+    columns=table_cand.find_element_by_xpath('//thead[tr]').text
+    data_all_lines = table_cand.find_elements_by_xpath('//tbody[tr]')
+    print(f'len(data_all_lines) = {len(data_all_lines)}')
+
+    for data_line in data_all_lines:
+        print('---')
+        print(data_line.text)
+        print('---')
+    #    data_item = data_line.find_elements_by_xpath('//td')
+    #    data_revised_line = [x.text for x in data_item]
+    #    print(", ".join(data_revised_line))
+
     pass
 
 
