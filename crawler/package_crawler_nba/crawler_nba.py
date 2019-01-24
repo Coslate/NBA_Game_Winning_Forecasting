@@ -153,19 +153,18 @@ def GetNBAData(table_obj, all_data_loop):
         sys.exit(1)
 
     table_cand = table_obj[0]
-    columns=table_cand.find_element_by_xpath('//thead[tr]').text
-    data_all_lines = table_cand.find_elements_by_xpath('//tbody[tr]')
+    columns=table_cand.find_element_by_xpath('//thead/tr').text
+    print('---')
+    print(f'columns = {columns}')
+    print('---')
+    data_all_lines = table_cand.find_elements_by_xpath('.//tbody/tr')
     print(f'len(data_all_lines) = {len(data_all_lines)}')
 
     for data_line in data_all_lines:
-        print('---')
-        print(data_line.text)
-        print('---')
-    #    data_item = data_line.find_elements_by_xpath('//td')
-    #    data_revised_line = [x.text for x in data_item]
-    #    print(", ".join(data_revised_line))
-
-    pass
+        data_item = data_line.find_elements_by_xpath('.//td')
+        data_revised_line = [x.text for x in data_item]
+        print(", ".join(data_revised_line))
+        all_data_loop.append(data_revised_line)
 
 
 def GetWikiLinksContent(starting_url, cur, table):
