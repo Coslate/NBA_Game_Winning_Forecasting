@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 from urllib.error import HTTPError
 from selenium import webdriver
 import re
+import pandas as pd
 import package_crawler_nba.crawler_nba as crawler_nba
 import random
 import datetime
@@ -17,7 +18,7 @@ import argparse
 #########################
 def main():
     #Argument Parser
-    (thresh_change_proxy, thresh_change_proxy_list, is_debug) = ArgumentParser()
+    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name) = ArgumentParser()
     print(f'thresh_change_proxy      = {thresh_change_proxy}')
     print(f'thresh_change_proxy_list = {thresh_change_proxy_list}')
 
@@ -31,8 +32,17 @@ def main():
 
     #Scraping NBA stats
     starting_url = "https://stats.nba.com/teams/boxscores"
-    all_data_loop = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
+    (all_data_loop, columns) = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
     print(f'all_data_loop = {all_data_loop}')
+
+    #Constructing the dataframe and write out as a csv file
+    all_data_df = pd.DataFrame(data = all_data_loop, columns = columns)
+    print(f'columns = {columns}')
+    print(f'all_data_loop_df = ')
+    print(all_data_df)
+    if(out_file_name != ""):
+        all_data_df.to_csv(out_file_name, sep=',')
+
 
 #########################
 #     Sub-Routine       #
@@ -41,11 +51,13 @@ def ArgumentParser():
     is_debug = 0
     thresh_change_proxy = 10
     thresh_change_proxy_list = 50
+    out_file_name = ""
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--thresh_change_proxy", "-tcp", help="The threshold value of the request number within an IP address to change the proxy.")
     parser.add_argument("--thresh_change_proxy_list", "-tcpl", help="The threshold value of the request number within an IP address to change the proxy list.")
     parser.add_argument("--is_debug", "-isd", help="1: To show the debug messages. 0: Not to show the debug messages.")
+    parser.add_argument("--out", "-out", help="The output file name of the scraped NBA data.")
 
 
     args = parser.parse_args()
@@ -56,8 +68,10 @@ def ArgumentParser():
         thresh_change_proxy_list = int(args.thresh_change_proxy_list)
     if args.is_debug:
         is_debug = int(args.is_debug)
+    if args.out:
+        out_file_name = args.out
 
-    return(thresh_change_proxy, thresh_change_proxy_list, is_debug)
+    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name)
 
 #-----------------Execution------------------#
 if __name__ == '__main__':

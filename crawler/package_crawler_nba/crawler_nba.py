@@ -140,11 +140,11 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
 
     #Get the data table by css
     table = browser.find_elements_by_class_name('nba-stat-table__overflow')
-    GetNBAData(table, all_data_loop)
+    columns = GetNBAData(table, all_data_loop)
     print('---------------crawler_nba.GetNBADataRequest ends-------------------')
     browser.close()
 
-    return all_data_loop
+    return (all_data_loop, columns)
 
 def GetNBAData(table_obj, all_data_loop):
     print("> GetNBAData...")
@@ -152,8 +152,9 @@ def GetNBAData(table_obj, all_data_loop):
         print("Error: table_obj has more than one candidate. Need to specify which data table to use.")
         sys.exit(1)
 
-    table_cand = table_obj[0]
-    columns=table_cand.find_element_by_xpath('//thead/tr').text
+    table_cand  = table_obj[0]
+    columns_item=table_cand.find_elements_by_xpath('.//thead/tr/th')
+    columns     =[x.text for x in columns_item]
     print('---')
     print(f'columns = {columns}')
     print('---')
@@ -165,6 +166,8 @@ def GetNBAData(table_obj, all_data_loop):
         data_revised_line = [x.text for x in data_item]
         print(", ".join(data_revised_line))
         all_data_loop.append(data_revised_line)
+
+    return columns
 
 
 def GetWikiLinksContent(starting_url, cur, table):
