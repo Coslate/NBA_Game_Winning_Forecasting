@@ -130,7 +130,15 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         return all_data_loop
     except Exception as err:
         print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
-        print(f'Return with original data.')
+        print(f'Randomly set new proxy, and try again.')
+        if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
+            proxy_list.remove(proxy_used)
+
+        #randomly set new proxy
+        proxy_index = RandomProxy(proxy_list)
+        proxy_used = proxy_list[proxy_index]
+        SetProxy(proxy_used['ip']+':'+proxy_used['port'])
+        all_data_loop = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
         return all_data_loop
 
     time.sleep(5)
@@ -154,19 +162,23 @@ def GetNBAData(table_obj, all_data_loop):
 
     table_cand  = table_obj[0]
     columns_item=table_cand.find_elements_by_xpath('.//thead/tr/th')
-    columns     =[x.text for x in columns_item]
+    columns     =[x.text if(x.text != '') else None for x in columns_item]
     print('---')
     print(f'columns = {columns}')
     print('---')
     data_all_lines = table_cand.find_elements_by_xpath('.//tbody/tr')
-    print(f'len(data_all_lines) = {len(data_all_lines)}')
+    num_data_all_lines = len(data_all_lines)
+    print(f'len(data_all_lines) = {num_data_all_lines}')
 
+    i=0
     for data_line in data_all_lines:
+        print('> Progress = {:.2f}%'.format((i/num_data_all_lines)*100))
         data_item = data_line.find_elements_by_xpath('.//td')
-        data_revised_line = [x.text for x in data_item]
-        print(", ".join(data_revised_line))
+        data_revised_line = [x.text if(x.text != '') else None for x in data_item]
         all_data_loop.append(data_revised_line)
+        i += 1
 
+    print('> Progress = {:.2f}%'.format(((i+1)/num_data_all_lines)*100))
     return columns
 
 
