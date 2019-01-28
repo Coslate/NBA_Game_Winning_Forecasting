@@ -40,7 +40,7 @@ def main():
     print(f'org columns = {columns}')
     print(f'new columns = {list(all_data_df.columns.values)}')
     print(f'all_data_loop_df = ')
-    print(all_data_df)
+    print(all_data_df.to_string(index=indexing_to_csv))
     if(out_file_name != ""):
         all_data_df.to_csv(out_file_name, sep=',', index=indexing_to_csv)
 
