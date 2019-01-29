@@ -6,6 +6,7 @@ from urllib import error
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 from selenium import webdriver
+import pandas as pd
 import package_tool_surf.tool_surf as tool_surf
 import re
 import sys
@@ -181,6 +182,15 @@ def GetNBAData(table_obj, all_data_loop):
     print('> Progress = {:.2f}%'.format(((i+1)/num_data_all_lines)*100))
     return columns
 
+def CheckDateHasSpecifiedTeam(date, team, all_data_df):
+    team_list          = list(all_data_df['MATCH UP'].values)
+    date_list          = list(all_data_df['GAME DATE'].values)
+    index_val_selected = [i for (i, x) in enumerate(team_list) if((re.match(r'.*{}.*'.format(team), x)) and (date_list[i] == date))]
+    selected_df_list   = [all_data_df.iloc[index] for index in index_val_selected]
+    selected_df        = pd.DataFrame(data=selected_df_list, columns = all_data_df.columns, index=all_data_df.index[0:len(selected_df_list)])
+    get_wanted_data    = 1 if(len(selected_df_list) > 1) else 0
+
+    return(get_wanted_data, selected_df)
 
 def GetWikiLinksContent(starting_url, cur, table):
     all_internal_links_loop = []
