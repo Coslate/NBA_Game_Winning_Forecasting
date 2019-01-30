@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from urllib.error import HTTPError
 from selenium import webdriver
+from tabulate import tabulate
 import re
 import pandas as pd
 import package_crawler_nba.crawler_nba as crawler_nba
@@ -54,15 +55,17 @@ def main():
     print(f'current time in USA(America/New York) = {current_time_usa}')
     print(f'current date in USA(America/New York) = {current_date_usa}')
 
-    #Send email if has Warriors
+    #Send email if has interested team
     (get_wanted_data, selected_data_df) = crawler_nba.CheckDateHasSpecifiedTeam(current_date_usa, team, all_data_df)
     if(get_wanted_data):
         gmail_user = 'coslate@media.ee.ntu.edu.tw'
         gmail_password = password # your gmail password
-        content = selected_data_df.to_string(index=indexing_to_csv)
+#        content = selected_data_df.to_string(index=indexing_to_csv)
+        content = tabulate(selected_data_df, headers='keys', tablefmt='psql')
         title = 'NBA game statistics for {x}'.format(x = team)
         to_addr = gmail_user
-        email.SendMail(gmail_user, gmail_password, content, title, to_addr)
+        cc_addr = gmail_user+' '+'vickiehsu828@gmail.com'
+        email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
         print(f'There are NBA games for {team} at {current_date_usa}. Email sent!')
     else:
         print(f'No NBA games for {team} at {current_date_usa}.')

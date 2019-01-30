@@ -8,11 +8,12 @@ import smtplib
 from email.mime.text import MIMEText
 
 
-def SendMail(gmail_user, gmail_password, content, title, to_addr):
+def SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr):
     msg = MIMEText(content)
     msg['Subject'] = title
     msg['From'] = gmail_user
     msg['To'] = to_addr
+    msg['Cc'] = cc_addr
 
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
     server.ehlo()
