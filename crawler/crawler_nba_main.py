@@ -40,35 +40,40 @@ def main():
     #Constructing the dataframe and write out as a csv file
     all_data_df     = pd.DataFrame(data = all_data_loop, columns = columns)
     all_data_df.dropna(axis=1, how='all', inplace=True) #Delete the empty columns
-    all_data_df_str = all_data_df.to_string(index=indexing_to_csv)
+    all_data_df_tab = tabulate(all_data_df, headers='keys', tablefmt='psql')
     print(f'org columns = {columns}')
     print(f'new columns = {list(all_data_df.columns.values)}')
-    print(f'all_data_loop_df = ')
-    print(all_data_df_str)
+    print(f'all_data_df_tab = ')
+    print(all_data_df_tab)
     if(out_file_name != ""):
         all_data_df.to_csv(out_file_name, sep=',', index=indexing_to_csv)
 
     #Get current date at the time zone of America/New York
-    time_zone_usa    = pytz.timezone('America/New_York')
-    current_time_usa = datetime.datetime.now(time_zone_usa)
-    current_date_usa = str(current_time_usa.month).zfill(2)+'/'+str(current_time_usa.day).zfill(2)+'/'+str(current_time_usa.year)
-    print(f'current time in USA(America/New York) = {current_time_usa}')
-    print(f'current date in USA(America/New York) = {current_date_usa}')
+    time_zone_usa      = pytz.timezone('America/New_York')
+    current_time_usa   = datetime.datetime.now(time_zone_usa)
+    yesterday_time_usa = datetime.datetime.now(time_zone_usa) - timedelta(days=1)
+    current_date_usa   = str(current_time_usa.month).zfill(2)+'/'+str(current_time_usa.day).zfill(2)+'/'+str(current_time_usa.year)
+    yesterday_date_usa = str(yesterday_time_usa.month).zfill(2)+'/'+str(yesterday_time_usa.day).zfill(2)+'/'+str(yesterday_time_usa.year)
+    print(f'current time in USA(America/New York)       = {current_time_usa}')
+    print(f'current date in USA(America/New York)       = {current_date_usa}')
+    print(f'Use yesterday date in USA(America/New York) = {yesterday_date_usa}')
 
     #Send email if has interested team
-    (get_wanted_data, selected_data_df) = crawler_nba.CheckDateHasSpecifiedTeam(current_date_usa, team, all_data_df)
+    (get_wanted_data, selected_data_df, short_selected_df) = crawler_nba.CheckDateHasSpecifiedTeam(yesterday_date_usa, team, all_data_df)
     if(get_wanted_data):
-        gmail_user = 'coslate@media.ee.ntu.edu.tw'
+        gmail_user     = 'coslate@media.ee.ntu.edu.tw'
         gmail_password = password # your gmail password
 #        content = selected_data_df.to_string(index=indexing_to_csv)
-        content = tabulate(selected_data_df, headers='keys', tablefmt='psql')
-        title = 'NBA game statistics for {x}'.format(x = team)
-        to_addr = gmail_user
-        cc_addr = gmail_user+' '+'vickiehsu828@gmail.com'
+        content  = tabulate(short_selected_df, headers='keys', tablefmt='psql')
+        content += '\n'+'detailed : '+'\n'
+        content += tabulate(selected_data_df, headers='keys', tablefmt='psql')
+        title    = 'NBA game statistics for {x}'.format(x = team)
+        to_addr  = gmail_user
+        cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'
         email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
-        print(f'There are NBA games for {team} at {current_date_usa}. Email sent!')
+        print(f'There are NBA games for {team} at {yesterday_date_usa}. Email sent!')
     else:
-        print(f'No NBA games for {team} at {current_date_usa}.')
+        print(f'No NBA games for {team} at {yesterday_date_usa}.')
 
 #########################
 #     Sub-Routine       #

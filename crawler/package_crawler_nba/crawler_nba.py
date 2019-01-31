@@ -188,9 +188,13 @@ def CheckDateHasSpecifiedTeam(date, team, all_data_df):
     index_val_selected = [i for (i, x) in enumerate(team_list) if((re.match(r'.*{}.*'.format(team), x)) and (date_list[i] == date))]
     selected_df_list   = [all_data_df.iloc[index] for index in index_val_selected]
     selected_df        = pd.DataFrame(data=selected_df_list, columns = all_data_df.columns, index=all_data_df.index[0:len(selected_df_list)])
+
+    #Only select a few interested columns to send emails
+    short_col_list = ['TEAM', 'GAME DATE', 'W/L', 'PTS']
+    short_sel_df   = selected_df[short_col_list]
     get_wanted_data    = 1 if(len(selected_df_list) > 1) else 0
 
-    return(get_wanted_data, selected_df)
+    return(get_wanted_data, selected_df, short_sel_df)
 
 def GetWikiLinksContent(starting_url, cur, table):
     all_internal_links_loop = []
