@@ -51,7 +51,7 @@ def main():
     #Get current date at the time zone of America/New York
     time_zone_usa      = pytz.timezone('America/New_York')
     current_time_usa   = datetime.datetime.now(time_zone_usa)
-    yesterday_time_usa = datetime.datetime.now(time_zone_usa) - timedelta(days=1)
+    yesterday_time_usa = datetime.datetime.now(time_zone_usa) - datetime.timedelta(days=1)
     current_date_usa   = str(current_time_usa.month).zfill(2)+'/'+str(current_time_usa.day).zfill(2)+'/'+str(current_time_usa.year)
     yesterday_date_usa = str(yesterday_time_usa.month).zfill(2)+'/'+str(yesterday_time_usa.day).zfill(2)+'/'+str(yesterday_time_usa.year)
     print(f'current time in USA(America/New York)       = {current_time_usa}')
@@ -65,7 +65,7 @@ def main():
         gmail_password = password # your gmail password
 #        content = selected_data_df.to_string(index=indexing_to_csv)
         content  = tabulate(short_selected_df, headers='keys', tablefmt='psql')
-        content += '\n'+'detailed : '+'\n'
+        content += '\n\n\n'+'detailed : '+'\n'
         content += tabulate(selected_data_df, headers='keys', tablefmt='psql')
         title    = 'NBA game statistics for {x}'.format(x = team)
         to_addr  = gmail_user
