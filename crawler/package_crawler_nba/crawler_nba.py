@@ -96,7 +96,7 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
             proxy_list = GetProxyList(1)
 
         print("> Use Webdriver...")
-        browser = webdriver.Chrome(executable_path='/home/coslate/anaconda3/bin/chromedriver')
+        browser = webdriver.Chrome()
         browser.get(starting_url)
         request_num += 1
     except HTTPError as err:
