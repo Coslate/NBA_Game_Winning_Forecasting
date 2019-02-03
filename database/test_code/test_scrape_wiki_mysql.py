@@ -12,14 +12,16 @@ import os
 #########################
 def main():
     #Initialization
+    print('> Crawler Initialization...')
     iter_num = 0
     crawler_nba.init()
 
     #Argument Parser
-    (password, table, max_sql_store_num) = ArgumentParser()
+    (password, table, max_sql_store_num, unix_socket, database_name) = ArgumentParser()
 
     #DB Initialization
-    crawler_nba.MySQLDBInitialize(password, table)
+    print('> DB Initialization...')
+    crawler_nba.MySQLDBInitialize(password, table, unix_socket, database_name)
 
     #Sideband Setting
     current_time = datetime.datetime.now()
@@ -64,14 +66,18 @@ def main():
 #     Sub-Routine       #
 #########################
 def ArgumentParser():
-    password = ""
-    table    = ""
+    password      = ""
+    table         = ""
+    database_name = ""
+    unix_socket = ""
     max_sql_store_num = 10
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--mysql_password", "-sql_p", help="The password to connect to MySQL server.", required=True)
     parser.add_argument("--mysql_table_name", "-sql_tn", help="The table name that will be used to store data.", required=True)
     parser.add_argument("--max_sql_store_num", "-sql_mx_sn", help="The maximum number that stores in MySQL table.", required=True)
+    parser.add_argument("--unix_socket", "-sql_un_sock", help="The unix_socket that is used to mypysql connection.", required=True)
+    parser.add_argument("--database_name", "-database_name", help="The unix_socket that is used to mypysql connection.", required=True)
 
     args = parser.parse_args()
 
@@ -81,15 +87,19 @@ def ArgumentParser():
         table = args.mysql_table_name
     if args.max_sql_store_num:
         max_sql_store_num = int(args.max_sql_store_num)
+    if args.unix_socket:
+        unix_socket = args.unix_socket
+    if args.database_name:
+        database_name = args.database_name
 
-    return(password, table, max_sql_store_num)
+    return(password, table, max_sql_store_num, unix_socket, database_name)
 
 #-----------------Execution------------------#
 if __name__ == '__main__':
     import sys
     this_script_path = os.path.realpath(__file__)
     this_script_folder = os.path.dirname(this_script_path)
-    crawler_nba_pkg_path = this_script_folder+'/../crawler'
+    crawler_nba_pkg_path = this_script_folder+'/../../crawler'
     print('Add to sys.path : {x}'.format(x=crawler_nba_pkg_path))
     sys.path.append(crawler_nba_pkg_path)
     import package_crawler_nba.crawler_nba as crawler_nba

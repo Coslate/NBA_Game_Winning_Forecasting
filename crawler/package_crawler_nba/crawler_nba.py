@@ -21,27 +21,29 @@ def MySQLDBClose(cur, conn):
     conn.close()
     print('Close MySQL Database connection.')
 
-def MySQLDBInitialize(password, table):
+def MySQLDBInitialize(password, table, unix_socket, database_name):
     global conn
     global cur
     conn = pymysql.connect(host       ='localhost',
-                           unix_socket='/var/run/mysqld/mysqld.sock',
+                           unix_socket= unix_socket,
                            user       ='root',
                            passwd     = password,
                            db         ='mysql')
     cur = conn.cursor()
-    cur.execute('USE scraping;')
+    cur.execute('CREATE DATABASE IF NOT EXISTS {x};'.format(x=database_name))
+    cur.execute('USE {x};'.format(x=database_name))
     cur.execute('DROP TABLE IF EXISTS {x};'.format(x=table))
     cur.execute('CREATE TABLE IF NOT EXISTS {x} (id BIGINT(7) NOT NULL AUTO_INCREMENT\
                 , title VARCHAR(255)\
                 , url VARCHAR(255)\
-                , content VARCHAR(100000)\
+                , content TEXT(65535)\
                 , created TIMESTAMP DEFAULT CURRENT_TIMESTAMP\
                 , PRIMARY KEY (id)\
                 , UNIQUE KEY title_idx (title)\
                 , UNIQUE KEY url_idx (url)\
-                , UNIQUE KEY created_idx (created)\
-                , UNIQUE KEY content_idx (content(16)));'.format(x=table))
+                , UNIQUE KEY created_idx (created));'.format(x=table))
+
+                #, UNIQUE KEY content_idx (content));'.format(x=table))
 
 def StoreWikiToMySQL(table, cur, url, title, content):
     print('Storing...')
@@ -219,6 +221,7 @@ def GetWikiLinksContent(starting_url, cur, table):
         html = urlopen(req)
     except HTTPError as err:
         print(f'Cannot access {starting_url}. {err}')
+        skipping = 1
         return all_internal_links_loop, skipping
     except http.client.RemoteDisconnected as disconnected_err:
         print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
@@ -246,6 +249,7 @@ def GetWikiLinksContent(starting_url, cur, table):
         return all_internal_links_loop, skipping
     except Exception as err:
         print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
+        skipping = 1
         return all_internal_links_loop, skipping
 
     bs_obj       = BeautifulSoup(html, 'lxml')
@@ -676,7 +680,7 @@ def GetProxyList(is_debug):
 
     return proxy_list
 
-def init(is_debug):
+def init(is_debug=0):
     print('> Initialization...')
     global request_num
     global USER_AGENT_LIST
