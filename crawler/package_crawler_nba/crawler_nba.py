@@ -6,8 +6,10 @@ from urllib import error
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 from selenium import webdriver
+from tabulate import tabulate
 import pandas as pd
 import package_tool_surf.tool_surf as tool_surf
+import package_email.email as email
 import re
 import sys
 import json
@@ -197,6 +199,41 @@ def CheckDateHasSpecifiedTeam(date, team, all_data_df):
     get_wanted_data    = 1 if(len(selected_df_list) > 1) else 0
 
     return(get_wanted_data, selected_df, short_sel_df)
+
+def CheckTeamLose(team, all_data_df):
+    team_list  = list(all_data_df['TEAM'].values)
+    match_list = list(all_data_df['MATCH UP'].values)
+    win_list   = list(all_data_df['W/L'].values)
+    index_val_selected = [i for (i, x) in enumerate(team_list) if(((re.match(r'.*{}.*'.format(team), x)) and (win_list[i] == 'L')) or ((not(re.match(r'.*{}.*'.format(team, x)))) and (re.match(r'.*{}.*'.format(team), match_list[i])) and (win_list[i] == 'W')))]
+    selected_df_list   = [all_data_df.iloc[index] for index in index_val_selected]
+    selected_df        = pd.DataFrame(data=selected_df_list, columns = all_data_df.columns, index=all_data_df.index[0:len(selected_df_list)])
+
+    #Only select a few interested columns to send emails
+    short_col_list = ['TEAM', 'GAME DATE', 'W/L', 'PTS']
+    short_sel_df   = selected_df[short_col_list]
+    get_wanted_data    = 1 if(len(selected_df_list) > 1) else 0
+
+    return(get_wanted_data, selected_df, short_sel_df)
+
+def CheckSendMailsToINO(date, team, all_data_df, password):
+    (get_wanted_data, selected_data_df, short_selected_df) = CheckDateHasSpecifiedTeam(date, team, all_data_df)
+    if(get_wanted_data):
+        (get_wanted_send_data, selected_send_data_df, short_selected_send_data_df) = CheckTeamLose(team, selected_data_df)
+
+    if(get_wanted_send_data):
+        gmail_user     = 'coslate@media.ee.ntu.edu.tw'
+        gmail_password = password # your gmail password
+#        content = selected_data_df.to_string(index=indexing_to_csv)
+        content  = tabulate(short_selected_send_data_df, headers='keys', tablefmt='psql')
+        content += '\n\n\n'+'detailed : '+'\n'
+        content += tabulate(selected_send_data_df, headers='keys', tablefmt='psql')
+        title    = 'NBA game statistics for {x}'.format(x = team)
+        to_addr  = gmail_user
+        cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'
+        email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
+        print(f'There are NBA games that {team} loses at {date}. Email sent!')
+    else:
+        print(f'No NBA games for {team} losing at {date}.')
 
 def GetWikiLinksContent(starting_url, cur, table):
     all_internal_links_loop = []

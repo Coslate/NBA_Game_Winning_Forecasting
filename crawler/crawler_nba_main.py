@@ -59,12 +59,12 @@ def main():
     print(f'Use yesterday date in USA(America/New York) = {yesterday_date_usa}')
 
     #Send email if has interested team
-    (get_wanted_data, selected_data_df, short_selected_df) = crawler_nba.CheckDateHasSpecifiedTeam(yesterday_date_usa, team, all_data_df)
+    (get_wanted_data, selected_data_df, short_selected_data_df) = crawler_nba.CheckDateHasSpecifiedTeam(yesterday_date_usa, team, all_data_df)
     if(get_wanted_data):
         gmail_user     = 'coslate@media.ee.ntu.edu.tw'
         gmail_password = password # your gmail password
 #        content = selected_data_df.to_string(index=indexing_to_csv)
-        content  = tabulate(short_selected_df, headers='keys', tablefmt='psql')
+        content  = tabulate(short_selected_data_df, headers='keys', tablefmt='psql')
         content += '\n\n\n'+'detailed : '+'\n'
         content += tabulate(selected_data_df, headers='keys', tablefmt='psql')
         title    = 'NBA game statistics for {x}'.format(x = team)
@@ -74,6 +74,9 @@ def main():
         print(f'There are NBA games for {team} at {yesterday_date_usa}. Email sent!')
     else:
         print(f'No NBA games for {team} at {yesterday_date_usa}.')
+
+    #Send to I-No if Lakers lose a game.
+    crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAC', all_data_df, password)
 
 #########################
 #     Sub-Routine       #
