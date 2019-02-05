@@ -225,6 +225,7 @@ def CheckSendMailsToINO(date, team, all_data_df, password):
         gmail_user     = 'coslate@media.ee.ntu.edu.tw'
         gmail_password = password # your gmail password
 #        content = selected_data_df.to_string(index=indexing_to_csv)
+        content  = 'OH MY GOODNESS!!!!!! {x} lost the game!'
         content  = tabulate(short_selected_send_data_df, headers='keys', tablefmt='psql')
         content += '\n\n\n'+'detailed : '+'\n'
         content += tabulate(selected_send_data_df, headers='keys', tablefmt='psql')
@@ -232,7 +233,7 @@ def CheckSendMailsToINO(date, team, all_data_df, password):
         to_addr  = gmail_user
         cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'
         email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
-        print(f'There are NBA games that {team} loses at {date}. Email sent!')
+        print(f'There are NBA games that {team} lost at {date}. Email sent!')
     else:
         print(f'No NBA games for {team} losing at {date}.')
 

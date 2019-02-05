@@ -21,4 +21,4 @@ def SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr):
     server.send_message(msg)
     server.quit()
 
-    print("Email Sent!")
+    print("package_email.SendMail : Email Sent!")
