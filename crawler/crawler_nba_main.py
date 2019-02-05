@@ -76,7 +76,7 @@ def main():
         print(f'No NBA games for {team} at {yesterday_date_usa}.')
 
     #Send to I-No if Lakers lose a game.
-    crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAC', all_data_df, password)
+    crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'IND', all_data_df, password)
 
 #########################
 #     Sub-Routine       #

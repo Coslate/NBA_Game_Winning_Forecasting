@@ -204,7 +204,7 @@ def CheckTeamLose(team, all_data_df):
     team_list  = list(all_data_df['TEAM'].values)
     match_list = list(all_data_df['MATCH UP'].values)
     win_list   = list(all_data_df['W/L'].values)
-    index_val_selected = [i for (i, x) in enumerate(team_list) if(((re.match(r'.*{}.*'.format(team), x)) and (win_list[i] == 'L')) or ((not(re.match(r'.*{}.*'.format(team, x)))) and (re.match(r'.*{}.*'.format(team), match_list[i])) and (win_list[i] == 'W')))]
+    index_val_selected = [i for (i, x) in enumerate(team_list) if(((re.match(r'.*{}.*'.format(team), x)) and (win_list[i] == 'L')) or ((not(re.match(r'.*{}.*'.format(team), x))) and (re.match(r'.*{}.*'.format(team), match_list[i])) and (win_list[i] == 'W')))]
     selected_df_list   = [all_data_df.iloc[index] for index in index_val_selected]
     selected_df        = pd.DataFrame(data=selected_df_list, columns = all_data_df.columns, index=all_data_df.index[0:len(selected_df_list)])
 
@@ -216,6 +216,7 @@ def CheckTeamLose(team, all_data_df):
     return(get_wanted_data, selected_df, short_sel_df)
 
 def CheckSendMailsToINO(date, team, all_data_df, password):
+    get_wanted_send_data = 0
     (get_wanted_data, selected_data_df, short_selected_df) = CheckDateHasSpecifiedTeam(date, team, all_data_df)
     if(get_wanted_data):
         (get_wanted_send_data, selected_send_data_df, short_selected_send_data_df) = CheckTeamLose(team, selected_data_df)
