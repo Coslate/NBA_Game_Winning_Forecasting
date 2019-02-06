@@ -196,9 +196,10 @@ def CheckDateHasSpecifiedTeam(date, team, all_data_df):
     #Only select a few interested columns to send emails
     short_col_list = ['TEAM', 'GAME DATE', 'W/L', 'PTS']
     short_sel_df   = selected_df[short_col_list]
-    get_wanted_data    = 1 if(len(selected_df_list) > 1) else 0
+    get_wanted_data= 1 if(len(selected_df_list) > 1) else 0
+    game_set_num   = len(selected_df_list)/2
 
-    return(get_wanted_data, selected_df, short_sel_df)
+    return(game_set_num, get_wanted_data, selected_df, short_sel_df)
 
 def CheckTeamLose(team, all_data_df):
     team_list  = list(all_data_df['TEAM'].values)
@@ -217,7 +218,7 @@ def CheckTeamLose(team, all_data_df):
 
 def CheckSendMailsToINO(date, team, all_data_df, password):
     get_wanted_send_data = 0
-    (get_wanted_data, selected_data_df, short_selected_df) = CheckDateHasSpecifiedTeam(date, team, all_data_df)
+    (game_set_num, get_wanted_data, selected_data_df, short_selected_df) = CheckDateHasSpecifiedTeam(date, team, all_data_df)
     if(get_wanted_data):
         (get_wanted_send_data, selected_send_data_df, short_selected_send_data_df) = CheckTeamLose(team, selected_data_df)
 
@@ -225,8 +226,8 @@ def CheckSendMailsToINO(date, team, all_data_df, password):
         gmail_user     = 'coslate@media.ee.ntu.edu.tw'
         gmail_password = password # your gmail password
 #        content = selected_data_df.to_string(index=indexing_to_csv)
-        content  = 'OH MY GOODNESS!!!!!! {x} lost the game!'
-        content  = tabulate(short_selected_send_data_df, headers='keys', tablefmt='psql')
+        content  = 'Oops!!!!!! {x} lost the game(s) : \n'.format(x=team)
+        content += tabulate(short_selected_send_data_df, headers='keys', tablefmt='psql')
         content += '\n\n\n'+'detailed : '+'\n'
         content += tabulate(selected_send_data_df, headers='keys', tablefmt='psql')
         title    = 'NBA game statistics for {x}'.format(x = team)
