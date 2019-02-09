@@ -64,7 +64,7 @@ def main():
         gmail_user     = 'coslate@media.ee.ntu.edu.tw'
         gmail_password = password # your gmail password
 #        content = selected_data_df.to_string(index=indexing_to_csv)
-        content  = 'There is a game' if(game_set_num==1) else 'There are {x} games'.format(x=game_set_num)
+        content  = 'There is a game ' if(game_set_num==1) else 'There are {x} games '.format(x=game_set_num)
         content += 'that {x} plays today : \n'.format(x=team)
         content += tabulate(short_selected_data_df, headers='keys', tablefmt='psql')
         content += '\n\n\n'+'detailed : '+'\n'
