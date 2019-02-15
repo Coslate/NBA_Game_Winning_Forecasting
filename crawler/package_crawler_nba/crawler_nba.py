@@ -180,11 +180,17 @@ def GetNBAData(table_obj, all_data_loop):
         print('> Progress = {:.2f}%'.format((i/num_data_all_lines)*100))
         data_item = data_line.find_elements_by_xpath('.//td')
         data_revised_line = [x.text if(x.text != '') else None for x in data_item]
+        GetStartersOfEachGame(data_item)
         all_data_loop.append(data_revised_line)
         i += 1
 
     print('> Progress = {:.2f}%'.format(((i+1)/num_data_all_lines)*100))
     return columns
+
+def GetStartersOfEachGame(data_item):
+    data_item[1].
+
+
 
 def CheckDateHasSpecifiedTeam(date, team, all_data_df):
     team_list          = list(all_data_df['MATCH UP'].values)
