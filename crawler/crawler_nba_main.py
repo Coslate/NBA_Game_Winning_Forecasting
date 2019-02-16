@@ -35,7 +35,7 @@ def main():
 
     #Scraping NBA stats
     starting_url = "https://stats.nba.com/teams/boxscores"
-    (all_data_loop, columns) = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
+    (all_data_loop, columns, browser, all_data_item_href) = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
 
     #Constructing the dataframe and write out as a csv file
     all_data_df     = pd.DataFrame(data = all_data_loop, columns = columns)
@@ -59,26 +59,16 @@ def main():
     print(f'Use yesterday date in USA(America/New York) = {yesterday_date_usa}')
 
     #Send email if has interested team
-    (game_set_num, get_wanted_data, selected_data_df, short_selected_data_df) = crawler_nba.CheckDateHasSpecifiedTeam(yesterday_date_usa, team, all_data_df)
-    if(get_wanted_data):
-        gmail_user     = 'coslate@media.ee.ntu.edu.tw'
-        gmail_password = password # your gmail password
-#        content = selected_data_df.to_string(index=indexing_to_csv)
-        content  = 'There is a game ' if(game_set_num==1) else 'There are {x} games '.format(x=game_set_num)
-        content += 'that {x} plays today : \n'.format(x=team)
-        content += tabulate(short_selected_data_df, headers='keys', tablefmt='psql')
-        content += '\n\n\n'+'detailed : '+'\n'
-        content += tabulate(selected_data_df, headers='keys', tablefmt='psql')
-        title    = 'NBA game statistics for {x}'.format(x = team)
-        to_addr  = gmail_user
-        cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'
-        email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
-        print(f'There are NBA games for {team} at {yesterday_date_usa}. Email sent!')
-    else:
-        print(f'No NBA games for {team} at {yesterday_date_usa}.')
+    (game_set_num, get_wanted_data, selected_data_df, short_selected_data_df, starters_data_dict) = crawler_nba.CheckDateHasSpecifiedTeam(yesterday_date_usa, team, all_data_df, browser, all_data_item_href)
+
+    #Send mails if interested game occurs.
+    crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team)
 
     #Send to I-No if Lakers lose a game.
-    crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAL', all_data_df, password)
+    crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAL', all_data_df, password, browser, all_data_item_href)
+
+    #Close
+    browser.close()
 
 #########################
 #     Sub-Routine       #

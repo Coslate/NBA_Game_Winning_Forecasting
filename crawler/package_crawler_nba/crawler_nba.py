@@ -80,7 +80,9 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
     print(f'starting_url = {starting_url}')
     print(f'request_num = {request_num}')
 
-    all_data_loop = []
+    all_data_loop          = []
+    all_data_item_href     = []
+    columns                = []
 
     try:
         ip_addr = tool_surf.GetPublicIPAddress()
@@ -108,7 +110,7 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         if(re.match(r'\s*HTTP\s*Error\s*404.*', str(err)) is not None):
             print(f'Return with original data.')
 
-        return all_data_loop
+        return (all_data_loop, columns, browser, all_data_item_href)
     except http.client.RemoteDisconnected as disconnected_err:
         print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
         print(f'Randomly set new proxy, and try again.')
@@ -119,8 +121,8 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        all_data_loop = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
-        return all_data_loop
+        (all_data_loop, columns, browser, all_data_item_href)  = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
+        return (all_data_loop, columns, browser, all_data_item_href)
     except error.URLError as err:
         print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
         print(f'Randomly set new proxy, and try again.')
@@ -131,8 +133,8 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        all_data_loop = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
-        return all_data_loop
+        (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
+        return (all_data_loop, columns, browser, all_data_item_href)
     except Exception as err:
         print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
         print(f'Randomly set new proxy, and try again.')
@@ -143,8 +145,8 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        all_data_loop = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
-        return all_data_loop
+        (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
+        return (all_data_loop, columns, browser, all_data_item_href)
 
     time.sleep(5)
 
@@ -153,13 +155,12 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
 
     #Get the data table by css
     table = browser.find_elements_by_class_name('nba-stat-table__overflow')
-    columns = GetNBAData(table, all_data_loop)
+    columns = GetNBAData(table, all_data_loop, all_data_item_href, browser)
     print('---------------crawler_nba.GetNBADataRequest ends-------------------')
-    browser.close()
 
-    return (all_data_loop, columns)
+    return (all_data_loop, columns, browser, all_data_item_href)
 
-def GetNBAData(table_obj, all_data_loop):
+def GetNBAData(table_obj, all_data_loop, all_data_item_href, browser):
     print("> GetNBAData...")
     if(len(table_obj) > 1):
         print("Error: table_obj has more than one candidate. Need to specify which data table to use.")
@@ -180,22 +181,23 @@ def GetNBAData(table_obj, all_data_loop):
         print('> Progress = {:.2f}%'.format((i/num_data_all_lines)*100))
         data_item = data_line.find_elements_by_xpath('.//td')
         data_revised_line = [x.text if(x.text != '') else None for x in data_item]
-        GetStartersOfEachGame(data_item)
         all_data_loop.append(data_revised_line)
+        game_set = data_item[1].find_element_by_xpath('.//a')
+        all_data_item_href.append(game_set.get_attribute('href'))
         i += 1
 
     print('> Progress = {:.2f}%'.format(((i+1)/num_data_all_lines)*100))
     return columns
 
-def GetStartersOfEachGame(data_item):
-    data_item[1].
+def GetStartersOfEachGame(href_list, browser, team_list, starters_data_dict):
 
 
 
-def CheckDateHasSpecifiedTeam(date, team, all_data_df):
-    team_list          = list(all_data_df['MATCH UP'].values)
+
+def CheckDateHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href):
+    match_list         = list(all_data_df['MATCH UP'].values)
     date_list          = list(all_data_df['GAME DATE'].values)
-    index_val_selected = [i for (i, x) in enumerate(team_list) if((re.match(r'.*{}.*'.format(team), x)) and (date_list[i] == date))]
+    index_val_selected = [i for (i, x) in enumerate(match_list) if((re.match(r'.*{}.*'.format(team), x)) and (date_list[i] == date))]
     selected_df_list   = [all_data_df.iloc[index] for index in index_val_selected]
     selected_df        = pd.DataFrame(data=selected_df_list, columns = all_data_df.columns, index=all_data_df.index[0:len(selected_df_list)])
 
@@ -205,7 +207,12 @@ def CheckDateHasSpecifiedTeam(date, team, all_data_df):
     get_wanted_data= 1 if(len(selected_df_list) > 1) else 0
     game_set_num   = len(selected_df_list)/2
 
-    return(game_set_num, get_wanted_data, selected_df, short_sel_df)
+    #Get the interested game statistics of the starters of the teams
+    starters_data_dict = {}
+    team_list = list(selected_df['TEAM'].values)
+    GetStartersOfEachGame(all_data_item_href, browser, team_list, starters_data_dict)
+
+    return(game_set_num, get_wanted_data, selected_df, short_sel_df, starters_data_dict)
 
 def CheckTeamLose(team, all_data_df):
     team_list  = list(all_data_df['TEAM'].values)
@@ -223,9 +230,27 @@ def CheckTeamLose(team, all_data_df):
 
     return(game_set_num, get_wanted_data, selected_df, short_sel_df)
 
-def CheckSendMailsToINO(date, team, all_data_df, password):
+def CheckSendMails(date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team):
+    if(get_wanted_data):
+        gmail_user     = 'coslate@media.ee.ntu.edu.tw'
+        gmail_password = password # your gmail password
+#        content = selected_data_df.to_string(index=indexing_to_csv)
+        content  = 'There is a game ' if(game_set_num==1) else 'There are {x} games '.format(x=game_set_num)
+        content += 'that {x} plays today : \n'.format(x=team)
+        content += tabulate(short_selected_data_df, headers='keys', tablefmt='psql')
+        content += '\n\n\n'+'detailed : '+'\n'
+        content += tabulate(selected_data_df, headers='keys', tablefmt='psql')
+        title    = 'NBA game statistics for {x}'.format(x = team)
+        to_addr  = gmail_user
+        cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'
+        email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
+        print(f'There are NBA games for {team} at {date_usa}. Email sent!')
+    else:
+        print(f'No NBA games for {team} at {date_usa}.')
+
+def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_item_href):
     get_wanted_send_data = 0
-    (game_set_num, get_wanted_data, selected_data_df, short_selected_df) = CheckDateHasSpecifiedTeam(date, team, all_data_df)
+    (game_set_num, get_wanted_data, selected_data_df, short_selected_df, starters_data_dict) = CheckDateHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href)
     if(get_wanted_data):
         (get_send_data_set_num, get_wanted_send_data, selected_send_data_df, short_selected_send_data_df) = CheckTeamLose(team, selected_data_df)
 
