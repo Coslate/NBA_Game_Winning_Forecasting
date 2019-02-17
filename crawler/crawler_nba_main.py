@@ -54,7 +54,6 @@ def main():
     yesterday_time_usa = datetime.datetime.now(time_zone_usa) - datetime.timedelta(days=1)
     current_date_usa   = str(current_time_usa.month).zfill(2)+'/'+str(current_time_usa.day).zfill(2)+'/'+str(current_time_usa.year)
     yesterday_date_usa = str(yesterday_time_usa.month).zfill(2)+'/'+str(yesterday_time_usa.day).zfill(2)+'/'+str(yesterday_time_usa.year)
-    yesterday_date_usa = '02/12/2019'
     print(f'current time in USA(America/New York)       = {current_time_usa}')
     print(f'current date in USA(America/New York)       = {current_date_usa}')
     print(f'Use yesterday date in USA(America/New York) = {yesterday_date_usa}')

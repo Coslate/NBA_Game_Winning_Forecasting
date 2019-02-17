@@ -151,7 +151,7 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
     time.sleep(5)
 
     #Set Page to 'All'
-    #browser.find_element_by_xpath('/html/body/main/div[2]/div/div[2]/div/div/nba-stat-table/div[3]/div/div/select/option[1]').click()
+    browser.find_element_by_xpath('/html/body/main/div[2]/div/div[2]/div/div/nba-stat-table/div[3]/div/div/select/option[1]').click()
 
     #Get the data table by css
     table = browser.find_elements_by_class_name('nba-stat-table__overflow')
@@ -202,7 +202,6 @@ def GetStartersOfEachGame(href_list, browser, team_list, starters_data_dict):
 
             team_name_list     = browser.find_elements_by_xpath("//td[@class='team-name show-for-medium']")
             print(f'len of team_name_list = {len(team_name_list)}')
-#            players_table_list = browser.find_elements_by_class_name('nba-stat-table__overflow')
             players_table_list = browser.find_elements_by_xpath("//div[@class='nba-stat-table__overflow']")
             print(f'len of players_table_list = {len(players_table_list)}')
 
@@ -237,8 +236,6 @@ def GetStartersOfEachGame(href_list, browser, team_list, starters_data_dict):
         print('<><><><><><><><><><><><><><><><><><><><><><><><><')
         print('<><><><><><><><><><><>>END<><><><><><><><><><><><')
         print('<><><><><><><><><><><><><><><><><><><><><><><><><')
-
-
 
 def CheckDateHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href):
     match_list         = list(all_data_df['MATCH UP'].values)
