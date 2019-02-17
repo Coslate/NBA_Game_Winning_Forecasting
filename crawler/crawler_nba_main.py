@@ -54,15 +54,16 @@ def main():
     yesterday_time_usa = datetime.datetime.now(time_zone_usa) - datetime.timedelta(days=1)
     current_date_usa   = str(current_time_usa.month).zfill(2)+'/'+str(current_time_usa.day).zfill(2)+'/'+str(current_time_usa.year)
     yesterday_date_usa = str(yesterday_time_usa.month).zfill(2)+'/'+str(yesterday_time_usa.day).zfill(2)+'/'+str(yesterday_time_usa.year)
+    yesterday_date_usa = '02/12/2019'
     print(f'current time in USA(America/New York)       = {current_time_usa}')
     print(f'current date in USA(America/New York)       = {current_date_usa}')
     print(f'Use yesterday date in USA(America/New York) = {yesterday_date_usa}')
 
-    #Send email if has interested team
+    #Check if the data has the interested game.
     (game_set_num, get_wanted_data, selected_data_df, short_selected_data_df, starters_data_dict) = crawler_nba.CheckDateHasSpecifiedTeam(yesterday_date_usa, team, all_data_df, browser, all_data_item_href)
 
     #Send mails if interested game occurs.
-    crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team)
+    crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict)
 
     #Send to I-No if Lakers lose a game.
     crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAL', all_data_df, password, browser, all_data_item_href)
