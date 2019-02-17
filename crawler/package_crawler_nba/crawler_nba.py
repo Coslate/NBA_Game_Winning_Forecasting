@@ -198,9 +198,12 @@ def GetStartersOfEachGame(href_list, browser, team_list, starters_data_dict):
         else:
             #Get statistics of the starters of the team
             browser.get(href_list[index])
+            time.sleep(5)
+
             team_name_list     = browser.find_elements_by_xpath("//td[@class='team-name show-for-medium']")
             print(f'len of team_name_list = {len(team_name_list)}')
-            players_table_list = browser.find_elements_by_class_name('nba-stat-table__overflow')
+#            players_table_list = browser.find_elements_by_class_name('nba-stat-table__overflow')
+            players_table_list = browser.find_elements_by_xpath("//div[@class='nba-stat-table__overflow']")
             print(f'len of players_table_list = {len(players_table_list)}')
 
             for (j, team_scraped) in enumerate(team_name_list):
@@ -212,7 +215,7 @@ def GetStartersOfEachGame(href_list, browser, team_list, starters_data_dict):
                 print('---')
                 data_all_lines = players_table_list[j].find_elements_by_xpath('.//tbody/tr')
                 all_data_loop  = []
-                num_data_all_lines = 5 #Just get starters(the top 5 players) statistics
+                num_data_all_lines = 5 #Just get the statistics of starters(the top 5 players).
                 for (i, data_line) in enumerate(data_all_lines):
                     if(i>num_data_all_lines-1):
                         break
@@ -284,10 +287,10 @@ def CheckSendMails(date_usa, game_set_num, selected_data_df, short_selected_data
         content += '\n\n\n'+'detailed : '+'\n'
         content += tabulate(selected_data_df, headers='keys', tablefmt='psql')
         #Also show the statistics of the starting players of the teams
-        team_list  = list(selected_data_df['TEAM'].values)
-        for team in team_list:
-            content += '\n\n\n {} starting players : '.format(team)+'\n'
-            content += tabulate(starters_data_dict[team], headers='keys', tablefmt='psql')
+        team_sel_list  = list(selected_data_df['TEAM'].values)
+        for team_sel in team_sel_list:
+            content += '\n\n\n {} starting players : '.format(team_sel)+'\n'
+            content += tabulate(starters_data_dict[team_sel], headers='keys', tablefmt='psql')
 
         title    = 'NBA game statistics for {x}'.format(x = team)
         to_addr  = gmail_user
@@ -311,10 +314,10 @@ def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_ite
         content += '\n\n\n'+'detailed : '+'\n'
         content += tabulate(selected_send_data_df, headers='keys', tablefmt='psql')
         #Also show the statistics of the starting players of the teams
-        team_list  = list(selected_send_data_df['TEAM'].values)
-        for team in team_list:
-            content += '\n\n\n {} starting players : '.format(team)+'\n'
-            content += tabulate(starters_data_dict[team], headers='keys', tablefmt='psql')
+        team_sel_list  = list(selected_send_data_df['TEAM'].values)
+        for team_sel in team_sel_list:
+            content += '\n\n\n {} starting players : '.format(team_sel)+'\n'
+            content += tabulate(starters_data_dict[team_sel], headers='keys', tablefmt='psql')
 
         title    = 'NBA game statistics for {x}'.format(x = team)
         to_addr  = gmail_user
