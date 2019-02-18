@@ -318,7 +318,7 @@ def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_ite
 
         title    = 'NBA game statistics for {x}'.format(x = team)
         to_addr  = gmail_user
-        cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'
+        cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'+', '+'ino.liao@gmail.com'
         email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
         print(f'There are NBA games that {team} lost at {date}. Email sent!')
     else:
