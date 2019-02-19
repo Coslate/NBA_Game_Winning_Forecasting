@@ -69,7 +69,7 @@ def StoreWikiToMySQL(table, cur, url, title, content):
         print('Already existed. Skipping...')
         return 1;
 
-def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list):
+def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season):
     print("> GetNBADataRequest...")
     global request_num
     global proxy_list
@@ -149,8 +149,14 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         return (all_data_loop, columns, browser, all_data_item_href)
 
     time.sleep(5)
+    #Get the option number to click
+    return_option_num = GetSeasonOption(browser, season)
 
-    #Set Page to 'All'
+    #Set page to the specific season
+    browser.find_element_by_xpath('/html/body/main/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/label/select/option[{x}]'.format(x=return_option_num)).click()
+
+    time.sleep(5)
+    #Set page to 'All'
     browser.find_element_by_xpath('/html/body/main/div[2]/div/div[2]/div/div/nba-stat-table/div[3]/div/div/select/option[1]').click()
 
     #Get the data table by css
@@ -160,6 +166,16 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
     print('---------------crawler_nba.GetNBADataRequest ends-------------------')
 
     return (all_data_loop, columns, browser, all_data_item_href)
+
+def GetSeasonOption(browser, season):
+    return_option_num = 0
+    season_option_list = browser.find_elements_by_xpath("//select[@name='Season']//option")
+    for (index, season_option) in enumerate(season_option_list):
+        if(season_option.text == season):
+            return_option_num = index+1
+            break
+
+    return return_option_num
 
 def GetNBAData(table_obj, all_data_loop, all_data_item_href, browser):
     print("> GetNBAData...")

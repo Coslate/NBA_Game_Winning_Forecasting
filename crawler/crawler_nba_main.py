@@ -21,9 +21,14 @@ import pytz
 #########################
 def main():
     #Argument Parser
-    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password) = ArgumentParser()
-    print(f'thresh_change_proxy      = {thresh_change_proxy}')
-    print(f'thresh_change_proxy_list = {thresh_change_proxy_list}')
+    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season) = ArgumentParser()
+    if(is_debug):
+        print(f'thresh_change_proxy      = {thresh_change_proxy}')
+        print(f'thresh_change_proxy_list = {thresh_change_proxy_list}')
+        print(f'out_file_name            = {out_file_name}')
+        print(f'indexing_to_csv          = {indexing_to_csv}')
+        print(f'team                     = {team}')
+        print(f'season                   = {season}')
 
     #Initialization
     crawler_nba.init(is_debug)
@@ -35,7 +40,7 @@ def main():
 
     #Scraping NBA stats
     starting_url = "https://stats.nba.com/teams/boxscores"
-    (all_data_loop, columns, browser, all_data_item_href) = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
+    (all_data_loop, columns, browser, all_data_item_href) = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season)
 
     #Constructing the dataframe and write out as a csv file
     all_data_df     = pd.DataFrame(data = all_data_loop, columns = columns)
@@ -81,6 +86,7 @@ def ArgumentParser():
     indexing_to_csv          = True
     team                     = 'GSW'
     password                 = ''
+    season                   = '2018-19'
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--thresh_change_proxy", "-tcp", help="The threshold value of the request number within an IP address to change the proxy.")
@@ -90,9 +96,7 @@ def ArgumentParser():
     parser.add_argument("--out_indexing", "-out_idx", help="1: To write out the csv file of scraped NBA data with indexing. 0: To write out the csv file of scraped NBA data without indexing. Default is 1.")
     parser.add_argument("--team", "-team", help="The team specified in this argument will be searched in the statistics of the games played today on stats.nba.com. If the specified team occurs, the statistics will be sent to your mailbox.")
     parser.add_argument("--gmail_password", "-gmail_p", help="The password of your gmail.", required=True)
-
-
-
+    parser.add_argument("--season", "-season", help="The NBA season that you want to scrape. For example, '-season 2018-19' will make the script scrape the NBA game data in the 2018-2019 season. The default is 2018-19")
 
     args = parser.parse_args()
 
@@ -110,8 +114,10 @@ def ArgumentParser():
         team = args.team
     if args.gmail_password:
         password = args.gmail_password
+    if args.season:
+        season = args.season
 
-    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password)
+    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season)
 
 #-----------------Execution------------------#
 if __name__ == '__main__':
