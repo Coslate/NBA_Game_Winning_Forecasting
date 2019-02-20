@@ -47,6 +47,20 @@ def MySQLDBInitialize(password, table, unix_socket, database_name):
 
                 #, UNIQUE KEY content_idx (content));'.format(x=table))
 
+def MySQLDBInitializeDataFrame(password, table, unix_socket, database_name, data_df):
+    global conn
+    global cur
+    conn = pymysql.connect(host       ='localhost',
+                           unix_socket= unix_socket,
+                           user       ='root',
+                           passwd     = password,
+                           db         ='mysql')
+    cur = conn.cursor()
+    cur.execute('CREATE DATABASE IF NOT EXISTS {x};'.format(x=database_name))
+    cur.execute('USE {x};'.format(x=database_name))
+    cur.execute('DROP TABLE IF EXISTS {x};'.format(x=table))
+    data_df.to_sql(con=conn, name=table, if_exists='replace')
+
 def StoreWikiToMySQL(table, cur, url, title, content):
     print('Storing...')
     print(f'table   = {table}')

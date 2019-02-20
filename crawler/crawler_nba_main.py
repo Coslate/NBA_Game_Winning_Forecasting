@@ -21,7 +21,7 @@ import pytz
 #########################
 def main():
     #Argument Parser
-    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season) = ArgumentParser()
+    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name) = ArgumentParser()
     if(is_debug):
         print(f'thresh_change_proxy      = {thresh_change_proxy}')
         print(f'thresh_change_proxy_list = {thresh_change_proxy_list}')
@@ -75,6 +75,12 @@ def main():
     #Close
     browser.close()
 
+    #Store all the scraped data into MySQL
+    crawler_nba.MySQLDBInitializeDataFrame(mysql_password, table, unix_socket, database_name, all_data_df)
+
+    # Close the connection of MySQL Database
+    crawler_nba.MySQLDBClose(crawler_nba.cur, crawler_nba.conn)
+
 #########################
 #     Sub-Routine       #
 #########################
@@ -87,6 +93,10 @@ def ArgumentParser():
     team                     = 'GSW'
     password                 = ''
     season                   = '2018-19'
+    mysql_password           = ""
+    table                    = ""
+    database_name            = ""
+    unix_socket              = ""
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--thresh_change_proxy", "-tcp", help="The threshold value of the request number within an IP address to change the proxy.")
@@ -97,6 +107,10 @@ def ArgumentParser():
     parser.add_argument("--team", "-team", help="The team specified in this argument will be searched in the statistics of the games played today on stats.nba.com. If the specified team occurs, the statistics will be sent to your mailbox.")
     parser.add_argument("--gmail_password", "-gmail_p", help="The password of your gmail.", required=True)
     parser.add_argument("--season", "-season", help="The NBA season that you want to scrape. For example, '-season 2018-19' will make the script scrape the NBA game data in the 2018-2019 season. The default is 2018-19")
+    parser.add_argument("--mysql_password", "-sql_p", help="The password to connect to MySQL server.", required=True)
+    parser.add_argument("--mysql_table_name", "-sql_tn", help="The table name that will be used to store data.", required=True)
+    parser.add_argument("--unix_socket", "-sql_un_sock", help="The unix_socket that is used to mypysql connection.", required=True)
+    parser.add_argument("--database_name", "-database_name", help="The unix_socket that is used to mypysql connection.", required=True)
 
     args = parser.parse_args()
 
@@ -116,8 +130,16 @@ def ArgumentParser():
         password = args.gmail_password
     if args.season:
         season = args.season
+    if args.mysql_password:
+        mysql_password = args.mysql_password
+    if args.mysql_table_name:
+        table = args.mysql_table_name
+    if args.unix_socket:
+        unix_socket = args.unix_socket
+    if args.database_name:
+        database_name = args.database_name
 
-    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season)
+    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name)
 
 #-----------------Execution------------------#
 if __name__ == '__main__':
