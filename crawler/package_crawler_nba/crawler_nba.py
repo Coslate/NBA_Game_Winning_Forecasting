@@ -135,7 +135,7 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        (all_data_loop, columns, browser, all_data_item_href)  = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
+        (all_data_loop, columns, browser, all_data_item_href)  = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, Season)
         return (all_data_loop, columns, browser, all_data_item_href)
     except error.URLError as err:
         print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
@@ -147,7 +147,7 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
+        (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season)
         return (all_data_loop, columns, browser, all_data_item_href)
     except Exception as err:
         print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
@@ -159,7 +159,7 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list)
+        (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season)
         return (all_data_loop, columns, browser, all_data_item_href)
 
     time.sleep(5)
