@@ -17,6 +17,10 @@ import http.client
 import random
 import time
 import pymysql
+from sqlalchemy import create_engine
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 def MySQLDBClose(cur, conn):
     cur.close()
@@ -47,18 +51,10 @@ def MySQLDBInitialize(password, table, unix_socket, database_name):
 
                 #, UNIQUE KEY content_idx (content));'.format(x=table))
 
-def MySQLDBInitializeDataFrame(password, table, unix_socket, database_name, data_df):
+def MySQLDBStoreDataFrame(password, table, unix_socket, database_name, data_df):
     global conn
-    global cur
-    conn = pymysql.connect(host       ='localhost',
-                           unix_socket= unix_socket,
-                           user       ='root',
-                           passwd     = password,
-                           db         ='mysql')
-    cur = conn.cursor()
-    cur.execute('CREATE DATABASE IF NOT EXISTS {x};'.format(x=database_name))
-    cur.execute('USE {x};'.format(x=database_name))
-    cur.execute('DROP TABLE IF EXISTS {x};'.format(x=table))
+
+    conn = create_engine('mysql+pymysql://root:{password}@{host}:{port}/{db_name}'.format(password=password, host='localhost', port='3306', db_name=database_name))
     data_df.to_sql(con=conn, name=table, if_exists='replace')
 
 def StoreWikiToMySQL(table, cur, url, title, content):
@@ -169,8 +165,9 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
     #Set page to the specific season
     browser.find_element_by_xpath('/html/body/main/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/label/select/option[{x}]'.format(x=return_option_num)).click()
 
-    time.sleep(5)
     #Set page to 'All'
+    wait = WebDriverWait(browser, 20, 0.05)
+    wait.until(EC.presence_of_element_located((By.XPATH, '//option[@label="All"]')))
     browser.find_element_by_xpath('/html/body/main/div[2]/div/div[2]/div/div/nba-stat-table/div[3]/div/div/select/option[1]').click()
 
     #Get the data table by css
