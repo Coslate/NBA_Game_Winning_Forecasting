@@ -158,7 +158,6 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season)
         return (all_data_loop, columns, browser, all_data_item_href)
 
-    time.sleep(5)
     #Get the option number to click
     return_option_num = GetSeasonOption(browser, season)
 
@@ -180,6 +179,9 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
 
 def GetSeasonOption(browser, season):
     return_option_num = 0
+    wait = WebDriverWait(browser, 20, 0.05)
+    wait.until(EC.presence_of_element_located((By.XPATH, '//select[@name="Season"]//option')))
+
     season_option_list = browser.find_elements_by_xpath("//select[@name='Season']//option")
     for (index, season_option) in enumerate(season_option_list):
         if(season_option.text == season):
