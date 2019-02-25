@@ -21,7 +21,7 @@ import pytz
 #########################
 def main():
     #Argument Parser
-    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name) = ArgumentParser()
+    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season) = ArgumentParser()
     if(is_debug):
         print(f'thresh_change_proxy      = {thresh_change_proxy}')
         print(f'thresh_change_proxy_list = {thresh_change_proxy_list}')
@@ -29,6 +29,7 @@ def main():
         print(f'indexing_to_csv          = {indexing_to_csv}')
         print(f'team                     = {team}')
         print(f'season                   = {season}')
+        print(f'scrape_all_season        = {scrape_all_season}')
 
     #Initialization
     crawler_nba.init(is_debug)
@@ -40,7 +41,7 @@ def main():
 
     #Scraping NBA stats
     starting_url = "https://stats.nba.com/teams/boxscores"
-    (all_data_loop, columns, browser, all_data_item_href) = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season)
+    (all_data_loop, columns, browser, all_data_item_href) = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season, scrape_all_season)
 
     #Constructing the dataframe and write out as a csv file
     all_data_df     = pd.DataFrame(data = all_data_loop, columns = columns)
@@ -97,6 +98,7 @@ def ArgumentParser():
     table                    = ""
     database_name            = ""
     unix_socket              = ""
+    scrape_all_season        = 0
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--thresh_change_proxy", "-tcp", help="The threshold value of the request number within an IP address to change the proxy.")
@@ -111,6 +113,7 @@ def ArgumentParser():
     parser.add_argument("--mysql_table_name", "-sql_tn", help="The table name that will be used to store data.", required=True)
     parser.add_argument("--unix_socket", "-sql_un_sock", help="The unix_socket that is used to mypysql connection.", required=True)
     parser.add_argument("--database_name", "-database_name", help="The unix_socket that is used to mypysql connection.", required=True)
+    parser.add_argument("--scrape_all_season", "-scrape_all_season", help="Set 1 to scrape all the pages of a season. Set 0 to only scrape the first page of a season.")
 
     args = parser.parse_args()
 
@@ -138,8 +141,10 @@ def ArgumentParser():
         unix_socket = args.unix_socket
     if args.database_name:
         database_name = args.database_name
+    if args.scrape_all_season:
+        scrape_all_season = int(args.scrape_all_season)
 
-    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name)
+    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season)
 
 #-----------------Execution------------------#
 if __name__ == '__main__':

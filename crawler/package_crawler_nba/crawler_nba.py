@@ -79,7 +79,7 @@ def StoreWikiToMySQL(table, cur, url, title, content):
         print('Already existed. Skipping...')
         return 1;
 
-def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season):
+def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season, scrape_all_season):
     print("> GetNBADataRequest...")
     global request_num
     global proxy_list
@@ -131,7 +131,7 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        (all_data_loop, columns, browser, all_data_item_href)  = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, Season)
+        (all_data_loop, columns, browser, all_data_item_href)  = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, Season, scrape_all_season)
         return (all_data_loop, columns, browser, all_data_item_href)
     except error.URLError as err:
         print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
@@ -143,7 +143,7 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season)
+        (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season, scrape_all_season)
         return (all_data_loop, columns, browser, all_data_item_href)
     except Exception as err:
         print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
@@ -155,7 +155,7 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
-        (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season)
+        (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season, scrape_all_season)
         return (all_data_loop, columns, browser, all_data_item_href)
 
     #Get the option number to click
@@ -165,11 +165,14 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
     browser.find_element_by_xpath('/html/body/main/div[2]/div/div[2]/div/div/div[1]/div[1]/div/div/label/select/option[{x}]'.format(x=return_option_num)).click()
 
     #Set page to 'All'
-    wait = WebDriverWait(browser, 20, 0.05)
-    wait.until(EC.presence_of_element_located((By.XPATH, '//option[@label="All"]')))
-    browser.find_element_by_xpath('/html/body/main/div[2]/div/div[2]/div/div/nba-stat-table/div[3]/div/div/select/option[1]').click()
+    if(scrape_all_season):
+        wait = WebDriverWait(browser, 20, 0.05)
+        wait.until(EC.presence_of_element_located((By.XPATH, '//option[@label="All"]')))
+        browser.find_element_by_xpath('/html/body/main/div[2]/div/div[2]/div/div/nba-stat-table/div[3]/div/div/select/option[1]').click()
 
     #Get the data table by css
+    wait = WebDriverWait(browser, 20, 0.05)
+    wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'nba-stat-table__overflow')))
     table = browser.find_elements_by_class_name('nba-stat-table__overflow')
     print(f'type of table = {type(table)}')
     columns = GetNBAData(table, all_data_loop, all_data_item_href, browser)
