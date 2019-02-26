@@ -77,10 +77,14 @@ def main():
     browser.close()
 
     #Store all the scraped data into MySQL
-    crawler_nba.MySQLDBStoreDataFrame(mysql_password, table, unix_socket, database_name, all_data_df)
+    #crawler_nba.MySQLDBStoreDataFrame(mysql_password, table, unix_socket, database_name, all_data_df)
+
+
+    #Store all the scraped data into MySQL
+    crawler_nba.MySQLDBInitializeNBATable(mysql_password, table, unix_socket, database_name)
 
     # Close the connection of MySQL Database
-    #crawler_nba.MySQLDBClose(crawler_nba.cur, crawler_nba.conn)
+    crawler_nba.MySQLDBClose(crawler_nba.cur, crawler_nba.conn)
 
 #########################
 #     Sub-Routine       #

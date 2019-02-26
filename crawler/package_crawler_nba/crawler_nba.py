@@ -51,6 +51,46 @@ def MySQLDBInitialize(password, table, unix_socket, database_name):
 
                 #, UNIQUE KEY content_idx (content));'.format(x=table))
 
+def MySQLDBInitializeNBATable(password, table, unix_socket, database_name):
+    global conn
+    global cur
+    conn = pymysql.connect(host       ='localhost',
+                           unix_socket= unix_socket,
+                           user       ='root',
+                           passwd     = password,
+                           db         ='mysql')
+    cur = conn.cursor()
+    cur.execute('CREATE DATABASE IF NOT EXISTS {x};'.format(x=database_name))
+    cur.execute('USE {x};'.format(x=database_name))
+    cur.execute('DROP TABLE IF EXISTS {x};'.format(x=table))
+    cur.execute("CREATE TABLE IF NOT EXISTS {x} (\
+                `index` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,\
+                TEAM VARCHAR(255) NOT NULL DEFAULT 'not specified',\
+                `MATCH UP` VARCHAR(255) NOT NULL DEFAULT 'not specified',\
+                `GAME DATE` VARCHAR(255) NOT NULL DEFAULT 'not specified',\
+                `W/L` VARCHAR(255) NOT NULL DEFAULT 'not specified',\
+                MIN INT NOT NULL DEFAULT -1,\
+                PTS INT NOT NULL DEFAULT -1,\
+                FGM INT NOT NULL DEFAULT -1,\
+                FGA INT NOT NULL DEFAULT -1,\
+                `FG%` FLOAT NOT NULL DEFAULT -1,\
+                3PM INT NOT NULL DEFAULT -1,\
+                3PA INT NOT NULL DEFAULT -1,\
+                `3P%` FLOAT NOT NULL DEFAULT -1,\
+                FTM INT NOT NULL DEFAULT -1,\
+                FTA INT NOT NULL DEFAULT -1,\
+                `FT%` FLOAT NOT NULL DEFAULT -1,\
+                OREB INT NOT NULL DEFAULT -1,\
+                DREB INT NOT NULL DEFAULT -1,\
+                REB INT NOT NULL DEFAULT -1,\
+                AST INT NOT NULL DEFAULT -1,\
+                STL INT NOT NULL DEFAULT -1,\
+                BLK INT NOT NULL DEFAULT -1,\
+                TOV INT NOT NULL DEFAULT -1,\
+                PF INT NOT NULL DEFAULT -1,\
+                `+/-` INT NOT NULL DEFAULT -1\
+                );".format(x=table))
+
 def MySQLDBStoreDataFrame(password, table, unix_socket, database_name, data_df):
     global conn
 
