@@ -52,6 +52,7 @@ def MySQLDBInitialize(password, table, unix_socket, database_name):
                 #, UNIQUE KEY content_idx (content));'.format(x=table))
 
 def MySQLDBInitializeNBATable(password, table, unix_socket, database_name):
+    print("-> MySQLDBInitializeNBA...")
     global conn
     global cur
     conn = pymysql.connect(host       ='localhost',
@@ -62,8 +63,10 @@ def MySQLDBInitializeNBATable(password, table, unix_socket, database_name):
     cur = conn.cursor()
     cur.execute('CREATE DATABASE IF NOT EXISTS {x};'.format(x=database_name))
     cur.execute('USE {x};'.format(x=database_name))
-    cur.execute('DROP TABLE IF EXISTS {x};'.format(x=table))
-    cur.execute("CREATE TABLE IF NOT EXISTS {x} (\
+    if(not CheckIfTableExist(cur, table)):
+        print("-> Table '{x}' does not exist!".format(x=table))
+        print("-> Create one...")
+        cur.execute("CREATE TABLE IF NOT EXISTS {x} (\
                 `index` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,\
                 TEAM VARCHAR(255) NOT NULL DEFAULT 'not specified',\
                 `MATCH UP` VARCHAR(255) NOT NULL DEFAULT 'not specified',\
@@ -90,6 +93,21 @@ def MySQLDBInitializeNBATable(password, table, unix_socket, database_name):
                 PF INT NOT NULL DEFAULT -1,\
                 `+/-` INT NOT NULL DEFAULT -1\
                 );".format(x=table))
+    else:
+        print("-> Table '{x}' already exists!".format(x=table))
+
+def CheckIfTableExist(cur, table):
+    ret_result_bool = False
+    ret_result      = ''
+
+    sql_ex = 'SHOW TABLES LIKE "%{table_name}%";'.format(table_name=table)
+    cur.execute(sql_ex)
+    ret_result = cur.fetchone()
+    if(ret_result is not None):
+        if(ret_result[0] == table):
+            ret_result_bool = True
+
+    return ret_result_bool
 
 def MySQLDBStoreDataFrame(password, table, unix_socket, database_name, data_df):
     global conn

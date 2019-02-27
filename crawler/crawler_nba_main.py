@@ -68,10 +68,10 @@ def main():
     (game_set_num, get_wanted_data, selected_data_df, short_selected_data_df, starters_data_dict) = crawler_nba.CheckDateHasSpecifiedTeam(yesterday_date_usa, team, all_data_df, browser, all_data_item_href)
 
     #Send mails if interested game occurs.
-    crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict)
+    #crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict)
 
     #Send to I-No if Lakers lose a game.
-    crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAL', all_data_df, password, browser, all_data_item_href)
+    #crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAL', all_data_df, password, browser, all_data_item_href)
 
     #Close
     browser.close()
