@@ -52,7 +52,7 @@ def MySQLDBInitialize(password, table, unix_socket, database_name):
                 #, UNIQUE KEY content_idx (content));'.format(x=table))
 
 def MySQLDBInitializeNBATable(password, table, unix_socket, database_name):
-    print("-> MySQLDBInitializeNBA...")
+    print("> MySQLDBInitializeNBA...")
     global conn
     global cur
     conn = pymysql.connect(host       ='localhost',
@@ -64,8 +64,8 @@ def MySQLDBInitializeNBATable(password, table, unix_socket, database_name):
     cur.execute('CREATE DATABASE IF NOT EXISTS {x};'.format(x=database_name))
     cur.execute('USE {x};'.format(x=database_name))
     if(not CheckIfTableExist(cur, table)):
-        print("-> Table '{x}' does not exist!".format(x=table))
-        print("-> Create one...")
+        print("> Table '{x}' does not exist!".format(x=table))
+        print("> Create one...")
         cur.execute("CREATE TABLE IF NOT EXISTS {x} (\
                 `index` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,\
                 TEAM VARCHAR(255) NOT NULL DEFAULT 'not specified',\
@@ -94,7 +94,7 @@ def MySQLDBInitializeNBATable(password, table, unix_socket, database_name):
                 `+/-` INT NOT NULL DEFAULT -1\
                 );".format(x=table))
     else:
-        print("-> Table '{x}' already exists!".format(x=table))
+        print("> Table '{x}' already exists!".format(x=table))
 
 def CheckIfTableExist(cur, table):
     ret_result_bool = False
@@ -109,11 +109,32 @@ def CheckIfTableExist(cur, table):
 
     return ret_result_bool
 
-def MySQLDBStoreDataFrame(password, table, unix_socket, database_name, data_df):
+def MySQLDBStoreNBADataFrame(password, table, unix_socket, database_name, data_df):
     global conn
 
     conn = create_engine('mysql+pymysql://root:{password}@{host}:{port}/{db_name}'.format(password=password, host='localhost', port='3306', db_name=database_name))
     data_df.to_sql(con=conn, name=table, if_exists='replace')
+
+def MySQLDBStoreNBAData(selected_df_list, table, columns_list):
+    global cur
+    columns_list = ["`{x}`".format(x=val) for val in columns_list]
+
+    if(len(columns_list) > 0):
+        print('> MySQLDBStoreNBAData...')
+    else:
+        print('> No data to store...')
+
+    for data_list in selected_df_list:
+        column_values_list = [val if(re.match(r'\d+\.\d+', val)) else val if(re.match(r'\d+', val) and (not(re.match(r'.*/.*', val)))) else "'{}'".format(val) for key, val in data_list.iteritems()]
+        cur.execute('SELECT * FROM {table} WHERE TEAM="{data_team}" AND `GAME DATE`="{game_date}"'.format(table=table, data_team=data_list['TEAM'], game_date=data_list['GAME DATE']))
+
+        if(cur.rowcount==0):
+            column_name   = ', '.join(columns_list)
+            column_values = ', '.join(column_values_list)
+            execute_str = 'INSERT INTO {table_name} ({column_name}) VALUES ({column_values});'.format(table_name = table, column_name=column_name, column_values=column_values)
+            cur.execute(execute_str)
+            cur.connection.commit()
+
 
 def StoreWikiToMySQL(table, cur, url, title, content):
     print('Storing...')
@@ -327,7 +348,14 @@ def GetStartersOfEachGame(href_list, browser, team_list, starters_data_dict):
         print('<><><><><><><><><><><>>END<><><><><><><><><><><><')
         print('<><><><><><><><><><><><><><><><><><><><><><><><><')
 
-def CheckDateHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href):
+def CheckDataHasSpecifiedDate(date, all_data_df):
+    date_list          = list(all_data_df['GAME DATE'].values)
+    index_val_selected = [i for (i, x) in enumerate(date_list) if(date_list[i] == date)]
+    selected_df_list   = [all_data_df.iloc[index] for index in index_val_selected]
+
+    return(selected_df_list)
+
+def CheckDataHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href):
     match_list         = list(all_data_df['MATCH UP'].values)
     date_list          = list(all_data_df['GAME DATE'].values)
     index_val_selected = [i for (i, x) in enumerate(match_list) if((re.match(r'.*{}.*'.format(team), x)) and (date_list[i] == date))]

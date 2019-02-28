@@ -65,7 +65,7 @@ def main():
     print(f'Use yesterday date in USA(America/New York) = {yesterday_date_usa}')
 
     #Check if the data has the interested game.
-    (game_set_num, get_wanted_data, selected_data_df, short_selected_data_df, starters_data_dict) = crawler_nba.CheckDateHasSpecifiedTeam(yesterday_date_usa, team, all_data_df, browser, all_data_item_href)
+    (game_set_num, get_wanted_data, selected_data_df, short_selected_data_df, starters_data_dict) = crawler_nba.CheckDataHasSpecifiedTeam(yesterday_date_usa, team, all_data_df, browser, all_data_item_href)
 
     #Send mails if interested game occurs.
     #crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict)
@@ -77,11 +77,13 @@ def main():
     browser.close()
 
     #Store all the scraped data into MySQL
-    #crawler_nba.MySQLDBStoreDataFrame(mysql_password, table, unix_socket, database_name, all_data_df)
-
-
-    #Store all the scraped data into MySQL
     crawler_nba.MySQLDBInitializeNBATable(mysql_password, table, unix_socket, database_name)
+
+    #Get only games that play today(USA time zone)
+    selected_df_list = crawler_nba.CheckDataHasSpecifiedDate(yesterday_date_usa, all_data_df)
+
+    #Store data list to MySQL one by one.
+    crawler_nba.MySQLDBStoreNBAData(selected_df_list, table, list(all_data_df.columns.values))
 
     # Close the connection of MySQL Database
     crawler_nba.MySQLDBClose(crawler_nba.cur, crawler_nba.conn)
