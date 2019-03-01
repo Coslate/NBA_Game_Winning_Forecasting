@@ -23,7 +23,7 @@ def main():
 
 #Argument Parser
     print(f'> Parse the argument...')
-    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season) = ArgumentParser()
+    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season, write_csv_use_sql) = ArgumentParser()
     if(is_debug):
         print(f'thresh_change_proxy      = {thresh_change_proxy}')
         print(f'thresh_change_proxy_list = {thresh_change_proxy_list}')
@@ -32,6 +32,7 @@ def main():
         print(f'team                     = {team}')
         print(f'season                   = {season}')
         print(f'scrape_all_season        = {scrape_all_season}')
+        print(f'write_csv_use_sql        = {write_csv_use_sql}')
 
 #Initialization
     print(f'> Proxy initialization...')
@@ -59,16 +60,8 @@ def main():
     (all_data_loop, columns, browser, all_data_item_href) = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season, scrape_all_season)
 
 #Constructing the dataframe and write out as a csv file
-    print(f'> Reconstruct the dataframe...')
-    all_data_df     = pd.DataFrame(data = all_data_loop, columns = columns)
-    all_data_df.dropna(axis=1, how='all', inplace=True) #Delete the empty columns
-    all_data_df_tab = tabulate(all_data_df, headers='keys', tablefmt='psql')
-    print(f'org columns = {columns}')
-    print(f'new columns = {list(all_data_df.columns.values)}')
-    print(f'all_data_df_tab = ')
-    print(all_data_df_tab)
-    if(out_file_name != ""):
-        all_data_df.to_csv(out_file_name, sep=',', index=indexing_to_csv)
+    print(f'> Constructing the dataframe...')
+    all_data_df = crawler_nba.ConstructDFFROMListOFList(all_data_loop, columns)
 
 #Check if the data has the interested game.
     print(f'> Check whether specific teams have games...')
@@ -94,6 +87,14 @@ def main():
     print(f'> Store scraped data into database(MySQL)...')
     crawler_nba.MySQLDBStoreNBADataAll(table, all_data_df, yesterday_date_usa, scrape_all_season)
 
+#Get scraped data from MySQL.
+    print(f'> Get scraped data from database(MySQL)...')
+    all_data_df_sql = crawler_nba.GetAllDataFromDatabase(table)
+
+#Check whether to write out scraped data to a CSV file.
+    print(f'> Check whether to write scraped data to a CSV file(MySQL)...')
+    crawler_nba.CheckIfWriteToCSV(all_data_df, all_data_df_sql, out_file_name, indexing_to_csv, write_csv_use_sql)
+
 #Close the connection of MySQL Database
     print(f'> Store done and close the database connection(MySQL)...')
     crawler_nba.MySQLDBClose(crawler_nba.cur, crawler_nba.conn)
@@ -115,6 +116,7 @@ def ArgumentParser():
     database_name            = ""
     unix_socket              = ""
     scrape_all_season        = 0
+    write_csv_use_sql        = 0
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--thresh_change_proxy", "-tcp", help="The threshold value of the request number within an IP address to change the proxy.")
@@ -130,6 +132,7 @@ def ArgumentParser():
     parser.add_argument("--unix_socket", "-sql_un_sock", help="The unix_socket that is used to mypysql connection.", required=True)
     parser.add_argument("--database_name", "-database_name", help="The unix_socket that is used to mypysql connection.", required=True)
     parser.add_argument("--scrape_all_season", "-scrape_all_season", help="Set 1 to scrape all the pages of a season. Set 0 to only scrape the first page of a season.")
+    parser.add_argument("--write_csv_use_sql", "-wus", help="Set 1 to write out the scraped data to CSV file through output from MySQL database. Set 0 to write out the scraped data to CSV file through output from NBA.stats.")
 
     args = parser.parse_args()
 
@@ -159,8 +162,10 @@ def ArgumentParser():
         database_name = args.database_name
     if args.scrape_all_season:
         scrape_all_season = int(args.scrape_all_season)
+    if args.write_csv_use_sql:
+        write_csv_use_sql = int(args.write_csv_use_sql)
 
-    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season)
+    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season, write_csv_use_sql)
 
 #-----------------Execution------------------#
 if __name__ == '__main__':

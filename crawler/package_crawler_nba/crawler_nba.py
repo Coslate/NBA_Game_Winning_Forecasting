@@ -272,6 +272,27 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
 
     return (all_data_loop, columns, browser, all_data_item_href)
 
+def ConstructDFFROMListOFList(all_data_loop, columns):
+    all_data_df     = pd.DataFrame(data = all_data_loop, columns = columns)
+    all_data_df.dropna(axis=1, how='all', inplace=True) #Delete the empty columns
+    return all_data_df
+
+def CheckIfWriteToCSV(all_data_df_nba_stats, all_data_df_sql, out_file_name, indexing_to_csv, write_csv_use_sql):
+    if(out_file_name != ''):
+        if(write_csv_use_sql):
+            WriteDFToCSV(all_data_df_sql, out_file_name, indexing_to_csv)
+        else:
+            WriteDFToCSV(all_data_df_nba_stats, out_file_name, indexing_to_csv)
+
+def WriteDFToCSV(all_data_df, out_file_name, indexing_to_csv):
+    if(out_file_name != ""):
+        all_data_df.to_csv(out_file_name, sep=',', index=indexing_to_csv)
+
+def GetAllDataFromDatabase(table):
+    global conn
+    all_data_df_sql = pd.read_sql('SELECT * FROM {}'.format(table), con=conn)
+    return all_data_df_sql
+
 def GetSeasonOption(browser, season):
     return_option_num = 0
     wait = WebDriverWait(browser, 20, 0.05)
