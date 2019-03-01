@@ -25,7 +25,7 @@ from selenium.webdriver.support import expected_conditions as EC
 def MySQLDBClose(cur, conn):
     cur.close()
     conn.close()
-    print('Close MySQL Database connection.')
+    print('>> Close MySQL Database connection.')
 
 def MySQLDBInitialize(password, table, unix_socket, database_name):
     global conn
@@ -52,7 +52,7 @@ def MySQLDBInitialize(password, table, unix_socket, database_name):
                 #, UNIQUE KEY content_idx (content));'.format(x=table))
 
 def MySQLDBInitializeNBATable(password, table, unix_socket, database_name):
-    print("> MySQLDBInitializeNBA...")
+    print(">> MySQLDBInitializeNBA...")
     global conn
     global cur
     conn = pymysql.connect(host       ='localhost',
@@ -64,8 +64,8 @@ def MySQLDBInitializeNBATable(password, table, unix_socket, database_name):
     cur.execute('CREATE DATABASE IF NOT EXISTS {x};'.format(x=database_name))
     cur.execute('USE {x};'.format(x=database_name))
     if(not CheckIfTableExist(cur, table)):
-        print("> Table '{x}' does not exist!".format(x=table))
-        print("> Create one...")
+        print(">> Table '{x}' does not exist!".format(x=table))
+        print(">> Create one...")
         cur.execute("CREATE TABLE IF NOT EXISTS {x} (\
                 `index` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,\
                 TEAM VARCHAR(255) NOT NULL DEFAULT 'not specified',\
@@ -94,7 +94,7 @@ def MySQLDBInitializeNBATable(password, table, unix_socket, database_name):
                 `+/-` INT NOT NULL DEFAULT -1\
                 );".format(x=table))
     else:
-        print("> Table '{x}' already exists!".format(x=table))
+        print(">> Table '{x}' already exists!".format(x=table))
 
 def CheckIfTableExist(cur, table):
     ret_result_bool = False
@@ -109,23 +109,40 @@ def CheckIfTableExist(cur, table):
 
     return ret_result_bool
 
-def MySQLDBStoreNBADataFrame(password, table, unix_socket, database_name, data_df):
+def MySQLDBStoreNBADataFrame(password, table, unix_socket, database_name, data_df, yesterday_date_usa):
     global conn
 
     conn = create_engine('mysql+pymysql://root:{password}@{host}:{port}/{db_name}'.format(password=password, host='localhost', port='3306', db_name=database_name))
     data_df.to_sql(con=conn, name=table, if_exists='replace')
+
+def MySQLDBStoreNBADataAll(table, all_data_df, yesterday_date_usa, scrape_all_season):
+    date_list          = list(all_data_df['GAME DATE'].values)
+    index_val_all      = [i for (i, x) in enumerate(date_list)]
+    all_df_list        = [all_data_df.iloc[index] for index in index_val_all]
+
+    if(scrape_all_season):
+        print(f">> Store all the data...")
+        #Store all data list to MySQL one by one.
+        MySQLDBStoreNBAData(all_df_list, table, list(all_data_df.columns.values))
+    else:
+        print(f">> Store only data with date = {yesterday_date_usa}...")
+        #Get only games that play today(USA time zone)
+        selected_df_list = CheckDataHasSpecifiedDate(yesterday_date_usa, all_data_df)
+
+        #Store selected data list to MySQL one by one.
+        MySQLDBStoreNBAData(selected_df_list, table, list(all_data_df.columns.values))
 
 def MySQLDBStoreNBAData(selected_df_list, table, columns_list):
     global cur
     columns_list = ["`{x}`".format(x=val) for val in columns_list]
 
     if(len(columns_list) > 0):
-        print('> MySQLDBStoreNBAData...')
+        print('>> MySQLDBStoreNBAData...')
     else:
-        print('> No data to store...')
+        print('>> No data to store...')
 
     for data_list in selected_df_list:
-        column_values_list = [val if(re.match(r'\d+\.\d+', val)) else val if(re.match(r'\d+', val) and (not(re.match(r'.*/.*', val)))) else "'{}'".format(val) for key, val in data_list.iteritems()]
+        column_values_list = ['None' if(((key=='TEAM') or (key=='MATCH UP') or (key=='GAME DATE') or (key=='W/L')) and (val==None)) else -1 if(val==None) else val if(re.match(r'\d+\.\d+', val)) else val if(re.match(r'\d+', val) and (not(re.match(r'.*/.*', val)))) else "'{}'".format(val) for key, val in data_list.iteritems()]
         cur.execute('SELECT * FROM {table} WHERE TEAM="{data_team}" AND `GAME DATE`="{game_date}"'.format(table=table, data_team=data_list['TEAM'], game_date=data_list['GAME DATE']))
 
         if(cur.rowcount==0):
@@ -135,13 +152,12 @@ def MySQLDBStoreNBAData(selected_df_list, table, columns_list):
             cur.execute(execute_str)
             cur.connection.commit()
 
-
 def StoreWikiToMySQL(table, cur, url, title, content):
-    print('Storing...')
-    print(f'table   = {table}')
-    print(f'title   = {title}')
-    print(f'url     = {url}')
-    print(f'content = {content}')
+    print('>> Storing...')
+    print(f'>> table   = {table}')
+    print(f'>> title   = {title}')
+    print(f'>> url     = {url}')
+    print(f'>> content = {content}')
 
     title   = '"'+title+'"'
     url     = '"'+url+'"'
@@ -150,24 +166,22 @@ def StoreWikiToMySQL(table, cur, url, title, content):
     cur.execute('SELECT * FROM {x} WHERE url={url_name}'.format(x=table, url_name=url))
     if cur.rowcount==0:
         execute_str = 'INSERT INTO {table_name} (title, url, content) VALUES ({title_name}, {url_name}, {content_name});'.format(table_name = table, url_name = url, title_name = title, content_name = content)
-        print(f'execute_str = {execute_str}')
+        print(f'>> execute_str = {execute_str}')
         cur.execute(execute_str)
         cur.connection.commit()
         return 0;
     else:
-        print('Already existed. Skipping...')
+        print('>> Already existed. Skipping...')
         return 1;
 
 def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season, scrape_all_season):
-    print("> GetNBADataRequest...")
     global request_num
     global proxy_list
     global proxy_used
     global proxy_index
 
-    print('---------------crawler_nba.GetNBADataRequest begins-------------------')
-    print(f'starting_url = {starting_url}')
-    print(f'request_num = {request_num}')
+    print(f'>> starting_url = {starting_url}')
+    print(f'>> request_num = {request_num}')
 
     all_data_loop          = []
     all_data_item_href     = []
@@ -175,34 +189,34 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
 
     try:
         ip_addr = tool_surf.GetPublicIPAddress()
-        print(f'ip address = {ip_addr}')
+        print(f'>> ip address = {ip_addr}')
 
         if(request_num % thresh_change_proxy == 0):
             if(proxy_index != -1):
                 del proxy_list[proxy_index]
 
             if(request_num != 0):
-                print(f'Request number reaches {thresh_change_proxy}. Change the proxy.')
+                print(f'>> Request number reaches {thresh_change_proxy}. Change the proxy.')
                 proxy_index = RandomProxy(proxy_list)
                 proxy_used = proxy_list[proxy_index]
                 SetProxy(proxy_used['ip']+':'+proxy_used['port'])
         if((request_num % thresh_change_proxy_list == 0) and (request_num != 0)):
-            print(f'Request number reaches {thresh_change_proxy_list}. Change the proxy list.')
+            print(f'>> Request number reaches {thresh_change_proxy_list}. Change the proxy list.')
             proxy_list = GetProxyList(1)
 
-        print("> Use Webdriver...")
+        print(">> Use Webdriver...")
         browser = webdriver.Chrome()
         browser.get(starting_url)
         request_num += 1
     except HTTPError as err:
-        print(f'Cannot access {starting_url}. {err}')
+        print(f'>> Cannot access {starting_url}. {err}')
         if(re.match(r'\s*HTTP\s*Error\s*404.*', str(err)) is not None):
-            print(f'Return with original data.')
+            print(f'>> Return with original data.')
 
         return (all_data_loop, columns, browser, all_data_item_href)
     except http.client.RemoteDisconnected as disconnected_err:
-        print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
-        print(f'Randomly set new proxy, and try again.')
+        print(f'>> Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
+        print(f'>> Randomly set new proxy, and try again.')
         if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
             proxy_list.remove(proxy_used)
 
@@ -213,8 +227,8 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         (all_data_loop, columns, browser, all_data_item_href)  = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, Season, scrape_all_season)
         return (all_data_loop, columns, browser, all_data_item_href)
     except error.URLError as err:
-        print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
-        print(f'Randomly set new proxy, and try again.')
+        print(f'>> Cannot access {starting_url}. Remote end closed connection without response. {err}')
+        print(f'>> Randomly set new proxy, and try again.')
         if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
             proxy_list.remove(proxy_used)
 
@@ -225,8 +239,8 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
         (all_data_loop, columns, browser, all_data_item_href) = GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season, scrape_all_season)
         return (all_data_loop, columns, browser, all_data_item_href)
     except Exception as err:
-        print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
-        print(f'Randomly set new proxy, and try again.')
+        print('>> Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
+        print(f'>> Randomly set new proxy, and try again.')
         if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
             proxy_list.remove(proxy_used)
 
@@ -253,9 +267,8 @@ def GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_lis
     wait = WebDriverWait(browser, 20, 0.05)
     wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'nba-stat-table__overflow')))
     table = browser.find_elements_by_class_name('nba-stat-table__overflow')
-    print(f'type of table = {type(table)}')
+    print(f'>> type of table = {type(table)}')
     columns = GetNBAData(table, all_data_loop, all_data_item_href, browser)
-    print('---------------crawler_nba.GetNBADataRequest ends-------------------')
 
     return (all_data_loop, columns, browser, all_data_item_href)
 
@@ -273,7 +286,7 @@ def GetSeasonOption(browser, season):
     return return_option_num
 
 def GetNBAData(table_obj, all_data_loop, all_data_item_href, browser):
-    print("> GetNBAData...")
+    print(">> GetNBAData...")
     if(len(table_obj) > 1):
         print("Error: table_obj has more than one candidate. Need to specify which data table to use.")
         sys.exit(1)
@@ -281,16 +294,16 @@ def GetNBAData(table_obj, all_data_loop, all_data_item_href, browser):
     table_cand  = table_obj[0]
     columns_item=table_cand.find_elements_by_xpath('.//thead/tr/th')
     columns     =[x.text if(x.text != '') else None for x in columns_item]
-    print('---')
-    print(f'columns = {columns}')
-    print('---')
+    print('>> ---')
+    print(f'>> columns = {columns}')
+    print('>> ---')
     data_all_lines = table_cand.find_elements_by_xpath('.//tbody/tr')
     num_data_all_lines = len(data_all_lines)
-    print(f'len(data_all_lines) = {num_data_all_lines}')
+    print(f'>> len(data_all_lines) = {num_data_all_lines}')
 
     i=0
     for data_line in data_all_lines:
-        print('> Progress = {:.2f}%'.format((i/num_data_all_lines)*100))
+        print('>> Progress = {:.2f}%'.format((i/num_data_all_lines)*100))
         data_item = data_line.find_elements_by_xpath('.//td')
         data_revised_line = [x.text if(x.text != '') else None for x in data_item]
         all_data_loop.append(data_revised_line)
@@ -298,12 +311,12 @@ def GetNBAData(table_obj, all_data_loop, all_data_item_href, browser):
         all_data_item_href.append(game_set.get_attribute('href'))
         i += 1
 
-    print('> Progress = {:.2f}%'.format(((i+1)/num_data_all_lines)*100))
+    print('>> Progress = {:.2f}%'.format(((i+1)/num_data_all_lines)*100))
     return columns
 
 def GetStartersOfEachGame(href_list, browser, team_list, starters_data_dict):
     for (index, team) in enumerate(team_list):
-        print(f'index = {index}, team = {team}, href = {href_list[index]}')
+        print(f'>> index = {index}, team = {team}, href = {href_list[index]}')
         if(team in starters_data_dict):
             continue
         else:
@@ -312,41 +325,41 @@ def GetStartersOfEachGame(href_list, browser, team_list, starters_data_dict):
             time.sleep(5)
 
             team_name_list     = browser.find_elements_by_xpath("//td[@class='team-name show-for-medium']")
-            print(f'len of team_name_list = {len(team_name_list)}')
+            print(f'>> len of team_name_list = {len(team_name_list)}')
             players_table_list = browser.find_elements_by_xpath("//div[@class='nba-stat-table__overflow']")
-            print(f'len of players_table_list = {len(players_table_list)}')
+            print(f'>> len of players_table_list = {len(players_table_list)}')
 
             for (j, team_scraped) in enumerate(team_name_list):
-                print(f'team_scraped = {team_scraped.text}')
+                print(f'>> team_scraped = {team_scraped.text}')
                 columns_item=players_table_list[j].find_elements_by_xpath('.//thead/tr/th')
                 columns     =[x.text if(x.text != '') else None for x in columns_item]
-                print('---')
-                print(f'columns = {columns}')
-                print('---')
+                print('>> ---')
+                print(f'>> columns = {columns}')
+                print('>> ---')
                 data_all_lines = players_table_list[j].find_elements_by_xpath('.//tbody/tr')
                 all_data_loop  = []
                 num_data_all_lines = 5 #Just get the statistics of starters(the top 5 players).
                 for (i, data_line) in enumerate(data_all_lines):
                     if(i>num_data_all_lines-1):
                         break
-                    print('> Progress = {:.2f}%'.format((i/num_data_all_lines)*100))
+                    print('>> Progress = {:.2f}%'.format((i/num_data_all_lines)*100))
                     data_item = data_line.find_elements_by_xpath('.//td')
                     data_revised_line = [x.text if(x.text != '') else None for x in data_item]
                     all_data_loop.append(data_revised_line)
-                print('> Progress = {:.2f}%'.format((i/num_data_all_lines)*100))
-                print('---')
+                print('>> Progress = {:.2f}%'.format((i/num_data_all_lines)*100))
+                print('>> ---')
                 all_data_df = pd.DataFrame(data = all_data_loop, columns = columns)
                 all_data_df.dropna(axis=1, how='all', inplace=True) #Delete the empty columns
                 starters_data_dict[team_scraped.text] = all_data_df
 
-    print('===========SHOW==========')
+    print('>> ===========SHOW==========')
     for (team, data) in starters_data_dict.items():
         print(f'{team} starting players: ')
         content = tabulate(data, headers='keys', tablefmt='psql')
         print(content)
-        print('<><><><><><><><><><><><><><><><><><><><><><><><><')
-        print('<><><><><><><><><><><>>END<><><><><><><><><><><><')
-        print('<><><><><><><><><><><><><><><><><><><><><><><><><')
+        print('>> <><><><><><><><><><><><><><><><><><><><><><><><><')
+        print('>> <><><><><><><><><><><>>END<><><><><><><><><><><><')
+        print('>> <><><><><><><><><><><><><><><><><><><><><><><><><')
 
 def CheckDataHasSpecifiedDate(date, all_data_df):
     date_list          = list(all_data_df['GAME DATE'].values)
@@ -411,13 +424,13 @@ def CheckSendMails(date_usa, game_set_num, selected_data_df, short_selected_data
         to_addr  = gmail_user
         cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'
         email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
-        print(f'There are NBA games for {team} at {date_usa}. Email sent!')
+        print(f'>> There are NBA games for {team} at {date_usa}. Email sent!')
     else:
-        print(f'No NBA games for {team} at {date_usa}.')
+        print(f'>> No NBA games for {team} at {date_usa}.')
 
 def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_item_href):
     get_wanted_send_data = 0
-    (game_set_num, get_wanted_data, selected_data_df, short_selected_df, starters_data_dict) = CheckDateHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href)
+    (game_set_num, get_wanted_data, selected_data_df, short_selected_df, starters_data_dict) = CheckDataHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href)
     if(get_wanted_data):
         (get_send_data_set_num, get_wanted_send_data, selected_send_data_df, short_selected_send_data_df) = CheckTeamLose(team, selected_data_df)
 
@@ -438,23 +451,23 @@ def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_ite
         to_addr  = gmail_user
         cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'+', '+'ino.liao@gmail.com'
         email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
-        print(f'There are NBA games that {team} lost at {date}. Email sent!')
+        print(f'>> There are NBA games that {team} lost at {date}. Email sent!')
     else:
-        print(f'No NBA games for {team} losing at {date}.')
+        print(f'>> No NBA games for {team} losing at {date}.')
 
 def GetWikiLinksContent(starting_url, cur, table):
     all_internal_links_loop = []
     skipping = 0
     try:
         ip_addr = tool_surf.GetPublicIPAddress()
-        print(f'ip address = {ip_addr}')
+        print(f'>> ip address = {ip_addr}')
 
         head = {}
         #user_agent = random.choice(USER_AGENT_LIST)
         ua = UserAgent()
         user_agent = ua.random
         head['User-Agent'] = user_agent
-        print(f'user_agent = {head["User-Agent"]}')
+        print(f'>> user_agent = {head["User-Agent"]}')
 
         #Set Proxy
         proxy_index = RandomProxy(proxy_list)
@@ -464,12 +477,12 @@ def GetWikiLinksContent(starting_url, cur, table):
         req = request.Request(starting_url, headers=head)
         html = urlopen(req)
     except HTTPError as err:
-        print(f'Cannot access {starting_url}. {err}')
+        print(f'>> Cannot access {starting_url}. {err}')
         skipping = 1
         return all_internal_links_loop, skipping
     except http.client.RemoteDisconnected as disconnected_err:
-        print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
-        print(f'Randomly set new proxy, and try again.')
+        print(f'>> Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
+        print(f'>> Randomly set new proxy, and try again.')
         if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
             proxy_list.remove(proxy_used)
 
@@ -480,8 +493,8 @@ def GetWikiLinksContent(starting_url, cur, table):
         all_internal_links_loop, skipping = GetWikiLinksContent(starting_url, cur, table)
         return all_internal_links_loop, skipping
     except error.URLError as err:
-        print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
-        print(f'Randomly set new proxy, and try again.')
+        print(f'>> Cannot access {starting_url}. Remote end closed connection without response. {err}')
+        print(f'>> Randomly set new proxy, and try again.')
         if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
             proxy_list.remove(proxy_used)
 
@@ -492,7 +505,7 @@ def GetWikiLinksContent(starting_url, cur, table):
         all_internal_links_loop, skipping = GetWikiLinksContent(starting_url, cur, table)
         return all_internal_links_loop, skipping
     except Exception as err:
-        print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
+        print('>> Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
         skipping = 1
         return all_internal_links_loop, skipping
 
@@ -505,7 +518,7 @@ def GetWikiLinksContent(starting_url, cur, table):
     for content_ele in content_list:
         if(content_ele.has_attr('class')):
             if(re.match(r'.*empty.*', content_ele.attrs['class'][-1]) is not None):
-                print(f'filtered -------> content_ele = {content_ele}')
+                print(f'>> filtered -------> content_ele = {content_ele}')
                 continue
         content += content_ele.get_text().strip('\n')
     content = content.replace('\n', ' ')
@@ -527,11 +540,11 @@ def GetAllWikiAtricleLinks(url, is_debug=0):
 
     if(is_debug):
         for ele in ret_all_article_links:
-            print("------------------")
-            print(f"ele = {ele}")
-            print(f"attrs = {ele.attrs}")
-            print(f"attrs[href] = {ele.attrs['href']}")
-            print("------------------")
+            print(">> ------------------")
+            print(f">> ele = {ele}")
+            print(f">> attrs = {ele.attrs}")
+            print(f">> attrs[href] = {ele.attrs['href']}")
+            print(">> ------------------")
 
     return ret_all_article_links
 
@@ -542,24 +555,24 @@ def GetAllURLLinks(url, pages_links, recursive_num, is_debug=0):
     ret_all_article_links = []
     all_div_tags = response.findAll('a', href=re.compile('^(\/wiki\/)((?!User).)*$'))
 
-    print('----------------------')
-    print(f'original page_links = {pages_links}')
-    print(f'recursive_num = {recursive_num}')
-    print('----------------------')
+    print('>> ----------------------')
+    print(f'>> original page_links = {pages_links}')
+    print(f'>> recursive_num = {recursive_num}')
+    print('>> ----------------------')
 
     for ele_tags in all_div_tags:
         if(ele_tags.attrs['href'] not in pages_links):
             new_page_link = ele_tags.attrs['href']
-            print('----------------------')
-            print(f'new_page_link = {new_page_link}')
-            print('----------------------')
+            print('>> ----------------------')
+            print(f'>> new_page_link = {new_page_link}')
+            print('>> ----------------------')
             pages_links.add(new_page_link)
             try:
                 (recursive_num, page_links) = GetAllURLLinks(new_page_link, pages_links, recursive_num, 1)
             except RecursionError:
-                print(f"> maximum recursion depth exceeded.")
-                print(f"> recursive_num = {recursive_num}")
-                print(f"> Program Terminated.")
+                print(f">> maximum recursion depth exceeded.")
+                print(f">> recursive_num = {recursive_num}")
+                print(f">> Program Terminated.")
                 return (recursive_num, page_links)
 
     return (recursive_num, page_links)
@@ -570,7 +583,7 @@ def GetEditHistoryIPList(url, is_debug=0):
     url = url.replace('/wiki/', '')
     history_url = 'http://en.wikipedia.org/w/index.php?title='+url+'&action=history'
     if(is_debug):
-        print(f'history_url = {history_url}')
+        print(f'>> history_url = {history_url}')
 
     html = urlopen(history_url)
     response_obj = BeautifulSoup(html, 'lxml')
@@ -581,9 +594,9 @@ def GetEditHistoryIPList(url, is_debug=0):
         address_list.add(ip_address_txt)
 
         if(is_debug):
-            print('---------------------------')
-            print(f"ip_address = {ip_address}")
-            print(f"ip_address_txt = {ip_address_txt}")
+            print('>> ---------------------------')
+            print(f">> ip_address = {ip_address}")
+            print(f">> ip_address_txt = {ip_address_txt}")
 
     return address_list
 
@@ -635,7 +648,7 @@ def GetExternalLinks(bs_obj, exclude_url_str_list):
     return external_links
 
 def SetProxy(proxy):
-    print(f'> SetProxy: {proxy}')
+    print(f'>> SetProxy: {proxy}')
     try :
         proxy_support = request.ProxyHandler({'http':proxy,
                                               'https':proxy})
@@ -643,10 +656,10 @@ def SetProxy(proxy):
         opener = request.build_opener(proxy_support)
         request.install_opener(opener)
         ip_addr = tool_surf.GetPublicIPAddress()
-        print(f'Set ip address = {ip_addr}')
+        print(f'>> Set ip address = {ip_addr}')
     except Exception as err :
         print(err)
-        print('Randomly get new proxy.')
+        print('>> Randomly get new proxy.')
         proxy_index = RandomProxy(proxy_list)
         proxy_used = proxy_list[proxy_index]
         SetProxy(proxy_used['ip']+':'+proxy_used['port'])
@@ -657,9 +670,8 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_l
     global proxy_used
     global proxy_index
 
-    print('---------------crawler_nba.GetAllInternalLinks begins-------------------')
-    print(f'starting_url = {starting_url}')
-    print(f'request_num = {request_num}')
+    print(f'>> starting_url = {starting_url}')
+    print(f'>> request_num = {request_num}')
     all_internal_links_loop = []
     internal_url_pattern_str = ""
     internal_url_pattern = re.compile(r'.*www.(\S*?)\.com.*')
@@ -671,22 +683,22 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_l
         internal_url_pattern_match = internal_url_pattern.match(urlparse(starting_url).netloc)
         internal_url_pattern_str = internal_url_pattern_match.group(1)
 
-    print(f'internal_url_pattern_str = {internal_url_pattern_str}')
+    print(f'>> internal_url_pattern_str = {internal_url_pattern_str}')
 
     try:
         ip_addr = tool_surf.GetPublicIPAddress()
-        print(f'ip address = {ip_addr}')
+        print(f'>> ip address = {ip_addr}')
 
         head = {}
         #user_agent = random.choice(USER_AGENT_LIST)
         ua = UserAgent()
         user_agent = ua.random
         head['User-Agent'] = user_agent
-        print(f'user_agent = {head["User-Agent"]}')
+        print(f'>> user_agent = {head["User-Agent"]}')
 
         if(request_num % thresh_change_proxy == 0):
             if(request_num != 0):
-                print(f'Request number reaches {thresh_change_proxy}. Change the proxy.')
+                print(f'>> Request number reaches {thresh_change_proxy}. Change the proxy.')
             if(proxy_index != -1):
                 del proxy_list[proxy_index]
 
@@ -694,23 +706,23 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_l
             proxy_used = proxy_list[proxy_index]
             SetProxy(proxy_used['ip']+':'+proxy_used['port'])
         if((request_num % thresh_change_proxy_list == 0) and (request_num != 0)):
-            print(f'Request number reaches {thresh_change_proxy_list}. Change the proxy list.')
+            print(f'>> Request number reaches {thresh_change_proxy_list}. Change the proxy list.')
             proxy_list = GetProxyList(1)
 
         req = request.Request(starting_url, headers=head)
         html = urlopen(req)
         request_num += 1
     except HTTPError as err:
-        print(f'Cannot access {starting_url}. {err}')
+        print(f'>> Cannot access {starting_url}. {err}')
         if(re.match(r'\s*HTTP\s*Error\s*404.*', str(err)) is not None):
-            print(f'Remove the url : {starting_url}')
+            print(f'>> Remove the url : {starting_url}')
             if(any(url_check == starting_url for url_check in all_internal_links)):
                 all_internal_links.remove(starting_url)
 
         return all_internal_links_loop
     except http.client.RemoteDisconnected as disconnected_err:
-        print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
-        print(f'Randomly set new proxy, and try again.')
+        print(f'>> Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
+        print(f'>> Randomly set new proxy, and try again.')
         if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
             proxy_list.remove(proxy_used)
 
@@ -721,8 +733,8 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_l
         all_internal_links_loop = GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list, all_internal_links)
         return all_internal_links_loop
     except error.URLError as err:
-        print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
-        print(f'Randomly set new proxy, and try again.')
+        print(f'>> Cannot access {starting_url}. Remote end closed connection without response. {err}')
+        print(f'>> Randomly set new proxy, and try again.')
         if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
             proxy_list.remove(proxy_used)
 
@@ -733,17 +745,16 @@ def GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_l
         all_internal_links_loop = GetAllInternalLinks(starting_url, thresh_change_proxy, thresh_change_proxy_list, all_internal_links)
         return all_internal_links_loop
     except Exception as err:
-        print('Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
+        print('>> Unexpected Error occurs : {x}. Cannot access {y}.'.format(x = err, y = starting_url))
         return all_internal_links_loop
 
     bs_obj = BeautifulSoup(html, 'lxml')
     domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
-    print(f'domain = {domain}')
+    print(f'>> domain = {domain}')
     all_internal_links_loop = GetInternalLinks(bs_obj, internal_url_pattern_str, domain)
 
     for ele in all_internal_links_loop:
-        print(f'this loop internal link = {ele}')
-    print('---------------crawler_nba.GetAllInternalLinks ends-------------------')
+        print(f'>> this loop internal link = {ele}')
 
     return all_internal_links_loop
 
@@ -753,9 +764,8 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
     global proxy_used
     global proxy_index
 
-    print('---------------crawler_nba.GetAllExternalLinks begins-------------------')
-    print(f'starting_url = {starting_url}')
-    print(f'request_num = {request_num}')
+    print(f'>> starting_url = {starting_url}')
+    print(f'>> request_num = {request_num}')
     all_external_links_loop = []
     external_url_pattern_str = ""
     external_url_pattern = re.compile(r'.*www.(\S*?)\.com.*')
@@ -767,24 +777,24 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
         external_url_pattern_match = external_url_pattern.match(urlparse(starting_url).netloc)
         external_url_pattern_str = external_url_pattern_match.group(1)
 
-    print(f'external_url_pattern_str = {external_url_pattern_str}')
+    print(f'>> external_url_pattern_str = {external_url_pattern_str}')
     if(external_url_pattern_str not in external_link_str_list):
         external_link_str_list.append(external_url_pattern_str)
 
     try:
         ip_addr = tool_surf.GetPublicIPAddress()
-        print(f'ip address = {ip_addr}')
+        print(f'>> ip address = {ip_addr}')
 
         head = {}
         #user_agent = random.choice(USER_AGENT_LIST)
         ua = UserAgent()
         user_agent = ua.random
         head['User-Agent'] = user_agent
-        print(f'user_agent = {user_agent}')
+        print(f'>> user_agent = {user_agent}')
 
         if(request_num % thresh_change_proxy == 0):
             if(request_num != 0):
-                print(f'Request number reaches {thresh_change_proxy}. Change the proxy.')
+                print(f'>> Request number reaches {thresh_change_proxy}. Change the proxy.')
             if(proxy_index != -1):
                 del proxy_list[proxy_index]
 
@@ -792,23 +802,23 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
             proxy_used = proxy_list[proxy_index]
             SetProxy(proxy_used['ip']+':'+proxy_used['port'])
         if((request_num % thresh_change_proxy_list == 0) and (request_num != 0)):
-            print(f'Request number reaches {thresh_change_proxy_list}. Change the proxy list.')
+            print(f'>> Request number reaches {thresh_change_proxy_list}. Change the proxy list.')
             proxy_list = GetProxyList(1)
 
         req = request.Request(starting_url, headers=head)
         html = urlopen(req)
         request_num += 1
     except HTTPError as err:
-        print(f'Cannot access {starting_url}. {err}')
+        print(f'>> Cannot access {starting_url}. {err}')
         if(re.match(r'\s*HTTP\s*Error\s*404.*', str(err)) is not None):
-            print(f'Remove the url : {starting_url}')
+            print(f'>> Remove the url : {starting_url}')
             if(any(url_check == starting_url for url_check in all_external_links)):
                 all_external_links.remove(starting_url)
 
         return all_external_links_loop
     except http.client.RemoteDisconnected as disconnected_err:
-        print(f'Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
-        print(f'Randomly set new proxy, and try again.')
+        print(f'>> Cannot access {starting_url}. RemoteDisconnected. {disconnected_err}')
+        print(f'>> Randomly set new proxy, and try again.')
         if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
             proxy_list.remove(proxy_used)
 
@@ -820,8 +830,8 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
         all_external_links_loop = GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list, all_external_links)
         return all_external_links_loop
     except error.URLError as err:
-        print(f'Cannot access {starting_url}. Remote end closed connection without response. {err}')
-        print(f'Randomly set new proxy, and try again.')
+        print(f'>> Cannot access {starting_url}. Remote end closed connection without response. {err}')
+        print(f'>> Randomly set new proxy, and try again.')
         if(any(((proxy_in_list['ip'] == proxy_used['ip']) and (proxy_in_list['port'] == proxy_used['port'])) for proxy_in_list in proxy_list)):
             proxy_list.remove(proxy_used)
 
@@ -838,12 +848,11 @@ def GetAllExternalLinks(starting_url, external_link_str_list, thresh_change_prox
 
     bs_obj = BeautifulSoup(html, 'lxml')
     domain = urlparse(starting_url).scheme+"://"+urlparse(starting_url).netloc
-    print(f'domain = {domain}')
+    print(f'>> domain = {domain}')
     all_external_links_loop = GetExternalLinks(bs_obj, external_link_str_list)
 
     for ele in all_external_links_loop:
-        print(f'this loop external link = {ele}')
-    print('---------------crawler_nba.GetAllExternalLinks ends-------------------')
+        print(f'>> this loop external link = {ele}')
 
     return all_external_links_loop
 
@@ -855,31 +864,31 @@ def GetAllExternalLinksThrInternalLinks(url, all_external_links, all_internal_li
     for external_link in all_external_links_loop:
         if external_link not in all_external_links:
             all_external_links.append(external_link)
-            print(f'--> added external_link = {external_link}')
+            print(f'>> added external_link = {external_link}')
 
     for internal_link in all_internal_links_loop:
         if internal_link not in all_internal_links:
             all_internal_links.append(internal_link)
-            print(f'--> added internal_link = {internal_link}')
-            print(f'About to get internal_link = {internal_link}')
+            print(f'>> added internal_link = {internal_link}')
+            print(f'>> About to get internal_link = {internal_link}')
             try:
                 (all_external_links, all_internal_links, recursive_err) = GetAllExternalLinksThrInternalLinks(internal_link, all_external_links, all_internal_links, external_link_str_list, thresh_change_proxy, thresh_change_proxy_list)
                 if(recursive_err):
                     break
             except RecursionError:
                 recursive_err = 1
-                print("Maximum recursive error occurs. Return...")
-                print(f"recursive_err = {recursive_err}")
+                print(">> Maximum recursive error occurs. Return...")
+                print(f">> recursive_err = {recursive_err}")
                 break
 
     return (all_external_links, all_internal_links, recursive_err)
 
 def RandomProxy(proxy_list):
-    print("> RandomProxy...")
+    print(">> RandomProxy...")
     return random.randint(0, len(proxy_list)-1)
 
 def GetProxyList(is_debug):
-    print("> GetProxyList...")
+    print(">> GetProxyList...")
     #proxy_list_url = 'http://www.freeproxylists.net/zh/'
     proxy_list_url = 'https://www.sslproxies.org/'
     proxy_list = []
@@ -888,14 +897,14 @@ def GetProxyList(is_debug):
     ua = UserAgent()
     user_agent = ua.random
     head['User-Agent'] = user_agent
-    print(f'user_agent = {head["User-Agent"]}')
+    print(f'>> user_agent = {head["User-Agent"]}')
 
     try:
         req = request.Request(proxy_list_url, headers=head)
         html = urlopen(req)
     except Exception as err:
-        print('Unexpected Error occurs during scraping proxy list : {x}. Cannot access {y}.'.format(x = err, y = proxy_list_url))
-        print('Sleep 5 minutes and try again.')
+        print('>> Unexpected Error occurs during scraping proxy list : {x}. Cannot access {y}.'.format(x = err, y = proxy_list_url))
+        print('>> Sleep 5 minutes and try again.')
         time.sleep(5*60)
         return GetProxyList(1)
 
@@ -915,17 +924,17 @@ def GetProxyList(is_debug):
                 'port': ip_port
             })
             if(is_debug):
-                print('-----------------------')
-                print(f'PROXY, ip_address   = {ip_address}')
-                print(f'PROXY, ip_port      = {ip_port}')
-                print(f'PROXY, anonymity    = {anonymity}')
-                print(f'PROXY, ip_country   = {ip_country}')
-                print(f'PROXY, ip_region    = {ip_region}')
+                print('>> -----------------------')
+                print(f'>> PROXY, ip_address   = {ip_address}')
+                print(f'>> PROXY, ip_port      = {ip_port}')
+                print(f'>> PROXY, anonymity    = {anonymity}')
+                print(f'>> PROXY, ip_country   = {ip_country}')
+                print(f'>> PROXY, ip_region    = {ip_region}')
 
     return proxy_list
 
 def init(is_debug=0):
-    print('> Initialization...')
+    print('>> Initialization...')
     global request_num
     global USER_AGENT_LIST
     global proxy_list

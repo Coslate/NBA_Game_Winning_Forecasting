@@ -20,7 +20,9 @@ import pytz
 #     Main-Routine      #
 #########################
 def main():
-    #Argument Parser
+
+#Argument Parser
+    print(f'> Parse the argument...')
     (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season) = ArgumentParser()
     if(is_debug):
         print(f'thresh_change_proxy      = {thresh_change_proxy}')
@@ -31,28 +33,15 @@ def main():
         print(f'season                   = {season}')
         print(f'scrape_all_season        = {scrape_all_season}')
 
-    #Initialization
+#Initialization
+    print(f'> Proxy initialization...')
     crawler_nba.init(is_debug)
 
-    #Sideband Setting
+#Sideband Setting
+    print(f'> Sideband setting...')
     current_time = datetime.datetime.now()
     print(f'current_time in Taiwan = {current_time}')
     random.seed(current_time)
-
-    #Scraping NBA stats
-    starting_url = "https://stats.nba.com/teams/boxscores"
-    (all_data_loop, columns, browser, all_data_item_href) = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season, scrape_all_season)
-
-    #Constructing the dataframe and write out as a csv file
-    all_data_df     = pd.DataFrame(data = all_data_loop, columns = columns)
-    all_data_df.dropna(axis=1, how='all', inplace=True) #Delete the empty columns
-    all_data_df_tab = tabulate(all_data_df, headers='keys', tablefmt='psql')
-    print(f'org columns = {columns}')
-    print(f'new columns = {list(all_data_df.columns.values)}')
-    print(f'all_data_df_tab = ')
-    print(all_data_df_tab)
-    if(out_file_name != ""):
-        all_data_df.to_csv(out_file_name, sep=',', index=indexing_to_csv)
 
     #Get current date at the time zone of America/New York
     time_zone_usa      = pytz.timezone('America/New_York')
@@ -64,28 +53,49 @@ def main():
     print(f'current date in USA(America/New York)       = {current_date_usa}')
     print(f'Use yesterday date in USA(America/New York) = {yesterday_date_usa}')
 
-    #Check if the data has the interested game.
+#Scraping NBA stats
+    print(f'> Crawling/Scraping...')
+    starting_url = "https://stats.nba.com/teams/boxscores"
+    (all_data_loop, columns, browser, all_data_item_href) = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season, scrape_all_season)
+
+#Constructing the dataframe and write out as a csv file
+    print(f'> Reconstruct the dataframe...')
+    all_data_df     = pd.DataFrame(data = all_data_loop, columns = columns)
+    all_data_df.dropna(axis=1, how='all', inplace=True) #Delete the empty columns
+    all_data_df_tab = tabulate(all_data_df, headers='keys', tablefmt='psql')
+    print(f'org columns = {columns}')
+    print(f'new columns = {list(all_data_df.columns.values)}')
+    print(f'all_data_df_tab = ')
+    print(all_data_df_tab)
+    if(out_file_name != ""):
+        all_data_df.to_csv(out_file_name, sep=',', index=indexing_to_csv)
+
+#Check if the data has the interested game.
+    print(f'> Check whether specific teams have games...')
     (game_set_num, get_wanted_data, selected_data_df, short_selected_data_df, starters_data_dict) = crawler_nba.CheckDataHasSpecifiedTeam(yesterday_date_usa, team, all_data_df, browser, all_data_item_href)
 
-    #Send mails if interested game occurs.
-    #crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict)
+#Send mails if interested game occurs.
+    print(f'> Send mails if specific team has games...')
+    crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict)
 
-    #Send to I-No if Lakers lose a game.
-    #crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAL', all_data_df, password, browser, all_data_item_href)
+#Send to I-No if Lakers lose a game.
+    print(f'> Send mails if LAL lost games...')
+    crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAL', all_data_df, password, browser, all_data_item_href)
 
-    #Close
+#Close
+    print(f'> Close the browser...')
     browser.close()
 
-    #Store all the scraped data into MySQL
+#Store all the scraped data into MySQL
+    print(f'> Database Initialization(MySQL)...')
     crawler_nba.MySQLDBInitializeNBATable(mysql_password, table, unix_socket, database_name)
 
-    #Get only games that play today(USA time zone)
-    selected_df_list = crawler_nba.CheckDataHasSpecifiedDate(yesterday_date_usa, all_data_df)
+#Store data list to MySQL one by one.
+    print(f'> Store scraped data into database(MySQL)...')
+    crawler_nba.MySQLDBStoreNBADataAll(table, all_data_df, yesterday_date_usa, scrape_all_season)
 
-    #Store data list to MySQL one by one.
-    crawler_nba.MySQLDBStoreNBAData(selected_df_list, table, list(all_data_df.columns.values))
-
-    # Close the connection of MySQL Database
+#Close the connection of MySQL Database
+    print(f'> Store done and close the database connection(MySQL)...')
     crawler_nba.MySQLDBClose(crawler_nba.cur, crawler_nba.conn)
 
 #########################
