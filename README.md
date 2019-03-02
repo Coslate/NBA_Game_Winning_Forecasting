@@ -46,11 +46,11 @@ The functions are listed as the below:
 
 | Argument | Default Value | Required | Comments |
 | :------- |:-------------:|:-------------:| :--------|
-| -tcp     | 10   | N | To set the threshold value of request numbers within a proxy IP address. If the request number exceeds the threshold, it will change the proxy IP by scraping again the website([https://www.sslproxies.org](https://www.sslproxies.org)). |
-| -tcpl    | 50   | N | To set the threshold value of request number within a proxy IP list. If the request number exceeds the threshold, it will change the proxy IP list by scraping again the website([https://www.sslproxies.org](https://www.sslproxies.org)). |
-| -isd | 0    | N | Whether to show the debugging messages. If set 1, the debugging messages will be shown. If set 0, the debugging messages will not be shown. |
-| -out_idx | 1    | N | To decide whether to write out the CSV file with index or not. If set 1, it will write out the CSV file of the scraped NBA data with indexing. If set 0, it will write out the CSV file of the scraped NBA data without indexing. |
-| -out     | ''   | N | To set the CSV file name that you want to write your scraped NBA games data to. If you do not set this argument, the CSV file will not be written out. |
+| -tcp     | 10   | N | To set the threshold value of request number within a ***proxy IP*** address. If the request number exceeds the threshold, it will change the ***proxy IP*** by scraping again the website([https://www.sslproxies.org](https://www.sslproxies.org)). |
+| -tcpl    | 50   | N | To set the threshold value of request number within a proxy IP address in a ***proxy IP list***. If the request number exceeds the threshold, it will change the ***proxy IP list*** by scraping again the website([https://www.sslproxies.org](https://www.sslproxies.org)). |
+| -isd | 0    | N | Whether to show the debugging messages. If set 1, the debugging messages ***will*** be shown. If set 0, the debugging messages ***will not*** be shown. |
+| -out_idx | 1    | N | To decide whether to write out the CSV file with index or not. If set 1, it will write out the CSV file of the scraped NBA data ***with*** indexing. If set 0, it will write out the CSV file of the scraped NBA data ***without*** indexing. |
+| -out     | ''   | N | To set the CSV file name that you want to write your scraped NBA games data to. If you do not set this argument, the CSV file ***will not*** be written out. |
 | -sql_p   | None | Y | To set your password of your local MySQL database. |
 | -sql_tn  | None | Y | To set the table name you want to create for storing the scraped data in your local MySQL database. |
 | -sql_un_sock  | None | Y | To set the unix socket of your local MySQL database. |
