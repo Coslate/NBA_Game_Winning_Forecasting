@@ -13,7 +13,7 @@ It's a program that will use the past(or current) data from NBA.stats to predict
 Contents
 ------
 * [Crawler](#Crawler)
-    * [Email sending subsystem](#Email)
+    * [Email sending subsystem](#Email%30sending%30subsystem)
 * [Database](#Database)
 * [Data Preprocessing](#Data%20Preprocessing)
     * Clean up NaN in the dataset.
@@ -59,7 +59,7 @@ The functions are listed as the below:
 | -scrape_all_season | 0 | N | To set whether to scrape all the NBA games data in the specified season. If set 1, it will scrape all the data of the specified season. If set 0, it will only scrape the NBA games data that play today. |
 | -wus | 0 | N | To set whether to write out scraped NBA games data to a CSV file through [NBA.stats](https://stats.nba.com/teams/boxscores) or through MySQL database. If set 1, it will write out through MySQL database. If set 0, it will write out through [NBA.stats](https://stats.nba.com/teams/boxscores). |
 
-### Email
+### Email sending subsystem
 A subsystem that is to send notify mails to you if there is a NBA game played by your interested team.
 It has the following arguments to specify: 
 
