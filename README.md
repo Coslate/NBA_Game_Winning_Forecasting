@@ -13,7 +13,7 @@ It's a program that will use the past(or current) data from NBA.stats to predict
 Contents
 ------
 * [Crawler](#Crawler)
-    * [Email sending subsystem](#Email%20sending%20subsystem)
+    * [Email sending subsystem](#Email)
 * [Database](#Database)
 * [Data Preprocessing](#Data%20Preprocessing)
     * Clean up NaN in the dataset.
@@ -59,14 +59,14 @@ The functions are listed as the below:
 | -scrape_all_season | 0 | N | To set whether to scrape all the NBA games data in the specified season. If set 1, it will scrape all the data of the specified season. If set 0, it will only scrape the NBA games data that play today. |
 | -wus | 0 | N | To set whether to write out scraped NBA games data to a CSV file through [NBA.stats](https://stats.nba.com/teams/boxscores) or through MySQL database. If set 1, it will write out through MySQL database. If set 0, it will write out through [NBA.stats](https://stats.nba.com/teams/boxscores). |
 
-### Email sending subsystem
+### Email
 A subsystem that is to send notify mails to you if there is a NBA game played by your interested team.
 It has the following arguments to specify: 
 
 | Argument | Default Value | Required | Comments |
 | :------- |:-------------:|:-------------:| :--------|
 | -team     | GSW   | N | To search the NBA games play today on [NBA.stats](https://stats.nba.com/teams/boxscores). If the team indeed has a game today, it will send a mail to notify you. |
-| -gmail_p  | None  | Y | The password of your gmail account. It is in order to send the notify mail. |
+| -gmail_p  | None  | Y | The password of your gmail account. It is in order to send the notify mails. |
 
 
 ****
