@@ -44,26 +44,29 @@ The functions are listed as the below:
 3.  If there is a NBA game which your interested team plays today, then the program can also send you a notify mail([Email sending subsystem](#Email%20sending%20subsystem)).
 4.  There are the following arguments that need to specify: 
 
-| Argument | Default Value | Comments |
-| :------- |:-------------:| :--------|
-| -tcp     | 10   | To set the threshold value of request numbers within a proxy IP address. If the request number exceeds the threshold, it will change the proxy IP by scraping again the website listed in 1. |
-| -tcpl    | 50   | To set the threshold value of request number within a proxy IP list. If the request number exceeds the threshold, it will change the proxy IP list by scraping again the website listed in 1. |
-| -out_idx | 1    | To decide whether to write out the CSV file with index or not. If set 1, it will write out the CSV file of the scraped NBA data with indexing. If set 0, it will write out the CSV file of the scraped NBA data without indexing. |
-| -out     | ''   | To set the CSV file name that you want to write your scraped NBA games data to. If you do not set this argument, the CSV file will not be written out. |
-| -sql_p   | None | To set your password of your local MySQL database. |
-| -sql_tn  | None | To set the table name you want to create for storing the scraped data in your local MySQL database. |
-| -sql_un_sock  | None | To set the unix socket of your local MySQL database. |
-| -database_name  | None | To set the database name that you want to use to store your NBA games data table in your local MySQL database. |
-| -season  | 2018-19 | To set which season you want to scrap on NBA.stats. Deafult is 2018-19 season. |
-| -scrape_all_season | 0 | To set whether to scrape all the NBA games data in the specified season. If set 1, it will scrape all the data of the specified season. If set 0, it will only scrape the NBA games data that play today. |
-| -wus | 0 | To set whether to write out scraped NBA games data to a CSV file through NBA.stats or through MySQL database. If set 1, it will write out through MySQL database. If set 0, it will write out through NBA.stats. |
+| Argument | Default Value | Required | Comments |
+| :------- |:-------------:|:-------------:| :--------|
+| -tcp     | 10   | N | To set the threshold value of request numbers within a proxy IP address. If the request number exceeds the threshold, it will change the proxy IP by scraping again the website([https://www.sslproxies.org](https://www.sslproxies.org)). |
+| -tcpl    | 50   | N | To set the threshold value of request number within a proxy IP list. If the request number exceeds the threshold, it will change the proxy IP list by scraping again the website listed in 1. |
+| -isd | 0    | N | Whether to show the debugging messages. If set 1, the debugging messages will be shown. If set 0, the debugging messages will not be shown. |
+| -out_idx | 1    | N | To decide whether to write out the CSV file with index or not. If set 1, it will write out the CSV file of the scraped NBA data with indexing. If set 0, it will write out the CSV file of the scraped NBA data without indexing. |
+| -out     | ''   | N | To set the CSV file name that you want to write your scraped NBA games data to. If you do not set this argument, the CSV file will not be written out. |
+| -sql_p   | None | Y | To set your password of your local MySQL database. |
+| -sql_tn  | None | Y | To set the table name you want to create for storing the scraped data in your local MySQL database. |
+| -sql_un_sock  | None | Y | To set the unix socket of your local MySQL database. |
+| -database_name  | None | Y | To set the database name that you want to use to store your NBA games data table in your local MySQL database. |
+| -season  | 2018-19 | N | To set which season you want to scrap on NBA.stats. Deafult is 2018-19 season. |
+| -scrape_all_season | 0 | N | To set whether to scrape all the NBA games data in the specified season. If set 1, it will scrape all the data of the specified season. If set 0, it will only scrape the NBA games data that play today. |
+| -wus | 0 | N | To set whether to write out scraped NBA games data to a CSV file through NBA.stats or through MySQL database. If set 1, it will write out through MySQL database. If set 0, it will write out through NBA.stats. |
 
 ### Email sending subsystem
 A subsystem that is to send notify mails to you if there is a NBA game played by your interested team.
 It has the following arguments to specify: 
 
-    a. The argument, -team, is to search the NBA games play today on NBA.stats. If the team indeed has a game today, it will send a mail to notify you.
-    b. You should set -gmail_p argument to pass your gmail password into the program or it cannot send the mail.
+| Argument | Default Value | Required | Comments |
+| :------- |:-------------:|:-------------:| :--------|
+| -team     | GSW   | N | To search the NBA games play today on NBA.stats. If the team indeed has a game today, it will send a mail to notify you. |
+| -gmail_p  | None  | Y | The password of your gmail account. It is in order to send the notify mail. |
 
 
 ****
