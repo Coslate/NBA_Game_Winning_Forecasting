@@ -13,15 +13,15 @@ It's a program that will use the past(or current) data from NBA.stats to predict
 Contents
 ------
 * [Crawler](#Crawler)
-    * [Email sending subsystem](#Email%1sending%1subsystem)
+    * [Email sending subsystem](#Email-sending-subsystem)
 * [Database](#Database)
-* [Data Preprocessing](#Data%2Preprocessing)
+* [Data Preprocessing](#Data-Preprocessing)
     * Clean up NaN in the dataset.
     * Delete any duplicated or invalid game.
-* [Feature Engineering](#Feature%20Engineering)
+* [Feature Engineering](#Feature-Engineering)
     * Decide which feature is useful.
     * W/L is the y-label.
-* [Model Training](#Mode%20Training) 
+* [Model Training](#Mode-Training) 
     * Ensemble Learning
         *  Bagging
         *  Boosting
@@ -30,7 +30,7 @@ Contents
     * RNN
     * DQN
     * DRQN
-* [Model Testing](#Model%20Testing)
+* [Model Testing](#Model-Testing)
     * Experimental results
 
 
@@ -41,7 +41,7 @@ An automatic scraping program that is to scrape the NBA games data through [NBA.
 The functions are listed as the below: 
 1.  It will first randomly select a proxy IP from [https://www.sslproxies.org](https://www.sslproxies.org) as a proxy for the following scraping.
 2.  Then, the boxscores data listed in [NBA.stats](https://stats.nba.com/teams/boxscores) will be scraped into your local MySQL database.
-3.  If there is a NBA game which your interested team plays today, then the program can also send you a notify mail([Email sending subsystem](#Email%20sending%20subsystem)).
+3.  If there is a NBA game which your interested team plays today, then the program can also send you a notify mail([Email sending subsystem](#Email-sending-subsystem)).
 4.  There are the following arguments that need to specify: 
 
 | Argument | Default Value | Required | Comments |
