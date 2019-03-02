@@ -21,7 +21,7 @@ Contents
 * [Feature Engineering](#Feature-Engineering)
     * Decide which feature is useful.
     * W/L is the y-label.
-* [Model Training](#Mode-Training) 
+* [Model Training](#Model-Training) 
     * Ensemble Learning
         *  Bagging
         *  Boosting
