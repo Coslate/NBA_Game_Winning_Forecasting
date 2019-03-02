@@ -13,7 +13,7 @@ It's a program that will use the past(or current) data from NBA.stats to predict
 Contents
 ------
 * [Crawler](#Crawler)
-    * Email sending system
+    * [Email sending sybsystem](#Email%20sending%20subsystem)
 * [Database](#Database)
 * [Data Preprocessing](#Data%20Preprocessing)
     * Clean up NaN in the dataset.
@@ -41,7 +41,7 @@ An automatic scraping program that is to scrape the NBA games data through NBA.s
 The functions are listed as the below: 
 1.  It will first randomly select a proxy IP from [https://www.sslproxies.org](https://www.sslproxies.org) as a proxy for the following scraping.
 2.  Then, the boxscores data listed in [https://stats.nba.com/teams/boxscores](https://stats.nba.com/teams/boxscores) will be scraped into your local MySQL database.
-3.  If there is a NBA game which your interested team plays today, then the program can also send you a notify mail(Email sending subsystem).
+3.  If there is a NBA game which your interested team plays today, then the program can also send you a notify mail[Email sending subsystem](#Email%20sending%20subsystem).
 4.  There are the following arguments that need to specify: 
 
         a. The argument, -tcp, is to set the threshold value of request numbers within a proxy IP address. If the request number exceeds the threshold, it will change the proxy IP by scraping again the website listed in 1..
