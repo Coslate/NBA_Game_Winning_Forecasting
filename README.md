@@ -37,11 +37,11 @@ Contents
 ****
 Crawler
 ------
-  An automatic scraping program that is to scrape the NBA games data through NBA.stats. The functions are listed as the below : 
-    1. It will first randomly select a proxy IP from https://www.sslproxies.org as a proxy for the following scraping.
-    2. Then, the boxscores data listed in https://stats.nba.com/teams/boxscores will be scraped into your local MySQL database.
-    3. If there is a NBA game which your interested team plays today, then the program can also send you a notify mail.
-    4. There are the following arguments that need to specify : 
+    An automatic scraping program that is to scrape the NBA games data through NBA.stats. The functions are listed as the below : 
+        1. It will first randomly select a proxy IP from https://www.sslproxies.org as a proxy for the following scraping.
+        2. Then, the boxscores data listed in https://stats.nba.com/teams/boxscores will be scraped into your local MySQL database.
+        3. If there is a NBA game which your interested team plays today, then the program can also send you a notify mail.
+        4. There are the following arguments that need to specify : 
       a. The argument, -tcp, is to set the threshold value of request numbers within a proxy IP address. If the request number exceeds the threshold, it will change the proxy IP by scraping again the website listed in 1..
       b. The argument, -tcpl, is to set the threshold value of request number within a proxy IP list. If the request number exceeds the threshold, it will change the proxy IP list by scraping again the website listed in 1..
       c. The argument, -out_idx, is to decide whether to write out the CSV file with index or not. If set 1, it will write out the CSV file of the scraped NBA data with indexing. If set 0, it will write out the CSV file of the scraped NBA data without indexing. Default is 1.
