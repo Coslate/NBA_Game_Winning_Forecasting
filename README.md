@@ -13,9 +13,9 @@ It's a program that will use the past(or current) data from NBA.stats to predict
 Contents
 ------
 * [Crawler](#Crawler)
-    * [Email sending subsystem](#Email%30sending%30subsystem)
+    * [Email sending subsystem](#Email%1sending%1subsystem)
 * [Database](#Database)
-* [Data Preprocessing](#Data%20Preprocessing)
+* [Data Preprocessing](#Data%2Preprocessing)
     * Clean up NaN in the dataset.
     * Delete any duplicated or invalid game.
 * [Feature Engineering](#Feature%20Engineering)
