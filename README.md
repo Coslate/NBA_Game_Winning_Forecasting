@@ -46,7 +46,7 @@ The functions are listed as the below:
 
 | Argument | Default Value | Required | Comments |
 | :------- |:-------------:|:-------------:| :--------|
-| -tcp     | 10   | N | To set the threshold value of request number within a ***proxy IP*** address. If the request number exceeds the threshold, it will change the ***proxy IP*** by scraping again the website([https://www.sslproxies.org](https://www.sslproxies.org)). |
+| -tcp     | 10   | N | To set the threshold value of request number within a ***proxy IP address***. If the request number exceeds the threshold, it will change the ***proxy IP address*** by scraping again the website([https://www.sslproxies.org](https://www.sslproxies.org)). |
 | -tcpl    | 50   | N | To set the threshold value of request number within a proxy IP address in a ***proxy IP list***. If the request number exceeds the threshold, it will change the ***proxy IP list*** by scraping again the website([https://www.sslproxies.org](https://www.sslproxies.org)). |
 | -isd | 0    | N | Whether to show the debugging messages. If set 1, the debugging messages ***will*** be shown. If set 0, the debugging messages ***will not*** be shown. |
 | -out_idx | 1    | N | To decide whether to write out the CSV file with index or not. If set 1, it will write out the CSV file of the scraped NBA data ***with*** indexing. If set 0, it will write out the CSV file of the scraped NBA data ***without*** indexing. |
