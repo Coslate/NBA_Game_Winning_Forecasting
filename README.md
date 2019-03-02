@@ -42,9 +42,9 @@ The functions are listed as the below:
 1.  It will first randomly select a proxy IP from [https://www.sslproxies.org](https://www.sslproxies.org) as a proxy for the following scraping.
 2.  Then, the boxscores data listed in [NBA.stats](https://stats.nba.com/teams/boxscores) will be scraped into your local MySQL database.
 3.  If there is a NBA game which your interested team plays today, then the program can also send you a notify mail([Email sending subsystem](#Email-sending-subsystem)).
-4.  There are the following arguments that need to specify: 
+4.  There are the following arguments that need to be specified: 
 
-| Argument | Default Value | Required | Comments |
+| Argument &nbsp; | Default Value | Required | Comments |
 | :------- |:-------------:|:-------------:| :--------|
 | -tcp     | 10   | N | To set the threshold value of request numbers within a proxy IP address. If the request number exceeds the threshold, it will change the proxy IP by scraping again the website([https://www.sslproxies.org](https://www.sslproxies.org)). |
 | -tcpl    | 50   | N | To set the threshold value of request number within a proxy IP list. If the request number exceeds the threshold, it will change the proxy IP list by scraping again the website([https://www.sslproxies.org](https://www.sslproxies.org)). |
