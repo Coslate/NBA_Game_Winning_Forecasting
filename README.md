@@ -37,7 +37,8 @@ Contents
 ****
 Crawler
 ------
-### An automatic scraping program that is to scrape the NBA games data through NBA.stats. The functions are listed as the below : 
+### An automatic scraping program that is to scrape the NBA games data through NBA.stats.
+### The functions are listed as the below: 
     1. It will first randomly select a proxy IP from https://www.sslproxies.org as a proxy for the following scraping.
     2. Then, the boxscores data listed in https://stats.nba.com/teams/boxscores will be scraped into your local MySQL database.
     3. If there is a NBA game which your interested team plays today, then the program can also send you a notify mail.
@@ -55,7 +56,8 @@ Crawler
           k. The argument, -wus, is to set whether to write out scraped NBA games data to a CSV file through NBA.stats or through MySQL database. If set 1, it will write out through MySQL database. If set 0, it will write out through NBA.stats. Default is 0.
 
 ### Email sending subsystem
-####A subsystem that is to send notify mails to you if there is a NBA game played by your interested team. It has the following arguments to specify.
+#### A subsystem that is to send notify mails to you if there is a NBA game played by your interested team.
+#### It has the following arguments to specify: 
     a. The argument, -team, is to search the NBA games play today on NBA.stats. If the team indeed has a game today, it will send a mail to notify you.
     b. You should set -gmail_p argument to pass your gmail password into the program or it cannot send the mail.
 
