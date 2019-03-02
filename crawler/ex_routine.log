@@ -1,516 +1,741 @@
+> Parse the argument...
 thresh_change_proxy      = 10
 thresh_change_proxy_list = 50
-out_file_name            = /home/coslate/NBA_Win_Predictor/crawler/nba_latest.csv
+out_file_name            = /home/coslate/NBA_Win_Predictor/database/nba_latest.2018_2019.csv
 indexing_to_csv          = False
 team                     = GSW
 season                   = 2018-19
-scrape_all_season        = 1
-> Initialization...
-> GetProxyList...
-user_agent = Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.90 Safari/537.36
------------------------
-PROXY, ip_address   = 95.165.163.229
-PROXY, ip_port      = 39362
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Russian Federation
-PROXY, ip_region    = RU
------------------------
-PROXY, ip_address   = 184.149.34.86
-PROXY, ip_port      = 44175
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Canada
-PROXY, ip_region    = CA
------------------------
-PROXY, ip_address   = 176.213.137.18
-PROXY, ip_port      = 60506
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Russian Federation
-PROXY, ip_region    = RU
------------------------
-PROXY, ip_address   = 182.52.90.74
-PROXY, ip_port      = 56472
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 124.41.211.32
-PROXY, ip_port      = 40063
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Nepal
-PROXY, ip_region    = NP
------------------------
-PROXY, ip_address   = 62.209.198.92
-PROXY, ip_port      = 56645
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Czech Republic
-PROXY, ip_region    = CZ
------------------------
-PROXY, ip_address   = 89.109.54.137
-PROXY, ip_port      = 36469
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Russian Federation
-PROXY, ip_region    = RU
------------------------
-PROXY, ip_address   = 5.129.61.30
-PROXY, ip_port      = 40568
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Russian Federation
-PROXY, ip_region    = RU
------------------------
-PROXY, ip_address   = 81.198.119.241
-PROXY, ip_port      = 58752
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Latvia
-PROXY, ip_region    = LV
------------------------
-PROXY, ip_address   = 1.20.100.207
-PROXY, ip_port      = 39751
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 194.54.87.172
-PROXY, ip_port      = 60624
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Poland
-PROXY, ip_region    = PL
------------------------
-PROXY, ip_address   = 107.85.192.198
-PROXY, ip_port      = 48629
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = United States
-PROXY, ip_region    = US
------------------------
-PROXY, ip_address   = 190.113.225.250
-PROXY, ip_port      = 47706
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Argentina
-PROXY, ip_region    = AR
------------------------
-PROXY, ip_address   = 189.126.76.216
-PROXY, ip_port      = 34836
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Brazil
-PROXY, ip_region    = BR
------------------------
-PROXY, ip_address   = 182.253.217.108
-PROXY, ip_port      = 53281
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Indonesia
-PROXY, ip_region    = ID
------------------------
-PROXY, ip_address   = 222.124.113.43
-PROXY, ip_port      = 53281
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Indonesia
-PROXY, ip_region    = ID
------------------------
-PROXY, ip_address   = 118.172.201.80
-PROXY, ip_port      = 56686
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 5.58.152.226
-PROXY, ip_port      = 60583
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Ukraine
-PROXY, ip_region    = UA
------------------------
-PROXY, ip_address   = 178.150.139.126
-PROXY, ip_port      = 37347
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Ukraine
-PROXY, ip_region    = UA
------------------------
-PROXY, ip_address   = 182.253.200.210
-PROXY, ip_port      = 32019
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Indonesia
-PROXY, ip_region    = ID
------------------------
-PROXY, ip_address   = 185.128.37.2
-PROXY, ip_port      = 8080
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Iraq
-PROXY, ip_region    = IQ
------------------------
-PROXY, ip_address   = 186.43.32.76
-PROXY, ip_port      = 3128
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Colombia
-PROXY, ip_region    = CO
------------------------
-PROXY, ip_address   = 190.152.37.106
-PROXY, ip_port      = 53001
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Ecuador
-PROXY, ip_region    = EC
------------------------
-PROXY, ip_address   = 150.242.35.247
-PROXY, ip_port      = 53281
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Australia
-PROXY, ip_region    = AU
------------------------
-PROXY, ip_address   = 1.2.169.44
-PROXY, ip_port      = 48545
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 212.73.77.200
-PROXY, ip_port      = 41302
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Armenia
-PROXY, ip_region    = AM
------------------------
-PROXY, ip_address   = 1.10.187.208
-PROXY, ip_port      = 43736
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 203.190.53.82
-PROXY, ip_port      = 40721
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Indonesia
-PROXY, ip_region    = ID
------------------------
-PROXY, ip_address   = 83.169.208.183
-PROXY, ip_port      = 33654
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Russian Federation
-PROXY, ip_region    = RU
------------------------
-PROXY, ip_address   = 188.244.189.11
-PROXY, ip_port      = 55293
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Russian Federation
-PROXY, ip_region    = RU
------------------------
-PROXY, ip_address   = 118.174.234.55
-PROXY, ip_port      = 60770
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 185.195.47.187
-PROXY, ip_port      = 53996
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Spain
-PROXY, ip_region    = ES
------------------------
-PROXY, ip_address   = 190.90.140.33
-PROXY, ip_port      = 48464
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Colombia
-PROXY, ip_region    = CO
------------------------
-PROXY, ip_address   = 1.10.189.119
-PROXY, ip_port      = 38319
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 155.0.181.254
-PROXY, ip_port      = 38720
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Zambia
-PROXY, ip_region    = ZM
------------------------
-PROXY, ip_address   = 1.20.100.130
-PROXY, ip_port      = 44302
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 118.172.211.183
-PROXY, ip_port      = 57183
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 118.172.176.61
-PROXY, ip_port      = 44842
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 1.20.96.118
-PROXY, ip_port      = 55034
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 111.118.138.127
-PROXY, ip_port      = 55145
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Cambodia
-PROXY, ip_region    = KH
------------------------
-PROXY, ip_address   = 212.142.196.57
-PROXY, ip_port      = 50430
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Spain
-PROXY, ip_region    = ES
------------------------
-PROXY, ip_address   = 46.201.249.7
-PROXY, ip_port      = 52671
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Ukraine
-PROXY, ip_region    = UA
------------------------
-PROXY, ip_address   = 155.0.180.254
-PROXY, ip_port      = 33257
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Zambia
-PROXY, ip_region    = ZM
------------------------
-PROXY, ip_address   = 107.190.148.202
-PROXY, ip_port      = 58419
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = United States
-PROXY, ip_region    = US
------------------------
-PROXY, ip_address   = 88.247.26.201
-PROXY, ip_port      = 8080
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Turkey
-PROXY, ip_region    = TR
------------------------
-PROXY, ip_address   = 37.57.31.240
-PROXY, ip_port      = 53374
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Ukraine
-PROXY, ip_region    = UA
------------------------
-PROXY, ip_address   = 1.179.188.169
-PROXY, ip_port      = 37274
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 54.38.183.107
-PROXY, ip_port      = 3128
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = France
-PROXY, ip_region    = FR
------------------------
-PROXY, ip_address   = 212.237.124.15
-PROXY, ip_port      = 42093
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Iraq
-PROXY, ip_region    = IQ
------------------------
-PROXY, ip_address   = 178.128.31.153
-PROXY, ip_port      = 8080
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Singapore
-PROXY, ip_region    = SG
------------------------
-PROXY, ip_address   = 194.126.180.150
-PROXY, ip_port      = 53281
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Ukraine
-PROXY, ip_region    = UA
------------------------
-PROXY, ip_address   = 115.70.21.150
-PROXY, ip_port      = 57611
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Australia
-PROXY, ip_region    = AU
------------------------
-PROXY, ip_address   = 103.76.188.52
-PROXY, ip_port      = 34479
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = India
-PROXY, ip_region    = IN
------------------------
-PROXY, ip_address   = 103.255.73.10
-PROXY, ip_port      = 57267
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = India
-PROXY, ip_region    = IN
------------------------
-PROXY, ip_address   = 182.52.90.69
-PROXY, ip_port      = 56841
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 118.175.93.79
-PROXY, ip_port      = 60896
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 1.179.184.158
-PROXY, ip_port      = 38750
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 1.10.189.100
-PROXY, ip_port      = 45413
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 177.136.33.21
-PROXY, ip_port      = 3128
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Brazil
-PROXY, ip_region    = BR
------------------------
-PROXY, ip_address   = 125.26.99.186
-PROXY, ip_port      = 30021
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Thailand
-PROXY, ip_region    = TH
------------------------
-PROXY, ip_address   = 128.199.229.57
-PROXY, ip_port      = 3128
-PROXY, anonymity    = elite proxy
-PROXY, ip_country   = Singapore
-PROXY, ip_region    = SG
-> RandomProxy...
-> SetProxy: 89.109.54.137:36469
-Set ip address = 89.109.54.137
-current_time in Taiwan = 2019-02-28 15:00:06.053866
-> GetNBADataRequest...
----------------crawler_nba.GetNBADataRequest begins-------------------
-starting_url = https://stats.nba.com/teams/boxscores
-request_num = 0
-ip address = 89.109.54.137
-> Use Webdriver...
-type of table = <class 'list'>
-> GetNBAData...
----
-columns = ['TEAM', 'MATCH UP', 'GAME DATE', None, 'W/L', 'MIN', 'PTS', 'FGM', 'FGA', 'FG%', '3PM', '3PA', '3P%', 'FTM', 'FTA', 'FT%', 'OREB', 'DREB', 'REB', 'AST', 'STL', 'BLK', 'TOV', 'PF', '+/-']
----
-len(data_all_lines) = 1842
-> Progress = 0.00%
-> Progress = 0.05%
-> Progress = 0.11%
-> Progress = 0.16%
-> Progress = 0.22%
-> Progress = 0.27%
-> Progress = 0.33%
-> Progress = 0.38%
-> Progress = 0.43%
-> Progress = 0.49%
-> Progress = 0.54%
-> Progress = 0.60%
-> Progress = 0.65%
-> Progress = 0.71%
-> Progress = 0.76%
-> Progress = 0.81%
-> Progress = 0.87%
-> Progress = 0.92%
-> Progress = 0.98%
-> Progress = 1.03%
-> Progress = 1.09%
-> Progress = 1.14%
-> Progress = 1.19%
-> Progress = 1.25%
-> Progress = 1.30%
-> Progress = 1.36%
-> Progress = 1.41%
-> Progress = 1.47%
-> Progress = 1.52%
-> Progress = 1.57%
-> Progress = 1.63%
-> Progress = 1.68%
-> Progress = 1.74%
-> Progress = 1.79%
-> Progress = 1.85%
-> Progress = 1.90%
-> Progress = 1.95%
-> Progress = 2.01%
-> Progress = 2.06%
-> Progress = 2.12%
-> Progress = 2.17%
-> Progress = 2.23%
-> Progress = 2.28%
-> Progress = 2.33%
-> Progress = 2.39%
-> Progress = 2.44%
-> Progress = 2.50%
-> Progress = 2.55%
-> Progress = 2.61%
-> Progress = 2.66%
-> Progress = 2.71%
-> Progress = 2.77%
-> Progress = 2.82%
-> Progress = 2.88%
-> Progress = 2.93%
-> Progress = 2.99%
-> Progress = 3.04%
-> Progress = 3.09%
-> Progress = 3.15%
-> Progress = 3.20%
-> Progress = 3.26%
-> Progress = 3.31%
-> Progress = 3.37%
-> Progress = 3.42%
-> Progress = 3.47%
-> Progress = 3.53%
-> Progress = 3.58%
-> Progress = 3.64%
-> Progress = 3.69%
-> Progress = 3.75%
-> Progress = 3.80%
-> Progress = 3.85%
-> Progress = 3.91%
-> Progress = 3.96%
-> Progress = 4.02%
-> Progress = 4.07%
-> Progress = 4.13%
-> Progress = 4.18%
-> Progress = 4.23%
-> Progress = 4.29%
-> Progress = 4.34%
-> Progress = 4.40%
-> Progress = 4.45%
-> Progress = 4.51%
-> Progress = 4.56%
-> Progress = 4.61%
-> Progress = 4.67%
-> Progress = 4.72%
-> Progress = 4.78%
-> Progress = 4.83%
-> Progress = 4.89%
-> Progress = 4.94%
-> Progress = 4.99%
-> Progress = 5.05%
-> Progress = 5.10%
-> Progress = 5.16%
-> Progress = 5.21%
-> Progress = 5.27%
-> Progress = 5.32%
-> Progress = 5.37%
-Traceback (most recent call last):
-  File "/home/coslate/NBA_Win_Predictor/crawler/crawler_nba_main.py", line 161, in <module>
-    main()
-  File "/home/coslate/NBA_Win_Predictor/crawler/crawler_nba_main.py", line 44, in main
-    (all_data_loop, columns, browser, all_data_item_href) = crawler_nba.GetNBADataRequest(starting_url, thresh_change_proxy, thresh_change_proxy_list, season, scrape_all_season)
-  File "/home/coslate/NBA_Win_Predictor/crawler/package_crawler_nba/crawler_nba.py", line 259, in GetNBADataRequest
-    columns = GetNBAData(table, all_data_loop, all_data_item_href, browser)
-  File "/home/coslate/NBA_Win_Predictor/crawler/package_crawler_nba/crawler_nba.py", line 297, in GetNBAData
-    data_revised_line = [x.text if(x.text != '') else None for x in data_item]
-  File "/home/coslate/NBA_Win_Predictor/crawler/package_crawler_nba/crawler_nba.py", line 297, in <listcomp>
-    data_revised_line = [x.text if(x.text != '') else None for x in data_item]
-  File "/usr/local/lib/python3.6/dist-packages/selenium/webdriver/remote/webelement.py", line 76, in text
-    return self._execute(Command.GET_ELEMENT_TEXT)['value']
-  File "/usr/local/lib/python3.6/dist-packages/selenium/webdriver/remote/webelement.py", line 633, in _execute
-    return self._parent.execute(command, params)
-  File "/usr/local/lib/python3.6/dist-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
-    self.error_handler.check_response(response)
-  File "/usr/local/lib/python3.6/dist-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
-    raise exception_class(message, screen, stacktrace)
-selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
-from unknown error: web view not found
-  (Session info: chrome=72.0.3626.119)
-  (Driver info: chromedriver=2.46.628388 (4a34a70827ac54148e092aafb70504c4ea7ae926),platform=Linux 4.15.0-20-generic x86_64)
+scrape_all_season        = 0
+write_csv_use_sql        = 1
+> Proxy initialization...
+>> Initialization...
+>> GetProxyList...
+>> user_agent = Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1468.0 Safari/537.36
+>> -----------------------
+>> PROXY, ip_address   = 200.58.84.165
+>> PROXY, ip_port      = 48009
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Bolivia
+>> PROXY, ip_region    = BO
+>> -----------------------
+>> PROXY, ip_address   = 202.131.229.98
+>> PROXY, ip_port      = 38965
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Mongolia
+>> PROXY, ip_region    = MN
+>> -----------------------
+>> PROXY, ip_address   = 177.244.28.170
+>> PROXY, ip_port      = 56537
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Mexico
+>> PROXY, ip_region    = MX
+>> -----------------------
+>> PROXY, ip_address   = 181.115.168.45
+>> PROXY, ip_port      = 43555
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Bolivia
+>> PROXY, ip_region    = BO
+>> -----------------------
+>> PROXY, ip_address   = 118.174.234.198
+>> PROXY, ip_port      = 35312
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Thailand
+>> PROXY, ip_region    = TH
+>> -----------------------
+>> PROXY, ip_address   = 45.232.99.7
+>> PROXY, ip_port      = 61541
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Argentina
+>> PROXY, ip_region    = AR
+>> -----------------------
+>> PROXY, ip_address   = 95.79.54.143
+>> PROXY, ip_port      = 54754
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Russian Federation
+>> PROXY, ip_region    = RU
+>> -----------------------
+>> PROXY, ip_address   = 103.211.49.202
+>> PROXY, ip_port      = 52563
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Indonesia
+>> PROXY, ip_region    = ID
+>> -----------------------
+>> PROXY, ip_address   = 79.104.28.46
+>> PROXY, ip_port      = 41513
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Russian Federation
+>> PROXY, ip_region    = RU
+>> -----------------------
+>> PROXY, ip_address   = 182.52.87.190
+>> PROXY, ip_port      = 53814
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Thailand
+>> PROXY, ip_region    = TH
+>> -----------------------
+>> PROXY, ip_address   = 1.10.188.140
+>> PROXY, ip_port      = 47268
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Thailand
+>> PROXY, ip_region    = TH
+>> -----------------------
+>> PROXY, ip_address   = 187.191.20.3
+>> PROXY, ip_port      = 53616
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Mexico
+>> PROXY, ip_region    = MX
+>> -----------------------
+>> PROXY, ip_address   = 186.236.237.243
+>> PROXY, ip_port      = 35224
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Brazil
+>> PROXY, ip_region    = BR
+>> -----------------------
+>> PROXY, ip_address   = 175.111.129.125
+>> PROXY, ip_port      = 38664
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = India
+>> PROXY, ip_region    = IN
+>> -----------------------
+>> PROXY, ip_address   = 193.85.228.178
+>> PROXY, ip_port      = 31262
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Czech Republic
+>> PROXY, ip_region    = CZ
+>> -----------------------
+>> PROXY, ip_address   = 203.205.29.106
+>> PROXY, ip_port      = 39191
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Vietnam
+>> PROXY, ip_region    = VN
+>> -----------------------
+>> PROXY, ip_address   = 89.140.169.24
+>> PROXY, ip_port      = 46032
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Spain
+>> PROXY, ip_region    = ES
+>> -----------------------
+>> PROXY, ip_address   = 203.17.150.95
+>> PROXY, ip_port      = 53128
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Australia
+>> PROXY, ip_region    = AU
+>> -----------------------
+>> PROXY, ip_address   = 45.120.116.141
+>> PROXY, ip_port      = 42698
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = New Zealand
+>> PROXY, ip_region    = NZ
+>> -----------------------
+>> PROXY, ip_address   = 46.172.76.114
+>> PROXY, ip_port      = 50160
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Ukraine
+>> PROXY, ip_region    = UA
+>> -----------------------
+>> PROXY, ip_address   = 203.110.84.178
+>> PROXY, ip_port      = 41968
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = India
+>> PROXY, ip_region    = IN
+>> -----------------------
+>> PROXY, ip_address   = 80.90.88.147
+>> PROXY, ip_port      = 61888
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Albania
+>> PROXY, ip_region    = AL
+>> -----------------------
+>> PROXY, ip_address   = 187.162.6.65
+>> PROXY, ip_port      = 3128
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Mexico
+>> PROXY, ip_region    = MX
+>> -----------------------
+>> PROXY, ip_address   = 103.44.139.81
+>> PROXY, ip_port      = 50981
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = India
+>> PROXY, ip_region    = IN
+>> -----------------------
+>> PROXY, ip_address   = 118.174.234.144
+>> PROXY, ip_port      = 54641
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Thailand
+>> PROXY, ip_region    = TH
+>> -----------------------
+>> PROXY, ip_address   = 178.128.174.206
+>> PROXY, ip_port      = 3128
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = United Kingdom
+>> PROXY, ip_region    = GB
+>> -----------------------
+>> PROXY, ip_address   = 142.93.34.45
+>> PROXY, ip_port      = 3128
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = United Kingdom
+>> PROXY, ip_region    = GB
+>> -----------------------
+>> PROXY, ip_address   = 206.189.112.106
+>> PROXY, ip_port      = 3128
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = United Kingdom
+>> PROXY, ip_region    = GB
+>> -----------------------
+>> PROXY, ip_address   = 1.20.98.66
+>> PROXY, ip_port      = 58705
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Thailand
+>> PROXY, ip_region    = TH
+>> -----------------------
+>> PROXY, ip_address   = 1.20.98.57
+>> PROXY, ip_port      = 50450
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Thailand
+>> PROXY, ip_region    = TH
+>> -----------------------
+>> PROXY, ip_address   = 88.87.85.220
+>> PROXY, ip_port      = 58168
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Russian Federation
+>> PROXY, ip_region    = RU
+>> -----------------------
+>> PROXY, ip_address   = 209.146.24.55
+>> PROXY, ip_port      = 59132
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Philippines
+>> PROXY, ip_region    = PH
+>> -----------------------
+>> PROXY, ip_address   = 119.15.103.114
+>> PROXY, ip_port      = 58374
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Australia
+>> PROXY, ip_region    = AU
+>> -----------------------
+>> PROXY, ip_address   = 119.40.95.122
+>> PROXY, ip_port      = 54731
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Bangladesh
+>> PROXY, ip_region    = BD
+>> -----------------------
+>> PROXY, ip_address   = 109.60.154.31
+>> PROXY, ip_port      = 50929
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Russian Federation
+>> PROXY, ip_region    = RU
+>> -----------------------
+>> PROXY, ip_address   = 93.109.241.246
+>> PROXY, ip_port      = 50529
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Cyprus
+>> PROXY, ip_region    = CY
+>> -----------------------
+>> PROXY, ip_address   = 59.152.104.142
+>> PROXY, ip_port      = 32142
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Bangladesh
+>> PROXY, ip_region    = BD
+>> -----------------------
+>> PROXY, ip_address   = 107.178.4.215
+>> PROXY, ip_port      = 54604
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = United States
+>> PROXY, ip_region    = US
+>> -----------------------
+>> PROXY, ip_address   = 190.184.203.174
+>> PROXY, ip_port      = 47475
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Colombia
+>> PROXY, ip_region    = CO
+>> -----------------------
+>> PROXY, ip_address   = 94.244.44.67
+>> PROXY, ip_port      = 59374
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Ukraine
+>> PROXY, ip_region    = UA
+>> -----------------------
+>> PROXY, ip_address   = 103.106.216.242
+>> PROXY, ip_port      = 32768
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Indonesia
+>> PROXY, ip_region    = ID
+>> -----------------------
+>> PROXY, ip_address   = 81.198.119.241
+>> PROXY, ip_port      = 58752
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Latvia
+>> PROXY, ip_region    = LV
+>> -----------------------
+>> PROXY, ip_address   = 118.67.222.154
+>> PROXY, ip_port      = 36165
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Bangladesh
+>> PROXY, ip_region    = BD
+>> -----------------------
+>> PROXY, ip_address   = 131.108.1.19
+>> PROXY, ip_port      = 49331
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Argentina
+>> PROXY, ip_region    = AR
+>> -----------------------
+>> PROXY, ip_address   = 118.174.234.28
+>> PROXY, ip_port      = 42644
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Thailand
+>> PROXY, ip_region    = TH
+>> -----------------------
+>> PROXY, ip_address   = 118.174.234.55
+>> PROXY, ip_port      = 42041
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Thailand
+>> PROXY, ip_region    = TH
+>> -----------------------
+>> PROXY, ip_address   = 110.93.209.142
+>> PROXY, ip_port      = 61408
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Pakistan
+>> PROXY, ip_region    = PK
+>> -----------------------
+>> PROXY, ip_address   = 150.242.34.123
+>> PROXY, ip_port      = 53281
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Australia
+>> PROXY, ip_region    = AU
+>> -----------------------
+>> PROXY, ip_address   = 37.145.73.119
+>> PROXY, ip_port      = 53057
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Russian Federation
+>> PROXY, ip_region    = RU
+>> -----------------------
+>> PROXY, ip_address   = 177.73.15.197
+>> PROXY, ip_port      = 47523
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Brazil
+>> PROXY, ip_region    = BR
+>> -----------------------
+>> PROXY, ip_address   = 154.66.241.213
+>> PROXY, ip_port      = 31961
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = South Africa
+>> PROXY, ip_region    = ZA
+>> -----------------------
+>> PROXY, ip_address   = 181.129.74.58
+>> PROXY, ip_port      = 56858
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Colombia
+>> PROXY, ip_region    = CO
+>> -----------------------
+>> PROXY, ip_address   = 83.213.14.157
+>> PROXY, ip_port      = 39274
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Spain
+>> PROXY, ip_region    = ES
+>> -----------------------
+>> PROXY, ip_address   = 116.90.233.2
+>> PROXY, ip_port      = 38512
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Nepal
+>> PROXY, ip_region    = NP
+>> -----------------------
+>> PROXY, ip_address   = 142.93.44.189
+>> PROXY, ip_port      = 3128
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = United Kingdom
+>> PROXY, ip_region    = GB
+>> -----------------------
+>> PROXY, ip_address   = 142.93.44.251
+>> PROXY, ip_port      = 3128
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = United Kingdom
+>> PROXY, ip_region    = GB
+>> -----------------------
+>> PROXY, ip_address   = 45.70.216.70
+>> PROXY, ip_port      = 50896
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Brazil
+>> PROXY, ip_region    = BR
+>> -----------------------
+>> PROXY, ip_address   = 119.82.253.103
+>> PROXY, ip_port      = 58073
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Cambodia
+>> PROXY, ip_region    = KH
+>> -----------------------
+>> PROXY, ip_address   = 186.215.164.58
+>> PROXY, ip_port      = 43190
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Brazil
+>> PROXY, ip_region    = BR
+>> -----------------------
+>> PROXY, ip_address   = 181.129.141.218
+>> PROXY, ip_port      = 35331
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Colombia
+>> PROXY, ip_region    = CO
+>> -----------------------
+>> PROXY, ip_address   = 144.202.92.210
+>> PROXY, ip_port      = 80
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = United States
+>> PROXY, ip_region    = US
+>> -----------------------
+>> PROXY, ip_address   = 176.9.202.125
+>> PROXY, ip_port      = 3128
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Germany
+>> PROXY, ip_region    = DE
+>> -----------------------
+>> PROXY, ip_address   = 209.97.191.169
+>> PROXY, ip_port      = 3128
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = United Kingdom
+>> PROXY, ip_region    = GB
+>> -----------------------
+>> PROXY, ip_address   = 193.200.151.158
+>> PROXY, ip_port      = 37355
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Ukraine
+>> PROXY, ip_region    = UA
+>> -----------------------
+>> PROXY, ip_address   = 199.115.254.122
+>> PROXY, ip_port      = 31849
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = United States
+>> PROXY, ip_region    = US
+>> -----------------------
+>> PROXY, ip_address   = 128.199.229.57
+>> PROXY, ip_port      = 3128
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Singapore
+>> PROXY, ip_region    = SG
+>> -----------------------
+>> PROXY, ip_address   = 154.70.139.234
+>> PROXY, ip_port      = 42349
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = South Africa
+>> PROXY, ip_region    = ZA
+>> -----------------------
+>> PROXY, ip_address   = 196.32.103.155
+>> PROXY, ip_port      = 45691
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = South Africa
+>> PROXY, ip_region    = ZA
+>> -----------------------
+>> PROXY, ip_address   = 95.87.127.133
+>> PROXY, ip_port      = 50607
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Italy
+>> PROXY, ip_region    = IT
+>> -----------------------
+>> PROXY, ip_address   = 185.72.42.37
+>> PROXY, ip_port      = 47135
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Italy
+>> PROXY, ip_region    = IT
+>> -----------------------
+>> PROXY, ip_address   = 118.175.207.180
+>> PROXY, ip_port      = 47335
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Thailand
+>> PROXY, ip_region    = TH
+>> -----------------------
+>> PROXY, ip_address   = 213.137.36.169
+>> PROXY, ip_port      = 41258
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Italy
+>> PROXY, ip_region    = IT
+>> -----------------------
+>> PROXY, ip_address   = 46.151.254.174
+>> PROXY, ip_port      = 53281
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Ukraine
+>> PROXY, ip_region    = UA
+>> -----------------------
+>> PROXY, ip_address   = 190.90.63.137
+>> PROXY, ip_port      = 39709
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Colombia
+>> PROXY, ip_region    = CO
+>> -----------------------
+>> PROXY, ip_address   = 88.81.72.240
+>> PROXY, ip_port      = 43795
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Czech Republic
+>> PROXY, ip_region    = CZ
+>> -----------------------
+>> PROXY, ip_address   = 45.228.254.109
+>> PROXY, ip_port      = 36301
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Brazil
+>> PROXY, ip_region    = BR
+>> -----------------------
+>> PROXY, ip_address   = 118.175.176.136
+>> PROXY, ip_port      = 30915
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Thailand
+>> PROXY, ip_region    = TH
+>> -----------------------
+>> PROXY, ip_address   = 181.129.47.27
+>> PROXY, ip_port      = 42459
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Colombia
+>> PROXY, ip_region    = CO
+>> -----------------------
+>> PROXY, ip_address   = 176.62.185.72
+>> PROXY, ip_port      = 58133
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Russian Federation
+>> PROXY, ip_region    = RU
+>> -----------------------
+>> PROXY, ip_address   = 119.82.252.76
+>> PROXY, ip_port      = 33857
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Cambodia
+>> PROXY, ip_region    = KH
+>> -----------------------
+>> PROXY, ip_address   = 103.219.43.72
+>> PROXY, ip_port      = 40003
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = India
+>> PROXY, ip_region    = IN
+>> -----------------------
+>> PROXY, ip_address   = 116.212.129.58
+>> PROXY, ip_port      = 59964
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Cambodia
+>> PROXY, ip_region    = KH
+>> -----------------------
+>> PROXY, ip_address   = 103.71.255.10
+>> PROXY, ip_port      = 51242
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Indonesia
+>> PROXY, ip_region    = ID
+>> -----------------------
+>> PROXY, ip_address   = 196.32.103.44
+>> PROXY, ip_port      = 52761
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = South Africa
+>> PROXY, ip_region    = ZA
+>> -----------------------
+>> PROXY, ip_address   = 181.129.140.226
+>> PROXY, ip_port      = 34576
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Colombia
+>> PROXY, ip_region    = CO
+>> -----------------------
+>> PROXY, ip_address   = 103.105.68.124
+>> PROXY, ip_port      = 40392
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Indonesia
+>> PROXY, ip_region    = ID
+>> -----------------------
+>> PROXY, ip_address   = 170.210.236.1
+>> PROXY, ip_port      = 55350
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Argentina
+>> PROXY, ip_region    = AR
+>> -----------------------
+>> PROXY, ip_address   = 221.120.163.242
+>> PROXY, ip_port      = 31767
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Cambodia
+>> PROXY, ip_region    = KH
+>> -----------------------
+>> PROXY, ip_address   = 94.136.157.121
+>> PROXY, ip_port      = 34671
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Slovakia
+>> PROXY, ip_region    = SK
+>> -----------------------
+>> PROXY, ip_address   = 94.180.108.102
+>> PROXY, ip_port      = 54022
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Russian Federation
+>> PROXY, ip_region    = RU
+>> -----------------------
+>> PROXY, ip_address   = 36.67.199.89
+>> PROXY, ip_port      = 61082
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Indonesia
+>> PROXY, ip_region    = ID
+>> -----------------------
+>> PROXY, ip_address   = 189.113.217.35
+>> PROXY, ip_port      = 61657
+>> PROXY, anonymity    = elite proxy
+>> PROXY, ip_country   = Brazil
+>> PROXY, ip_region    = BR
+>> RandomProxy...
+>> SetProxy: 37.145.73.119:53057
+name 'http' is not defined
+>> Randomly get new proxy.
+>> RandomProxy...
+>> SetProxy: 189.113.217.35:61657
+name 'http' is not defined
+>> Randomly get new proxy.
+>> RandomProxy...
+>> SetProxy: 95.79.54.143:54754
+name 'http' is not defined
+>> Randomly get new proxy.
+>> RandomProxy...
+>> SetProxy: 103.219.43.72:40003
+name 'http' is not defined
+>> Randomly get new proxy.
+>> RandomProxy...
+>> SetProxy: 103.219.43.72:40003
+name 'http' is not defined
+>> Randomly get new proxy.
+>> RandomProxy...
+>> SetProxy: 88.81.72.240:43795
+name 'http' is not defined
+>> Randomly get new proxy.
+>> RandomProxy...
+>> SetProxy: 46.151.254.174:53281
+name 'http' is not defined
+>> Randomly get new proxy.
+>> RandomProxy...
+>> SetProxy: 45.232.99.7:61541
+name 'http' is not defined
+>> Randomly get new proxy.
+>> RandomProxy...
+>> SetProxy: 181.129.74.58:56858
+>> Set ip address = 181.129.74.58
+> Sideband setting...
+current_time in Taiwan = 2019-03-02 22:00:30.447825
+current time in USA(America/New York)       = 2019-03-02 09:00:30.448512-05:00
+current date in USA(America/New York)       = 03/02/2019
+Use yesterday date in USA(America/New York) = 03/01/2019
+> Crawling/Scraping...
+>> starting_url = https://stats.nba.com/teams/boxscores
+>> request_num = 0
+>> ip address = 181.129.74.58
+>> Use Webdriver...
+>> type of table = <class 'list'>
+>> GetNBAData...
+>> ---
+>> columns = ['TEAM', 'MATCH UP', 'GAME DATE', None, 'W/L', 'MIN', 'PTS', 'FGM', 'FGA', 'FG%', '3PM', '3PA', '3P%', 'FTM', 'FTA', 'FT%', 'OREB', 'DREB', 'REB', 'AST', 'STL', 'BLK', 'TOV', 'PF', '+/-']
+>> ---
+>> len(data_all_lines) = 50
+>> Progress = 0.00%
+>> Progress = 2.00%
+>> Progress = 4.00%
+>> Progress = 6.00%
+>> Progress = 8.00%
+>> Progress = 10.00%
+>> Progress = 12.00%
+>> Progress = 14.00%
+>> Progress = 16.00%
+>> Progress = 18.00%
+>> Progress = 20.00%
+>> Progress = 22.00%
+>> Progress = 24.00%
+>> Progress = 26.00%
+>> Progress = 28.00%
+>> Progress = 30.00%
+>> Progress = 32.00%
+>> Progress = 34.00%
+>> Progress = 36.00%
+>> Progress = 38.00%
+>> Progress = 40.00%
+>> Progress = 42.00%
+>> Progress = 44.00%
+>> Progress = 46.00%
+>> Progress = 48.00%
+>> Progress = 50.00%
+>> Progress = 52.00%
+>> Progress = 54.00%
+>> Progress = 56.00%
+>> Progress = 58.00%
+>> Progress = 60.00%
+>> Progress = 62.00%
+>> Progress = 64.00%
+>> Progress = 66.00%
+>> Progress = 68.00%
+>> Progress = 70.00%
+>> Progress = 72.00%
+>> Progress = 74.00%
+>> Progress = 76.00%
+>> Progress = 78.00%
+>> Progress = 80.00%
+>> Progress = 82.00%
+>> Progress = 84.00%
+>> Progress = 86.00%
+>> Progress = 88.00%
+>> Progress = 90.00%
+>> Progress = 92.00%
+>> Progress = 94.00%
+>> Progress = 96.00%
+>> Progress = 98.00%
+>> Progress = 102.00%
+> Constructing the dataframe...
+> Check whether specific teams have games...
+>> ===========SHOW==========
+> Send mails if specific team has games...
+>> No NBA games for GSW at 03/01/2019.
+> Send mails if LAL lost games...
+>> index = 0, team = LAL, href = https://stats.nba.com/game/0021800934
+>> len of team_name_list = 2
+>> len of players_table_list = 2
+>> team_scraped = MIL
+>> ---
+>> columns = ['PLAYER', 'MIN', 'FGM', 'FGA', 'FG%', '3PM', '3PA', '3P%', 'FTM', 'FTA', 'FT%', 'OREB', 'DREB', 'REB', 'AST', 'TOV', 'STL', 'BLK', 'PF', 'PTS', '+/-']
+>> ---
+>> Progress = 0.00%
+>> Progress = 20.00%
+>> Progress = 40.00%
+>> Progress = 60.00%
+>> Progress = 80.00%
+>> Progress = 100.00%
+>> ---
+>> team_scraped = LAL
+>> ---
+>> columns = ['PLAYER', 'MIN', 'FGM', 'FGA', 'FG%', '3PM', '3PA', '3P%', 'FTM', 'FTA', 'FT%', 'OREB', 'DREB', 'REB', 'AST', 'TOV', 'STL', 'BLK', 'PF', 'PTS', '+/-']
+>> ---
+>> Progress = 0.00%
+>> Progress = 20.00%
+>> Progress = 40.00%
+>> Progress = 60.00%
+>> Progress = 80.00%
+>> Progress = 100.00%
+>> ---
+>> index = 1, team = MIL, href = https://stats.nba.com/game/0021800934
+>> ===========SHOW==========
+MIL starting players: 
++----+-------------------------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+--------+--------+-------+-------+-------+-------+-------+------+-------+-------+
+|    | PLAYER                  | MIN   |   FGM |   FGA |   FG% |   3PM |   3PA |   3P% |   FTM |   FTA |   FT% |   OREB |   DREB |   REB |   AST |   TOV |   STL |   BLK |   PF |   PTS |   +/- |
+|----+-------------------------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+--------+--------+-------+-------+-------+-------+-------+------+-------+-------|
+|  0 | Khris Middleton F       | 32:11 |     4 |     8 |  50   |     2 |     4 |  50   |     8 |     9 |  88.9 |      1 |      4 |     5 |     6 |     0 |     0 |     0 |    4 |    18 |    -3 |
+|  1 | Giannis Antetokounmpo F | 32:29 |     7 |    14 |  50   |     0 |     2 |   0   |     2 |     4 |  50   |      2 |     13 |    15 |     6 |     4 |     0 |     3 |    4 |    16 |     3 |
+|  2 | Brook Lopez C           | 20:18 |     4 |     8 |  50   |     3 |     6 |  50   |     0 |     0 |   0   |      0 |      3 |     3 |     0 |     2 |     0 |     1 |    1 |    11 |     0 |
+|  3 | Malcolm Brogdon G       | 27:45 |     8 |    13 |  61.5 |     3 |     3 | 100   |     2 |     2 | 100   |      0 |      2 |     2 |     4 |     0 |     0 |     0 |    0 |    21 |     9 |
+|  4 | Eric Bledsoe G          | 30:52 |    12 |    24 |  50   |     2 |    11 |  18.2 |     5 |     5 | 100   |      2 |      7 |     9 |     5 |     1 |     0 |     1 |    0 |    31 |    14 |
++----+-------------------------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+--------+--------+-------+-------+-------+-------+-------+------+-------+-------+
+>> <><><><><><><><><><><><><><><><><><><><><><><><><
+>> <><><><><><><><><><><>>END<><><><><><><><><><><><
+>> <><><><><><><><><><><><><><><><><><><><><><><><><
+LAL starting players: 
++----+------------------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+--------+--------+-------+-------+-------+-------+-------+------+-------+-------+
+|    | PLAYER           | MIN   |   FGM |   FGA |   FG% |   3PM |   3PA |   3P% |   FTM |   FTA |   FT% |   OREB |   DREB |   REB |   AST |   TOV |   STL |   BLK |   PF |   PTS |   +/- |
+|----+------------------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+--------+--------+-------+-------+-------+-------+-------+------+-------+-------|
+|  0 | Brandon Ingram F | 39:15 |    13 |    21 |  61.9 |     1 |     4 |  25   |     4 |     5 |    80 |      1 |      7 |     8 |     2 |     0 |     0 |     1 |    3 |    31 |   -11 |
+|  1 | LeBron James F   | 38:49 |    10 |    19 |  52.6 |     3 |     8 |  37.5 |     8 |    10 |    80 |      2 |      5 |     7 |    10 |     3 |     1 |     0 |    2 |    31 |    -4 |
+|  2 | Kyle Kuzma C     | 34:23 |     5 |    18 |  27.8 |     1 |     6 |  16.7 |     1 |     1 |   100 |      1 |      5 |     6 |     3 |     1 |     0 |     0 |    2 |    12 |    -9 |
+|  3 | Reggie Bullock G | 25:39 |     2 |     5 |  40   |     1 |     3 |  33.3 |     0 |     0 |     0 |      0 |      3 |     3 |     0 |     0 |     0 |     0 |    1 |     5 |     9 |
+|  4 | Rajon Rondo G    | 39:54 |     7 |    19 |  36.8 |     4 |    12 |  33.3 |     2 |     2 |   100 |      2 |      6 |     8 |     9 |     3 |     2 |     0 |    5 |    20 |   -17 |
++----+------------------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+--------+--------+-------+-------+-------+-------+-------+------+-------+-------+/home/coslate/.local/lib/python3.6/site-packages/pymysql/cursors.py:170: Warning: (1007, "Can't create database 'NBA_db'; database exists")
+  result = self._query(query)
 
+>> <><><><><><><><><><><><><><><><><><><><><><><><><
+>> <><><><><><><><><><><>>END<><><><><><><><><><><><
+>> <><><><><><><><><><><><><><><><><><><><><><><><><
+package_email.SendMail : Email Sent!
+>> There are NBA games that LAL lost at 03/01/2019. Email sent!
+> Close the browser...
+> Database Initialization(MySQL)...
+>> MySQLDBInitializeNBA...
+>> Table 'NBA_2018_2019_tb' already exists!
+> Store scraped data into database(MySQL)...
+>> Store only data with date = 03/01/2019...
+>> MySQLDBStoreNBAData...
+> Get scraped data from database(MySQL)...
+> Check whether to write scraped data to a CSV file(MySQL)...
+> Store done and close the database connection(MySQL)...
+>> Close MySQL Database connection.
