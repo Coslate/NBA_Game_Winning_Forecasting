@@ -66,6 +66,8 @@ def main():
 #Check if the data has the interested game.
     print(f'> Check whether specific teams have games...')
     (game_set_num, get_wanted_data, selected_data_df, short_selected_data_df, starters_data_dict) = crawler_nba.CheckDataHasSpecifiedTeam(yesterday_date_usa, team, all_data_df, browser, all_data_item_href)
+    selected_df_today_list = crawler_nba.CheckDataHasSpecifiedDate(yesterday_date_usa, all_data_df)
+    all_data_today_df      = crawler_nba.ConstructDFFROMListOFList(selected_df_today_list, columns)
 
 #Send mails if interested game occurs.
     print(f'> Send mails if specific team has games...')
@@ -89,11 +91,11 @@ def main():
 
 #Get scraped data from MySQL.
     print(f'> Get scraped data from database(MySQL)...')
-    all_data_df_sql = crawler_nba.GetAllDataFromDatabase(table)
+    all_data_sql_df = crawler_nba.GetAllDataFromDatabase(table)
 
 #Check whether to write out scraped data to a CSV file.
     print(f'> Check whether to write scraped data to a CSV file(MySQL)...')
-    crawler_nba.CheckIfWriteToCSV(all_data_df, all_data_df_sql, out_file_name, indexing_to_csv, write_csv_use_sql)
+    crawler_nba.CheckIfWriteToCSV(all_data_df, all_data_today_df, all_data_sql_df, out_file_name, indexing_to_csv, write_csv_use_sql, scrape_all_season)
 
 #Close the connection of MySQL Database
     print(f'> Store done and close the database connection(MySQL)...')

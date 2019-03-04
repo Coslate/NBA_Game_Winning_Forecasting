@@ -277,12 +277,15 @@ def ConstructDFFROMListOFList(all_data_loop, columns):
     all_data_df.dropna(axis=1, how='all', inplace=True) #Delete the empty columns
     return all_data_df
 
-def CheckIfWriteToCSV(all_data_df_nba_stats, all_data_df_sql, out_file_name, indexing_to_csv, write_csv_use_sql):
+def CheckIfWriteToCSV(all_data_df, all_data_today_df, all_data_df_sql, out_file_name, indexing_to_csv, write_csv_use_sql, scrape_all_season):
     if(out_file_name != ''):
         if(write_csv_use_sql):
             WriteDFToCSV(all_data_df_sql, out_file_name, indexing_to_csv)
         else:
-            WriteDFToCSV(all_data_df_nba_stats, out_file_name, indexing_to_csv)
+            if(scrape_all_season):
+                WriteDFToCSV(all_data_df, out_file_name, indexing_to_csv)
+            else:
+                WriteDFToCSV(all_data_today_df, out_file_name, indexing_to_csv)
 
 def WriteDFToCSV(all_data_df, out_file_name, indexing_to_csv):
     if(out_file_name != ""):
@@ -428,7 +431,6 @@ def CheckTeamLose(team, all_data_df):
 
 def CheckIsMailAddress(gmail_address):
     ret_is_mail_addr = False
-
     if(re.match(r'\S+\@\S+', gmail_address)):
         ret_is_mail_addr = True
 
@@ -443,12 +445,16 @@ def InterpretingGmailInfo(gmail_user, gmail_to_list):
 
     if(re.match(r'.*\/.*', gmail_to_list)):
         #the -gmail_to_list is a file format
-        with open(gmail_user, “r”) as f:
+        with open(gmail_to_list, 'r') as f:
             read_content = f.readlines()
 
         for i, mail_address in enumerate(read_content):
+            mail_address = mail_address.strip()
+
+            if(re.match(r'^\#.*', mail_address)):
+                continue
             if(not(CheckIsMailAddress(mail_address))):
-                print("Error: The {} line in {} should be an email address. Please refine it.".format(i+1, gmail_to_list))
+                print("Error: The number {} line in {}, which is {}, should be an email address. Please refine it.".format(i+1, gmail_to_list, mail_address))
                 sys.exit(1)
             else:
                 gmail_ret_list.append(mail_address)
@@ -458,8 +464,9 @@ def InterpretingGmailInfo(gmail_user, gmail_to_list):
         candidate_mail_list = m.group(1)
         read_content = [x for x in candidate_mail_list.split(',') if(x)]
         for i, mail_address in enumerate(read_content):
+            mail_address = mail_address.strip()
             if(not(CheckIsMailAddress(mail_address))):
-                print("Error: The {} line in {} should be an email address. Please refine it.".format(i+1, gmail_to_list))
+                print("Error: The number {} element in {} , which is {}, should be an email address. Please refine it.".format(i+1, gmail_to_list, mail_address))
                 sys.exit(1)
             else:
                 gmail_ret_list.append(mail_address)
@@ -470,54 +477,58 @@ def InterpretingGmailInfo(gmail_user, gmail_to_list):
     return gmail_user, gmail_ret_list
 
 def CheckSendMails(date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict, gmail_user, gmail_to_list):
-    if(get_wanted_data):
-        gmail_user     = 'coslate@media.ee.ntu.edu.tw'
-        gmail_password = password # your gmail password
-        content  = 'There is a game ' if(game_set_num==1) else 'There are {x} games '.format(x=game_set_num)
-        content += 'that {x} plays today : \n'.format(x=team)
-        content += tabulate(short_selected_data_df, headers='keys', tablefmt='psql')
-        content += '\n\n\n'+'detailed : '+'\n'
-        content += tabulate(selected_data_df, headers='keys', tablefmt='psql')
-        #Also show the statistics of the starting players of the teams
-        team_sel_list  = list(selected_data_df['TEAM'].values)
-        for team_sel in team_sel_list:
-            content += '\n\n\n {} starting players : '.format(team_sel)+'\n'
-            content += tabulate(starters_data_dict[team_sel], headers='keys', tablefmt='psql')
+    if(gmail_user != ''):
+        (gmail_user, gmail_to_list) = InterpretingGmailInfo(gmail_user, gmail_to_list)
 
-        title    = 'NBA game statistics for {x}'.format(x = team)
-        to_addr  = gmail_user
-        cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'
-        email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
-        print(f'>> There are NBA games for {team} at {date_usa}. Email sent!')
-    else:
-        print(f'>> No NBA games for {team} at {date_usa}.')
+        if(get_wanted_data):
+            gmail_password = password # your gmail password
+            content  = 'There is a game ' if(game_set_num==1) else 'There are {x} games '.format(x=game_set_num)
+            content += 'that {x} plays today : \n'.format(x=team)
+            content += tabulate(short_selected_data_df, headers='keys', tablefmt='psql')
+            content += '\n\n\n'+'detailed : '+'\n'
+            content += tabulate(selected_data_df, headers='keys', tablefmt='psql')
+            #Also show the statistics of the starting players of the teams
+            team_sel_list  = list(selected_data_df['TEAM'].values)
+            for team_sel in team_sel_list:
+                content += '\n\n\n {} starting players : '.format(team_sel)+'\n'
+                content += tabulate(starters_data_dict[team_sel], headers='keys', tablefmt='psql')
+
+            title    = 'NBA game statistics for {x}'.format(x = team)
+            to_addr  = ', '.join(gmail_to_list)
+            cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'
+            email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
+            print(f'>> There are NBA games for {team} at {date_usa}. Email sent!')
+        else:
+            print(f'>> No NBA games for {team} at {date_usa}.')
 
 def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_item_href, gmail_user, gmail_to_list):
     get_wanted_send_data = 0
     (game_set_num, get_wanted_data, selected_data_df, short_selected_df, starters_data_dict) = CheckDataHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href)
-    if(get_wanted_data):
-        (get_send_data_set_num, get_wanted_send_data, selected_send_data_df, short_selected_send_data_df) = CheckTeamLose(team, selected_data_df)
+    if(gmail_user != ''):
+        (gmail_user, gmail_to_list) = InterpretingGmailInfo(gmail_user, gmail_to_list)
 
-    if(get_wanted_send_data):
-        gmail_user     = 'coslate@media.ee.ntu.edu.tw'
-        gmail_password = password # your gmail password
-        content  = 'Oops!!!!!! {x} lost the games : \n'.format(x=team) if(get_send_data_set_num > 1) else 'Oops!!!!!! {x} lost the game : \n'.format(x=team)
-        content += tabulate(short_selected_send_data_df, headers='keys', tablefmt='psql')
-        content += '\n\n\n'+'detailed : '+'\n'
-        content += tabulate(selected_send_data_df, headers='keys', tablefmt='psql')
-        #Also show the statistics of the starting players of the teams
-        team_sel_list  = list(selected_send_data_df['TEAM'].values)
-        for team_sel in team_sel_list:
-            content += '\n\n\n {} starting players : '.format(team_sel)+'\n'
-            content += tabulate(starters_data_dict[team_sel], headers='keys', tablefmt='psql')
+        if(get_wanted_data):
+            (get_send_data_set_num, get_wanted_send_data, selected_send_data_df, short_selected_send_data_df) = CheckTeamLose(team, selected_data_df)
 
-        title    = 'NBA game statistics for {x}'.format(x = team)
-        to_addr  = gmail_user
-        cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'+', '+'ino.liao@gmail.com'
-        email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
-        print(f'>> There are NBA games that {team} lost at {date}. Email sent!')
-    else:
-        print(f'>> No NBA games for {team} losing at {date}.')
+        if(get_wanted_send_data):
+            gmail_password = password # your gmail password
+            content  = 'Oops!!!!!! {x} lost the games : \n'.format(x=team) if(get_send_data_set_num > 1) else 'Oops!!!!!! {x} lost the game : \n'.format(x=team)
+            content += tabulate(short_selected_send_data_df, headers='keys', tablefmt='psql')
+            content += '\n\n\n'+'detailed : '+'\n'
+            content += tabulate(selected_send_data_df, headers='keys', tablefmt='psql')
+            #Also show the statistics of the starting players of the teams
+            team_sel_list  = list(selected_send_data_df['TEAM'].values)
+            for team_sel in team_sel_list:
+                content += '\n\n\n {} starting players : '.format(team_sel)+'\n'
+                content += tabulate(starters_data_dict[team_sel], headers='keys', tablefmt='psql')
+
+            title    = 'NBA game statistics for {x}'.format(x = team)
+            to_addr  = ', '.join(gmail_to_list)
+            cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'
+            email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
+            print(f'>> There are NBA games that {team} lost at {date}. Email sent!')
+        else:
+            print(f'>> No NBA games for {team} losing at {date}.')
 
 def GetWikiLinksContent(starting_url, cur, table):
     all_internal_links_loop = []
