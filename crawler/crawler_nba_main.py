@@ -23,7 +23,7 @@ def main():
 
 #Argument Parser
     print(f'> Parse the argument...')
-    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season, write_csv_use_sql) = ArgumentParser()
+    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season, write_csv_use_sql, gmail_user, gmail_to_list) = ArgumentParser()
     if(is_debug):
         print(f'thresh_change_proxy      = {thresh_change_proxy}')
         print(f'thresh_change_proxy_list = {thresh_change_proxy_list}')
@@ -69,11 +69,11 @@ def main():
 
 #Send mails if interested game occurs.
     print(f'> Send mails if specific team has games...')
-    crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict)
+    crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict, gmail_user, gmail_to_list)
 
 #Send to I-No if Lakers lose a game.
     print(f'> Send mails if LAL lost games...')
-    crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAL', all_data_df, password, browser, all_data_item_href)
+    crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAL', all_data_df, password, browser, all_data_item_href, gmail_user, gmail_to_list)
 
 #Close
     print(f'> Close the browser...')
@@ -154,6 +154,10 @@ def ArgumentParser():
         team = args.team
     if args.gmail_password:
         password = args.gmail_password
+    if args.gmail_user:
+        gmail_user = args.gmail_user
+    if args.gmail_to_list:
+        gmail_to_list = args.gmail_to_list
     if args.season:
         season = args.season
     if args.mysql_password:
@@ -169,7 +173,7 @@ def ArgumentParser():
     if args.write_csv_use_sql:
         write_csv_use_sql = int(args.write_csv_use_sql)
 
-    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season, write_csv_use_sql)
+    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season, write_csv_use_sql, gmail_user, gmail_to_list)
 
 #-----------------Execution------------------#
 if __name__ == '__main__':

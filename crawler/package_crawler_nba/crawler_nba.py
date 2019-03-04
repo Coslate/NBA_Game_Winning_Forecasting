@@ -426,7 +426,50 @@ def CheckTeamLose(team, all_data_df):
 
     return(game_set_num, get_wanted_data, selected_df, short_sel_df)
 
-def CheckSendMails(date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict):
+def CheckIsMailAddress(gmail_address):
+    ret_is_mail_addr = False
+
+    if(re.match(r'\S+\@\S+', gmail_address)):
+        ret_is_mail_addr = True
+
+    return ret_is_mail_addr
+
+def InterpretingGmailInfo(gmail_user, gmail_to_list):
+    gmail_ret_list = []
+
+    if(not(CheckIsMailAddress(gmail_user))):
+        print("Error: Your input '-gmail_user' should be an email address. Please refine it.")
+        sys.exit(1)
+
+    if(re.match(r'.*\/.*', gmail_to_list)):
+        #the -gmail_to_list is a file format
+        with open(gmail_user, “r”) as f:
+            read_content = f.readlines()
+
+        for i, mail_address in enumerate(read_content):
+            if(not(CheckIsMailAddress(mail_address))):
+                print("Error: The {} line in {} should be an email address. Please refine it.".format(i+1, gmail_to_list))
+                sys.exit(1)
+            else:
+                gmail_ret_list.append(mail_address)
+    elif(re.match(r'\[.*\]', gmail_to_list)):
+        #the -gmail_to_list is a [address1, address2, ...] format
+        m = re.match(r'\[(.*)\]', gmail_to_list)
+        candidate_mail_list = m.group(1)
+        read_content = [x for x in candidate_mail_list.split(',') if(x)]
+        for i, mail_address in enumerate(read_content):
+            if(not(CheckIsMailAddress(mail_address))):
+                print("Error: The {} line in {} should be an email address. Please refine it.".format(i+1, gmail_to_list))
+                sys.exit(1)
+            else:
+                gmail_ret_list.append(mail_address)
+    else:
+        print("Error: Your input '-gmail_to_list' should be a list of mail address. Please refine it.")
+        sys.exit(1)
+
+    return gmail_user, gmail_ret_list
+
+def CheckSendMails(date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict, gmail_user, gmail_to_list):
     if(get_wanted_data):
         gmail_user     = 'coslate@media.ee.ntu.edu.tw'
         gmail_password = password # your gmail password
@@ -449,7 +492,7 @@ def CheckSendMails(date_usa, game_set_num, selected_data_df, short_selected_data
     else:
         print(f'>> No NBA games for {team} at {date_usa}.')
 
-def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_item_href):
+def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_item_href, gmail_user, gmail_to_list):
     get_wanted_send_data = 0
     (game_set_num, get_wanted_data, selected_data_df, short_selected_df, starters_data_dict) = CheckDataHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href)
     if(get_wanted_data):
