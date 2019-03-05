@@ -42,7 +42,11 @@ The functions are listed as the below:
 1.  It will first randomly select a proxy IP from [https://www.sslproxies.org](https://www.sslproxies.org) as a proxy for the following scraping.
 2.  Then, the boxscores data listed in [NBA.stats](https://stats.nba.com/teams/boxscores) will be scraped into your local MySQL database.
 3.  If there is a NBA game which your interested team plays today, then the program can also send you a notify mail([Email sending subsystem](#Email-sending-subsystem)).
-4.  There are the following arguments that need to be specified: 
+4.  The content of the notified mail will include : 
+    *The summarized game data which your interested team just played.
+    *The detailed data of each team in the match.
+    *The detailed data of each starting players of each team in the match.
+5.  There are the following arguments that need to be specified: 
 
 | Argument | Default Value | Required | Comments |
 | :------- |:-------------:|:-------------:| :--------|
@@ -66,7 +70,9 @@ It has the following arguments to specify:
 | Argument | Default Value | Required | Comments |
 | :------- |:-------------:|:-------------:| :--------|
 | -team     | GSW   | N | To search the NBA games play today on [NBA.stats](https://stats.nba.com/teams/boxscores). If the team indeed has a game today, it will send a mail to notify you. |
-| -gmail_p  | None  | Y | The password of your gmail account. It is in order to send the notify mails. |
+| -gmail_user  | None  | N | The 'From' email address to send the notified mail. If this argument is not set, the notified mail will not be sent.|
+| -gmail_p  | None  | N | The password of the gmail account of -gmail_user. |
+| -gmail_to_list  | None  | N | The 'To' list to specify the receivers of the notified mail sent by -gmail_user. It can be specified in two ways. The first one is `-gmail_to_list ./notify_mail_receive.list`, where the notify_mail_receive.list is a file that each line in it is an email address of a receiver. The second one is `-gmail_to_list '[mail_address_1, mail_address_2, ..., mail_address_n]'`. |
 
 
 ****
