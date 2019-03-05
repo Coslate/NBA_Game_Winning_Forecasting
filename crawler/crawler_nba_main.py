@@ -131,7 +131,7 @@ def ArgumentParser():
     parser.add_argument("--team", "-team", help="The team specified in this argument will be searched in the statistics of the games played today on stats.nba.com. If the specified team occurs, the statistics will be sent to your mailbox.")
     parser.add_argument("--gmail_password", "-gmail_p", help="The password of your gmail.")
     parser.add_argument("--gmail_user", "-gmail_user", help="The 'From' user to send the notify mails.")
-    parser.add_argument("--gmail_to_list", "-gmail_to_list", help="The 'To' users that receive the sending notified mails from -gmail_user. It can be specified as a file that includes one email address of a receiver each line or just specified as '-gmail_to_list [receiver_email_address_1, receiver_email_address_2, ..., receiver_email_address_n]")
+    parser.add_argument("--gmail_to_list", "-gmail_to_list", help="The 'To' users that receive the sending notified mails from -gmail_user. It can be specified as a file that includes one email address of a receiver each line or just specified as '-gmail_to_list \'[receiver_email_address_1, receiver_email_address_2, ..., receiver_email_address_n]\'")
     parser.add_argument("--season", "-season", help="The NBA season that you want to scrape. For example, '-season 2018-19' will make the script scrape the NBA game data in the 2018-2019 season. The default is 2018-19")
     parser.add_argument("--mysql_password", "-sql_p", help="The password to connect to MySQL server.", required=True)
     parser.add_argument("--mysql_table_name", "-sql_tn", help="The table name that will be used to store data.", required=True)
