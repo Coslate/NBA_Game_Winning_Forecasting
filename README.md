@@ -45,7 +45,7 @@ The functions are listed as the below:
 4.  The content of the notified mail will include : 
     * The summarized game data which your interested team just played.
     * The detailed data of each team in the match.
-    * The detailed data of each starting players of each team in the match.
+    * The detailed data of the starting players of each team in the match.
 5.  There are the following arguments that need to be specified: 
 
 | Argument | Default Value | Required | Comments |
