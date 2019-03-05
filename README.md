@@ -43,9 +43,11 @@ The functions are listed as the below:
 2.  Then, the boxscores data listed in [NBA.stats](https://stats.nba.com/teams/boxscores) will be scraped into your local MySQL database.
 3.  If there is a NBA game which your interested team plays today, then the program can also send you a notify mail([Email sending subsystem](#Email-sending-subsystem)).
 4.  The content of the notified mail will include : 
-    *The summarized game data which your interested team just played.
-    *The detailed data of each team in the match.
-    *The detailed data of each starting players of each team in the match.
+```
+        *The summarized game data which your interested team just played.
+        *The detailed data of each team in the match.
+        *The detailed data of each starting players of each team in the match.
+```
 5.  There are the following arguments that need to be specified: 
 
 | Argument | Default Value | Required | Comments |
