@@ -523,7 +523,7 @@ def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_ite
                 content += tabulate(starters_data_dict[team_sel], headers='keys', tablefmt='psql')
 
             title    = 'NBA game statistics for {x}'.format(x = team)
-            to_addr  = ', '.join(gmail_to_list)
+            to_addr  = ', '.join(gmail_to_list) + ', ino.liao@gmail.com'
             cc_addr  = gmail_user+', '+'vickiehsu828@gmail.com'
             email.SendMail(gmail_user, gmail_password, content, title, to_addr, cc_addr)
             print(f'>> There are NBA games that {team} lost at {date}. Email sent!')
