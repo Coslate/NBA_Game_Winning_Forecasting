@@ -148,6 +148,10 @@ def MySQLDBStoreNBAData(selected_df_list, table, columns_list):
         if(cur.rowcount==0):
             column_name   = ', '.join(columns_list)
             column_values = ', '.join(column_values_list)
+
+            print(f'>> column_name = {column_name}')
+            print(f'>> column_values = {column_values}')
+
             execute_str = 'INSERT INTO {table_name} ({column_name}) VALUES ({column_values});'.format(table_name = table, column_name=column_name, column_values=column_values)
             cur.execute(execute_str)
             cur.connection.commit()
