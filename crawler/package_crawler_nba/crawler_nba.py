@@ -350,10 +350,14 @@ def GetStartersOfEachGame(href_list, browser, team_list, starters_data_dict):
         else:
             #Get statistics of the starters of the team
             browser.get(href_list[index])
-            time.sleep(5)
+            wait = WebDriverWait(browser, 20, 0.05)
+            wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='team-name show-for-medium']")))
 
             team_name_list     = browser.find_elements_by_xpath("//td[@class='team-name show-for-medium']")
             print(f'>> len of team_name_list = {len(team_name_list)}')
+
+            wait = WebDriverWait(browser, 20, 0.05)
+            wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='nba-stat-table__overflow']")))
             players_table_list = browser.find_elements_by_xpath("//div[@class='nba-stat-table__overflow']")
             print(f'>> len of players_table_list = {len(players_table_list)}')
 
