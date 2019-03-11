@@ -78,6 +78,7 @@ It has the following arguments to specify:
 ****
 Database
 ------
+All scraped NBA data are stored in MySQL database. Please install a version from [MySQL official website](https://dev.mysql.com/downloads/mysql/)(suggested to use MySQL8.0). The crawler will automatically do all the stuff including creating database(-database_name), creating table(-sql_tn), and inserting all the scraped data. You can choose whether to write out a CSV file(-wus) after all the data being inserted into your datbase.
 
 
 ****
