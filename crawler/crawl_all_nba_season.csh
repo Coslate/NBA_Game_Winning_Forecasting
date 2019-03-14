@@ -10,7 +10,7 @@ while ( $j < $count )
   @ loop_yr_start     = $start + $j
   @ loop_yr_end       = ($loop_yr_start  % 100) + 1
   @ loop_yr_end_full  = $loop_yr_start + 1
-  set season_name     = "$loop_yr_start\_$loop_yr_end_full"
+  set season_name     = "${loop_yr_start}_${loop_yr_end_full}"
 
   if ( $loop_yr_end < 10 ) then
     set scraped_seasion = "$loop_yr_start-0$loop_yr_end"
