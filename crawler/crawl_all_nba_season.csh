@@ -1,8 +1,8 @@
 #! /bin/csh -f
 
 set exec_path = /home/coslate/NBA_Win_Predictor/crawler
-set start        = 1946
-set end          = 2017
+set start        = $1
+set end          = $2
 @ count          = $end - $start
 
 set j = 0
