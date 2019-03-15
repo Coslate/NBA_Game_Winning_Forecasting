@@ -142,18 +142,15 @@ def MySQLDBStoreNBAData(selected_df_list, table, columns_list):
         print('>> No data to store...')
 
     for data_list in selected_df_list:
-        column_values_list = ['None' if(((key=='TEAM') or (key=='MATCH UP') or (key=='GAME DATE') or (key=='W/L')) and (val==None)) else '-1' if(val==None) else val if(re.match(r'\d+\.\d+', val)) else val if(re.match(r'\d+', val) and (not(re.match(r'.*/.*', val)))) else "'{}'".format(val) for key, val in data_list.iteritems()]
+        column_values_list = ['None' if(((key=='TEAM') or (key=='MATCH UP') or (key=='GAME DATE') or (key=='W/L')) and ((val==None) or (val=='-'))) else '-1' if((val==None) or (val== '-')) else val if(re.match(r'\d+\.\d+', val)) else val if(re.match(r'\d+', val) and (not(re.match(r'.*/.*', val)))) else "'{}'".format(val) for key, val in data_list.iteritems()]
         cur.execute('SELECT * FROM {table} WHERE TEAM="{data_team}" AND `GAME DATE`="{game_date}"'.format(table=table, data_team=data_list['TEAM'], game_date=data_list['GAME DATE']))
 
         if(cur.rowcount==0):
-            print(f'>> before : columns_list = {columns_list}')
-            print(f'>> before : column_values_list = {column_values_list}')
-
             column_name   = ', '.join(columns_list)
             column_values = ', '.join(column_values_list)
 
-            print(f'>> after : column_name = {column_name}')
-            print(f'>> after : column_values = {column_values}')
+            print(f'>> column_name = {column_name}')
+            print(f'>> column_values = {column_values}')
             execute_str = 'INSERT INTO {table_name} ({column_name}) VALUES ({column_values});'.format(table_name = table, column_name=column_name, column_values=column_values)
             cur.execute(execute_str)
             cur.connection.commit()
