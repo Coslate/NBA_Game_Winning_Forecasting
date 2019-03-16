@@ -23,7 +23,7 @@ def main():
 
 #Argument Parser
     print(f'> Parse the argument...')
-    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season, write_csv_use_sql, gmail_user, gmail_to_list) = ArgumentParser()
+    (thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season, write_csv_use_sql, gmail_user, gmail_to_list, get_starters_data) = ArgumentParser()
     if(is_debug):
         print(f'thresh_change_proxy      = {thresh_change_proxy}')
         print(f'thresh_change_proxy_list = {thresh_change_proxy_list}')
@@ -65,17 +65,17 @@ def main():
 
 #Check if the data has the interested game.
     print(f'> Check whether specific teams have games...')
-    (game_set_num, get_wanted_data, selected_data_df, short_selected_data_df, starters_data_dict) = crawler_nba.CheckDataHasSpecifiedTeam(yesterday_date_usa, team, all_data_df, browser, all_data_item_href)
+    (game_set_num, get_wanted_data, selected_data_df, short_selected_data_df, starters_data_dict) = crawler_nba.CheckDataHasSpecifiedTeam(yesterday_date_usa, team, all_data_df, browser, all_data_item_href, get_starters_data)
     selected_df_today_list = crawler_nba.CheckDataHasSpecifiedDate(yesterday_date_usa, all_data_df)
     all_data_today_df      = crawler_nba.ConstructDFFROMListOFList(selected_df_today_list, columns)
 
 #Send mails if interested game occurs.
     print(f'> Send mails if specific team has games...')
-    crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict, gmail_user, gmail_to_list)
+    crawler_nba.CheckSendMails(yesterday_date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict, gmail_user, gmail_to_list, get_starters_data)
 
 #Send to I-No if Lakers lose a game.
     print(f'> Send mails if LAL lost games...')
-    crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAL', all_data_df, password, browser, all_data_item_href, gmail_user, gmail_to_list)
+    crawler_nba.CheckSendMailsToINO(yesterday_date_usa, 'LAL', all_data_df, password, browser, all_data_item_href, gmail_user, gmail_to_list, get_starters_data)
 
 #Close
     print(f'> Close the browser...')
@@ -121,6 +121,7 @@ def ArgumentParser():
     write_csv_use_sql        = 0
     gmail_user               = ""
     gmail_to_list            = ""
+    get_starters_data        = 1
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--thresh_change_proxy", "-tcp", help="The threshold value of the request number within an IP address to change the proxy.")
@@ -139,6 +140,7 @@ def ArgumentParser():
     parser.add_argument("--database_name", "-database_name", help="The unix_socket that is used to mypysql connection.", required=True)
     parser.add_argument("--scrape_all_season", "-scrape_all_season", help="Set 1 to scrape all the pages of a season. Set 0 to only scrape the first page of a season.")
     parser.add_argument("--write_csv_use_sql", "-wus", help="Set 1 to write out the scraped data to CSV file through output from MySQL database. Set 0 to write out the scraped data to CSV file through output from NBA.stats.")
+    parser.add_argument("--get_starters_data", "-gsd", help="Set 1 to scrape the NBA data of interested team starting player of the match today, and be sent in the notified mail. Set 0 to not scrape the starting players data, and there will be no such data in the notified mail.")
 
     args = parser.parse_args()
 
@@ -174,8 +176,10 @@ def ArgumentParser():
         scrape_all_season = int(args.scrape_all_season)
     if args.write_csv_use_sql:
         write_csv_use_sql = int(args.write_csv_use_sql)
+    if args.get_starters_data:
+        get_starters_data = int(args.get_starters_data)
 
-    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season, write_csv_use_sql, gmail_user, gmail_to_list)
+    return(thresh_change_proxy, thresh_change_proxy_list, is_debug, out_file_name, indexing_to_csv, team, password, season, mysql_password, table, unix_socket, database_name, scrape_all_season, write_csv_use_sql, gmail_user, gmail_to_list, get_starters_data)
 
 #-----------------Execution------------------#
 if __name__ == '__main__':

@@ -62,6 +62,7 @@ The functions are listed as the below:
 | -season  | 2018-19 | N | To set which season you want to scrap on [NBA.stats](https://stats.nba.com/teams/boxscores). Deafult is 2018-19 season. |
 | -scrape_all_season | 0 | N | To set whether to scrape all the NBA games data in the specified season. If set 1, it will scrape all the data of the specified season. If set 0, it will only scrape the NBA games data that play today. |
 | -wus | 0 | N | To set whether to write out scraped NBA games data to a CSV file through [NBA.stats](https://stats.nba.com/teams/boxscores) or through MySQL database. If set 1, it will write out through MySQL database. If set 0, it will write out through [NBA.stats](https://stats.nba.com/teams/boxscores). |
+| -gsd | 0 | Y | To set whether to scrape the NBA starting players data of your interested team(with -team option) and add it in the notified mail. If set 1, it will scraped the data and send it. If set 0, it will not scrape the data nor send it. |
 
 ### Email sending subsystem
 A subsystem that is to send notify mails to you if there is a NBA game played by your interested team.

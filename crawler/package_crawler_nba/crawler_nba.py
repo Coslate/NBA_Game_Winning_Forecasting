@@ -349,7 +349,7 @@ def GetStartersOfEachGame(href_list, browser, team_list, starters_data_dict):
         else:
             #Get statistics of the starters of the team
             browser.get(href_list[index])
-            wait = WebDriverWait(browser, 20, 0.05)
+            wait = WebDriverWait(browser, 60, 0.05)
             wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='team-name show-for-medium']")))
 
             team_name_list     = browser.find_elements_by_xpath("//td[@class='team-name show-for-medium']")
@@ -399,7 +399,7 @@ def CheckDataHasSpecifiedDate(date, all_data_df):
 
     return(selected_df_list)
 
-def CheckDataHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href):
+def CheckDataHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href, get_starters_data):
     match_list         = list(all_data_df['MATCH UP'].values)
     date_list          = list(all_data_df['GAME DATE'].values)
     index_val_selected = [i for (i, x) in enumerate(match_list) if((re.match(r'.*{}.*'.format(team), x)) and (date_list[i] == date))]
@@ -414,9 +414,10 @@ def CheckDataHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_hr
 
     #Get the interested game statistics of the starters of the teams
     starters_data_dict = {}
-    team_list          = list(selected_df['TEAM'].values)
-    href_selected_list = [all_data_item_href[index] for index in index_val_selected]
-    GetStartersOfEachGame(href_selected_list, browser, team_list, starters_data_dict)
+    if(get_starters_data):
+        team_list          = list(selected_df['TEAM'].values)
+        href_selected_list = [all_data_item_href[index] for index in index_val_selected]
+        GetStartersOfEachGame(href_selected_list, browser, team_list, starters_data_dict)
 
     return(game_set_num, get_wanted_data, selected_df, short_sel_df, starters_data_dict)
 
@@ -483,7 +484,7 @@ def InterpretingGmailInfo(gmail_user, gmail_to_list):
 
     return gmail_user, gmail_ret_list
 
-def CheckSendMails(date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict, gmail_user, gmail_to_list):
+def CheckSendMails(date_usa, game_set_num, selected_data_df, short_selected_data_df, get_wanted_data, password, team, starters_data_dict, gmail_user, gmail_to_list, get_starters_data):
     if(gmail_user != ''):
         (gmail_user, gmail_to_list) = InterpretingGmailInfo(gmail_user, gmail_to_list)
 
@@ -496,9 +497,10 @@ def CheckSendMails(date_usa, game_set_num, selected_data_df, short_selected_data
             content += tabulate(selected_data_df, headers='keys', tablefmt='psql')
             #Also show the statistics of the starting players of the teams
             team_sel_list  = list(selected_data_df['TEAM'].values)
-            for team_sel in team_sel_list:
-                content += '\n\n\n {} starting players : '.format(team_sel)+'\n'
-                content += tabulate(starters_data_dict[team_sel], headers='keys', tablefmt='psql')
+            if(get_starters_data):
+                for team_sel in team_sel_list:
+                    content += '\n\n\n {} starting players : '.format(team_sel)+'\n'
+                    content += tabulate(starters_data_dict[team_sel], headers='keys', tablefmt='psql')
 
             title    = 'NBA game statistics for {x}'.format(x = team)
             to_addr  = ', '.join(gmail_to_list)
@@ -508,9 +510,9 @@ def CheckSendMails(date_usa, game_set_num, selected_data_df, short_selected_data
         else:
             print(f'>> No NBA games for {team} at {date_usa}.')
 
-def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_item_href, gmail_user, gmail_to_list):
+def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_item_href, gmail_user, gmail_to_list, get_starters_data):
     get_wanted_send_data = 0
-    (game_set_num, get_wanted_data, selected_data_df, short_selected_df, starters_data_dict) = CheckDataHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href)
+    (game_set_num, get_wanted_data, selected_data_df, short_selected_df, starters_data_dict) = CheckDataHasSpecifiedTeam(date, team, all_data_df, browser, all_data_item_href, get_starters_data)
     if(gmail_user != ''):
         (gmail_user, gmail_to_list) = InterpretingGmailInfo(gmail_user, gmail_to_list)
 
@@ -525,9 +527,10 @@ def CheckSendMailsToINO(date, team, all_data_df, password, browser, all_data_ite
             content += tabulate(selected_send_data_df, headers='keys', tablefmt='psql')
             #Also show the statistics of the starting players of the teams
             team_sel_list  = list(selected_send_data_df['TEAM'].values)
-            for team_sel in team_sel_list:
-                content += '\n\n\n {} starting players : '.format(team_sel)+'\n'
-                content += tabulate(starters_data_dict[team_sel], headers='keys', tablefmt='psql')
+            if(get_starters_data):
+                for team_sel in team_sel_list:
+                    content += '\n\n\n {} starting players : '.format(team_sel)+'\n'
+                    content += tabulate(starters_data_dict[team_sel], headers='keys', tablefmt='psql')
 
             title    = 'NBA game statistics for {x}'.format(x = team)
             to_addr  = ', '.join(gmail_to_list) + ', ino.liao@gmail.com'
