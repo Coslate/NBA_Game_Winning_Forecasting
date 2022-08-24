@@ -1,0 +1,2 @@
+1. Summarize useful functions into one python3 script for further execution in command-line.
+2. Refine TotalModel functions to include CV+GridSearch.

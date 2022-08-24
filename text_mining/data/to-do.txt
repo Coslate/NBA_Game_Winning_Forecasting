@@ -1,0 +1,2 @@
+1. Use ~/Crawler/scrape_ptt/scrape_ptt.py to extract the articles from PTT.
+2. Listing all the corpus here: Total_{start_time}_{end_time}/*

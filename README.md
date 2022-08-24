@@ -24,12 +24,7 @@ Contents
 * [Model Training](#Model-Training) 
     * Ensemble Learning
         *  Bagging
-        *  Boosting
         *  Stacking
-    * DNN
-    * RNN
-    * DQN
-    * DRQN
 * [Model Testing](#Model-Testing)
     * Experimental results
 

@@ -1,0 +1,2 @@
+1. Summarize all functions into one python3 script to execute in command-line.
+2. Save all the cross-validation-trained model into packages for further usage.

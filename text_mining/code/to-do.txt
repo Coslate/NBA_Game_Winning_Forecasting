@@ -1,0 +1,2 @@
+1. Refine the run_total_team_feature.csh to run the corpus during: 20180618-20170510, 20170509-20150510, 20150509-20130510
+2. Remove redundant code.

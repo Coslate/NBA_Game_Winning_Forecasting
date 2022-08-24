@@ -1,0 +1,1 @@
+./run_total_team_feature.csh /Users/coslate/python_ex/Crawler/scrape_ptt/Total_20180618_20130510 20180618 20170510 Test_Run_20180618_20170510 400 50 20 1 Generate_Model_Test_Run Generate_WC_Image_Test_Run

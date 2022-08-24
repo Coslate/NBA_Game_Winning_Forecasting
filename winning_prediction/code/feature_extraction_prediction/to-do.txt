@@ -1,0 +1,3 @@
+1. Extract all the procedures into one python3 script for execution with command-line.
+2. Print out the result(CSV) into ../../result.
+
