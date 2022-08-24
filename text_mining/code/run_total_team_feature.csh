@@ -136,6 +136,7 @@ foreach team ( $team_list )
     endif
     @ i += 1
 end
+cd $current_dir
 
 ######################## Second Run #########################
 #Grep only the aritcles that include keywords of one team from the corpus
@@ -155,7 +156,7 @@ echo "--------------------2nd preprocess-------------------------"
 foreach team ( $team_list_eng )
     set file  = "${preprocess_input_name}_2nd_$team"
     set key   = "../${word2vec_dir}/keyword_result_${preprocess_input_name}_stop_$team"
-    set key_b = "../keyword_base/keyword_base_$team"
+    set key_b = "../Word2Vec_Dev/keyword_base/keyword_base_$team"
 
     echo "team = ${team}"
     echo "keyword_thresh = $keyword_thresh[$i]"
@@ -192,6 +193,7 @@ cd $current_dir
 
 ###################### 2nd word2vec #######################
 # Word2Vec Generate Keywords and 2nd word cloud
+cd ./Word2Vec_Dev
 set word2vec_dir = ${preprocess_input_name}_2nd_word2vec
 if ( -d $word2vec_dir ) then
     rm -rf $word2vec_dir
@@ -210,11 +212,12 @@ foreach team ( $team_list )
     set word_seg_output_file     = "${preprocess_output_file}.segmentated"
 
     set out_name = "${preprocess_input_name}_2nd_stop_$team_list_eng[$i]"
-    set text_file = "./Word_Segmentation_Dev/$word_seg_folder/$word_seg_output_file"
+    set text_file = "../Word_Segmentation_Dev/$word_seg_folder/$word_seg_output_file"
 
     ./word2vec_wordcloud.py -text_file $text_file -alg_sg $word2vec_alg -window $word2vec_window -word_dim $word2vec_word_dim -q_str $team -topn $keyword_top_n -verb 1 -train 1 -out_name $out_name -odir $word2vec_dir -out_mod_fold $word2vec_out_model_folder -out_img_fold $word2vec_out_img_folder > $debug_path/debug_2nd_word2vec.$preprocess_input_name.$timeing_slot.$team.log
     @ i += 1
 end
+cd $current_dir
 
 
 ###################### 2nd keyword_extraction #######################

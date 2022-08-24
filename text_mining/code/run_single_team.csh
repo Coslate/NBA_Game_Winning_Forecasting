@@ -20,7 +20,7 @@ else
 endif
 
 ###################### 1st preprocess #######################
-cd ./Preprocess
+cd ./Preprocess_Dev
 set preprocess_folder = ${preprocess_input_name}_1st_preprocess
 if ( -d $preprocess_folder ) then
     rm -rf $preprocess_folder
@@ -34,7 +34,7 @@ cd $current_dir
 
 
 ###################### 1st segmentation #######################
-cd ../Word_Segmentation
+cd ./Word_Segmentation_Dev
 set word_seg_folder = ${preprocess_input_name}_1st_segmentation
 if ( -d $word_seg_folder ) then
     rm -rf $word_seg_folder
@@ -45,11 +45,12 @@ endif
 set preprocess_output_folder = "${preprocess_input_name}_preprocessed"
 set preprocess_output_file   = "${preprocess_output_folder}_${timeing_slot}"
 
-./word_segmentation.py -file ../Word2Vec/Preprocess/$preprocess_folder/$preprocess_output_folder/$preprocess_output_file  -odir $word_seg_folder -verb 1 > $debug_path/debug_1st_word_segmentation.$preprocess_input_name.$timeing_slot.$team_eng.log
+./word_segmentation.py -file ../Preprocess_Dev/$preprocess_folder/$preprocess_output_folder/$preprocess_output_file  -odir $word_seg_folder -verb 1 > $debug_path/debug_1st_word_segmentation.$preprocess_input_name.$timeing_slot.$team_eng.log
 cd $current_dir
 
 ###################### 1st word2vec #######################
 # Word2Vec Generate Keywords and first word cloud
+cd ./Word2Vec_Dev
 set word2vec_dir = ${preprocess_input_name}_1st_word2vec
 if ( -d $word2vec_dir ) then
     rm -rf $word2vec_dir
@@ -59,16 +60,16 @@ else
 endif
 set word_seg_output_file = "${preprocess_output_file}.segmentated"
 
-@ i = 1
 set out_name = "${preprocess_input_name}_stop_$team_eng"
 
-./word2vec_wordcloud.py -text_file ../Word_Segmentation/$word_seg_folder/$word_seg_output_file -alg_sg 0 -window 10 -q_str $team -topn 400 -verb 1 -train 1 -out_name $out_name -odir $word2vec_dir > $debug_path/debug_1st_word2vec.$preprocess_input_name.$timeing_slot.$team_eng.log
+./word2vec_wordcloud.py -text_file ../Word_Segmentation_Dev/$word_seg_folder/$word_seg_output_file -alg_sg 0 -window 10 -q_str $team -topn 400 -verb 1 -train 1 -out_name $out_name -odir $word2vec_dir > $debug_path/debug_1st_word2vec.$preprocess_input_name.$timeing_slot.$team_eng.log
+cd $current_dir
 
 ######################## Second Run #########################
 #Grep only the aritcles that include keywords of one team from the corpus
 
 ###################### 2nd preprocess #######################
-cd ./Preprocess
+cd ./Preprocess_Dev
 set preprocess_folder = ${preprocess_input_name}_2nd_preprocess
 if ( -d $preprocess_folder ) then
     rm -rf $preprocess_folder
@@ -84,7 +85,7 @@ set key = "../$word2vec_dir/keyword_result_${preprocess_input_name}_stop_$team_e
 cd $current_dir
 
 ###################### 2nd segmentation #######################
-cd ../Word_Segmentation
+cd ./Word_Segmentation_Dev
 set word_seg_folder = ${preprocess_input_name}_2nd_segmentation
 if ( -d $word_seg_folder ) then
     rm -rf $word_seg_folder
@@ -97,7 +98,7 @@ set preprocess_file = "${preprocess_input_name}_2nd_$team_eng"
 set preprocess_output_folder = "${preprocess_file}_preprocessed"
 set preprocess_output_file   = "${preprocess_output_folder}_${timeing_slot}"
 
-set file = "../Word2Vec/Preprocess/$preprocess_folder/$preprocess_output_folder/$preprocess_output_file"
+set file = "../Preprocess_Dev/$preprocess_folder/$preprocess_output_folder/$preprocess_output_file"
 set stop_word_file = "./stopword_lib/stopwords.txt.$team_eng"
 
 ./word_segmentation.py -file $file -odir $word_seg_folder -verb 1 -stop_word_file $stop_word_file > $debug_path/debug_2nd_word_segmentation.$preprocess_input_name.$timeing_slot.$team_eng.log
@@ -105,6 +106,7 @@ cd $current_dir
 
 ###################### 2nd word2vec #######################
 # Word2Vec Generate Keywords and 2nd word cloud
+cd ./Word2Vec_Dev
 set word2vec_dir = ${preprocess_input_name}_2nd_word2vec
 if ( -d $word2vec_dir ) then
     rm -rf $word2vec_dir
@@ -119,14 +121,15 @@ set preprocess_output_file   = "${preprocess_output_folder}_${timeing_slot}"
 set word_seg_output_file     = "${preprocess_output_file}.segmentated"
 
 set out_name = "${preprocess_input_name}_2nd_stop_$team_eng"
-set text_file = "../Word_Segmentation/$word_seg_folder/$word_seg_output_file"
+set text_file = "../Word_Segmentation_Dev/$word_seg_folder/$word_seg_output_file"
 
 ./word2vec_wordcloud.py -text_file $text_file -alg_sg 0 -window 10 -q_str $team -topn 400 -verb 1 -train 1 -out_name $out_name -odir $word2vec_dir > $debug_path/debug_2nd_word2vec.$preprocess_input_name.$timeing_slot.$team_eng.log
+cd $current_dir
 
 
 ###################### 2nd keyword_extraction #######################
 # Keyword Extraction and generate final word cloud
-cd ../Keyword_Extraction_Form_Dictionary
+cd ./Keyword_Extraction_Form_Dictionary_Dev
 set keyword_extraction_dir = ${preprocess_input_name}_2nd_keyword_extraction_tfidf_word2vec
 if ( -d $keyword_extraction_dir ) then
     rm -rf $keyword_extraction_dir
@@ -141,11 +144,9 @@ set preprocess_output_folder = "${preprocess_file}_preprocessed"
 set preprocess_output_file   = "${preprocess_output_folder}_${timeing_slot}"
 set word_seg_output_file     = "${preprocess_output_file}.segmentated"
 
-set text_file = "../Word_Segmentation/$word_seg_folder/$word_seg_output_file"
-set stop_word_file = "../Word_Segmentation/stopword_lib/stopwords.txt.$team_eng"
-set key_word_file = "../Word2Vec/$word2vec_dir/keyword_result_${preprocess_input_name}_2nd_stop_$team_eng"
+set text_file = "../Word_Segmentation_Dev/$word_seg_folder/$word_seg_output_file"
+set stop_word_file = "../Word_Segmentation_Dev/stopword_lib/stopwords.txt.$team_eng"
+set key_word_file = "../Word2Vec_Dev/$word2vec_dir/keyword_result_${preprocess_input_name}_2nd_stop_$team_eng"
 
-    ./keyword_extraction.py -text_file $text_file -topn 400 -out_name $out_name -stop_word_file $stop_word_file -key_file $key_word_file -odir $keyword_extraction_dir > $debug_path/debug_final_keyword_extraction.$preprocess_input_name.$timeing_slot.$team_eng.log
-    endif
-    @ i += 1
-end
+./keyword_extraction.py -text_file $text_file -topn 400 -out_name $out_name -stop_word_file $stop_word_file -key_file $key_word_file -odir $keyword_extraction_dir > $debug_path/debug_final_keyword_extraction.$preprocess_input_name.$timeing_slot.$team_eng.log
+
