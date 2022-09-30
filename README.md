@@ -1,4 +1,4 @@
-NBA WIN PREDICTOR
+NBA GAME WINNING FORECASTING
 ===========================
 It's a program that will use the past(or current) data from NBA.stats to predict a game result in future. It will show whether a team will win in a following game, and it will also show how much accuracy is of the prediction. All the used data will be stored in a local MySQL database.
 
